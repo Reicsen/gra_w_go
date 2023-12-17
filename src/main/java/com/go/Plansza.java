@@ -3,27 +3,32 @@ package com.go;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Plansza
+public class Plansza implements IPlansza
 {
-    protected List<Pole> pola;
+    protected List<IPole> pola;
 
     public Plansza()
     {
-        this.pola = new ArrayList<Pole>();
+        this.pola = new ArrayList<IPole>();
         for (int i=0;i<361;i++)
         {
-            Pole temp = new Pole();
+            IPole temp = new Pole();
             pola.add(temp);
         }
     }
 
-    protected void dodajPionek(String kolor, int x, int y)
+    public void dodajPionek(String kolor, int x, int y)
     {
+<<<<<<< HEAD
         Pole temp = pola.get(19*y+x);
         temp.dodajPionek(kolor);
+=======
+        IPole temp = new Pole(kolor);
+        pola.set(19*y+x, temp);
+>>>>>>> 61bd39640edb6b2090bc220c07614a541c8a6e6c
     }
 
-    protected boolean sprawdzPoprawnosc(String kolor, int x, int y)
+    public boolean sprawdzPoprawnosc(String kolor, int x, int y)
     {
         if (x<0 || x >18 || y<0 || y>18)
         {
