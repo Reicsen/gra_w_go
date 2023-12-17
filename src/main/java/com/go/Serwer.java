@@ -4,7 +4,7 @@ public class Serwer
 {
     private int iloscGraczy;
     private String aktywnyKolor;
-    private Plansza plansza;
+    private IPlansza plansza;
 
     public Serwer()
     {
