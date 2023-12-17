@@ -1,6 +1,6 @@
 package com.go;
 
-public class Pole
+public class Pole 
 {
     private String pionek;
 

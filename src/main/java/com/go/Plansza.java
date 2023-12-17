@@ -3,7 +3,7 @@ package com.go;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Plansza
+public class Plansza implements IPlansza
 {
     protected List<Pole> pola;
 
@@ -17,13 +17,13 @@ public class Plansza
         }
     }
 
-    protected void dodajPionek(String kolor, int x, int y)
+    public void dodajPionek(String kolor, int x, int y)
     {
         Pole temp = new Pole(kolor);
         pola.set(19*y+x, temp);
     }
 
-    protected boolean sprawdzPoprawnosc(String kolor, int x, int y)
+    public boolean sprawdzPoprawnosc(String kolor, int x, int y)
     {
         if (x<0 || x >18 || y<0 || y>18)
         {
