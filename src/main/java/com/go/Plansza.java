@@ -19,13 +19,8 @@ public class Plansza implements IPlansza
 
     public void dodajPionek(String kolor, int x, int y)
     {
-<<<<<<< HEAD
-        Pole temp = pola.get(19*y+x);
+        IPole temp = pola.get(19*y+x);
         temp.dodajPionek(kolor);
-=======
-        IPole temp = new Pole(kolor);
-        pola.set(19*y+x, temp);
->>>>>>> 61bd39640edb6b2090bc220c07614a541c8a6e6c
     }
 
     public boolean sprawdzPoprawnosc(String kolor, int x, int y)
