@@ -1,6 +1,6 @@
 package com.go;
 
 interface IPole {
-     String podajPionek();
-     void dodajPionek(String kolor);
+    String podajPionek();
+    void dodajPionek(String kolor);
 }
