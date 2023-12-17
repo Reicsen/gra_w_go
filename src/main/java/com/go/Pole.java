@@ -9,12 +9,16 @@ public class Pole implements IPole
         this.pionek=null;
     }
 
+<<<<<<< HEAD
+    protected String podajPionek()
+=======
     public Pole(String kolor)
     {
         this.pionek=kolor;
     }
 
     public String podajPionek()
+>>>>>>> 61bd39640edb6b2090bc220c07614a541c8a6e6c
     {
         return this.pionek;
     }
