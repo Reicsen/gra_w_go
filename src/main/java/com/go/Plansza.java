@@ -19,8 +19,8 @@ public class Plansza
 
     protected void dodajPionek(String kolor, int x, int y)
     {
-        Pole temp = new Pole(kolor);
-        pola.set(19*y+x, temp);
+        Pole temp = pola.get(19*y+x);
+        temp.dodajPionek(kolor);
     }
 
     protected boolean sprawdzPoprawnosc(String kolor, int x, int y)

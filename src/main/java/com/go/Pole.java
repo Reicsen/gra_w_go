@@ -9,11 +9,6 @@ public class Pole
         this.pionek=null;
     }
 
-    public Pole(String kolor)
-    {
-        this.pionek=kolor;
-    }
-
     protected String podajPionek()
     {
         return this.pionek;
