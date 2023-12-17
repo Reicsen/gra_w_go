@@ -5,21 +5,21 @@ import java.util.List;
 
 public class Plansza implements IPlansza
 {
-    protected List<Pole> pola;
+    protected List<IPole> pola;
 
     public Plansza()
     {
-        this.pola = new ArrayList<Pole>();
+        this.pola = new ArrayList<IPole>();
         for (int i=0;i<361;i++)
         {
-            Pole temp = new Pole();
+            IPole temp = new Pole();
             pola.add(temp);
         }
     }
 
     public void dodajPionek(String kolor, int x, int y)
     {
-        Pole temp = new Pole(kolor);
+        IPole temp = new Pole(kolor);
         pola.set(19*y+x, temp);
     }
 

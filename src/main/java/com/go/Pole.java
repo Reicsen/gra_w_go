@@ -1,6 +1,6 @@
 package com.go;
 
-public class Pole 
+public class Pole implements IPole
 {
     private String pionek;
 
@@ -14,12 +14,12 @@ public class Pole
         this.pionek=kolor;
     }
 
-    protected String podajPionek()
+    public String podajPionek()
     {
         return this.pionek;
     }
 
-    protected void dodajPionek(String kolor)
+    public void dodajPionek(String kolor)
     {
         this.pionek=kolor;
     }
