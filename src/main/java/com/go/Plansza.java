@@ -25,7 +25,7 @@ public class Plansza implements IPlansza
 
     public boolean sprawdzPoprawnosc(String kolor, int x, int y)
     {
-        if (pola.get(19*y+x)!=null)
+        if (pola.get(19*y+x).podajPionek()!=null)
         {
             return false;
         }
