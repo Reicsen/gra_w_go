@@ -25,10 +25,6 @@ public class Plansza implements IPlansza
 
     public boolean sprawdzPoprawnosc(String kolor, int x, int y)
     {
-        if (x<0 || x >18 || y<0 || y>18)
-        {
-            return false;
-        }
         if (pola.get(19*y+x)!=null)
         {
             return false;

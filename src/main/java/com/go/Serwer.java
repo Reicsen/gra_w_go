@@ -1,41 +1,36 @@
 package com.go;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 public class Serwer
 {
-    private int iloscGraczy;
-    private String aktywnyKolor;
-    private Plansza plansza;
-
     public Serwer()
     {
-        this.iloscGraczy=0;
-        this.aktywnyKolor="czarny";
-        this.plansza=new Plansza();
+        try
+        {
+            ServerSocket serwerSocket = new ServerSocket(8000);
+            System.out.println("Oczekiwanie na graczy...");
+            Socket gracz1 = serwerSocket.accept();
+            System.out.println("Dołączył 1. gracz.");
+            new DataOutputStream(gracz1.getOutputStream()).writeInt(1);
+            Socket gracz2 = serwerSocket.accept();
+            System.out.println("Dołączył 2. gracz.");
+            new DataOutputStream(gracz2.getOutputStream()).writeInt(2);
+            Gra gra = new Gra(gracz1, gracz2);
+            Thread watek = new Thread(gra);
+            watek.start();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
-    private void zmienKolor()
+    public static void main(String[] args)
     {
-        if ("czarny".equals(this.aktywnyKolor))
-        {
-            aktywnyKolor="biały";
-        }
-        else
-        {
-            aktywnyKolor="czarny";
-        }
-    }
-
-    private boolean sprawdzPoprawnosc(int x, int y)
-    {
-        return plansza.sprawdzPoprawnosc(this.aktywnyKolor, x, y);
-    }
-
-    private void dodajPionek(int x, int y)
-    {
-        if (sprawdzPoprawnosc(x, y))
-        {
-            plansza.dodajPionek(this.aktywnyKolor, x, y);
-            this.zmienKolor();
-        }
+        Serwer serwer = new Serwer();       
     }
 }
