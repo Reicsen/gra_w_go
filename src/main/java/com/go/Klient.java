@@ -1,5 +1,10 @@
 package com.go;
 
-interface Klient {
-    void WykonajRuch(int x, int y);
+interface Klient
+{
+    void wykonajRuch(int x, int y);
+    void pominRuch();
+    void poddajSie();
+    void ustawKolor(int nrGracza);
+    void zmienAktywnosc();
 }
