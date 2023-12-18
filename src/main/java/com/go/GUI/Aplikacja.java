@@ -13,6 +13,6 @@ public class Aplikacja extends Application
     @Override
     public void start(Stage stage) 
     {
-        new MyGui(stage);
+        new GUI(stage);
     }
 }

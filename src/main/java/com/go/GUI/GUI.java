@@ -3,28 +3,33 @@ package com.go.GUI;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.Button;
+import javafx.scene.text.Font;
 
 public class GUI {
     public GUI(Stage stage){
     
-        stage.setTitle("Figures");
+        stage.setTitle("Gra w go");
 
         BorderPane root = new BorderPane();
-        Pane pane = new Pane();
 
-        Menu menu1 = new Menu("Info");
-        Menu menu2 = new Menu("Figures");
+        Button b1 = new PrzyciskGraZGraczem();
+        b1.setPrefWidth(400);
+        b1.setPrefHeight(200);
+        b1.setStyle("-fx-background-color: aquamarine");
+        b1.setFont(Font.font(20));
 
-        MenuBar myMenu = new MenuBar(menu1, menu2, pane);
+        Button b2 = new PrzyciskGraZBotem();
+        b2.setPrefWidth(400);
+        b2.setPrefHeight(200);
+        b2.setStyle("-fx-background-color: lightblue");
+        b2.setFont(Font.font(20));
 
 
-        root.setTop(myMenu);
-        root.setCenter(pane);
+        root.setRight(b2);
+        root.setLeft(b1);
 
-        Scene scene = new Scene(root, 1900, 800);
+        Scene scene = new Scene(root, 800, 200);
         stage.setScene(scene);
         stage.show(); 
 
