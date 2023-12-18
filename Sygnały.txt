@@ -13,4 +13,5 @@ Komunikat serwera do nieaktywnego gracza:
 0; -1 - przegrana - gracz wyświetla informację ,,Przegrałeś!"
 0; 1 - wygrana - gracz wyświetla informację ,,Wygrałeś!"
 1; n - gracz dodaje do planszy pionek przeciwnika na pole n i włącza swoją turę ruchu
-2; m - gracz dodaje do swojego licznika jeńców m
+2 - gracz włącza swoją turę ruchu bez dodawania pionka do planszy (na starcie lub po pominięciu ruchu)
+3; m - gracz dodaje do swojego licznika jeńców m
