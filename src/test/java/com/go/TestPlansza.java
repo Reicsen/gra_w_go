@@ -12,7 +12,7 @@ public class TestPlansza {
         p = new Plansza();
 
         //Sprawdzamy czy możemy dosatwić pionek w puste miejsce
-        if(p.sprawdzPoprawnosc("Czarny", 12, 7)){
+        if(!p.sprawdzPoprawnosc("Czarny", 12, 7)){
             assert false;
         }
 
