@@ -31,16 +31,16 @@ public class Gra implements Runnable
         }
     }
 
-    private boolean sprawdzPoprawnosc(int x, int y)
+    private boolean sprawdzPoprawnosc(int nrpola)
     {
-        return plansza.sprawdzPoprawnosc(this.aktywnyKolor, x, y);
+        return plansza.sprawdzPoprawnosc(this.aktywnyKolor, nrpola%19, nrpola/19);
     }
 
-    private void dodajPionek(int x, int y)
+    private void dodajPionek(int nrpola)
     {
-        if (sprawdzPoprawnosc(x, y))
+        if (sprawdzPoprawnosc(nrpola))
         {
-            plansza.dodajPionek(this.aktywnyKolor, x, y);
+            plansza.dodajPionek(this.aktywnyKolor, nrpola%19, nrpola/19);
             this.zmienKolor();
         }
     }
