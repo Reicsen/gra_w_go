@@ -1,0 +1,10 @@
+Najpierw, po połączeniu, serwer zwraca 1 lub 2 (numer gracza).
+
+Komunikat od aktywnego gracza do serwera:
+-1 = ,,poddaj się"; automatycznie wyłącza swoją aktywność 
+0 = ,,pomiń ruch"; automatycznie wyłącza swoją aktywność 
+1; n = wysyłanie ruchu (n=x+19*y -> 0<=n<=360); klient nie wyłącza aktywności, tylko czeka na odpowiedź serwera dotyczącą poprawności ruchu
+
+Komunikat serwera do aktywnego gracza (po ruchu):
+0; n = ruch poprawny - gracz wyłącza aktywność i dodaje do planszy pionek na polu n; serwer wysyła sygnał ,,przekazania tury" do drugiego gracza
+-1 = ruch niepoprawny - gracz wyświetla na dole komunikat o niepoprawności ruchu i ma ,,ponowioną turę"
