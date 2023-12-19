@@ -124,12 +124,11 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     public boolean dodaniePionka(int nrpola, Color kolor)
     {
         return true;
-        //dodanie do wizualnej planszy na wskazanym polu pionka o danym kolorze
     }
 
     public void usunieciePionka(int nrpola)
     {
-        //usunięcie z wizualnej planszy na wskazanym polu pionka (zamiana go w ,,krzyżyk"); na razie puste
+    
     }
 
     /*
@@ -137,7 +136,6 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
      */
     public String wypiszKomunikatNaPlanszy(String komunikat)
     {
-        //wyświetlenie w okienku GUI komunikatu
         return "";
     }
 
