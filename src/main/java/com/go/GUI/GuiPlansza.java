@@ -19,7 +19,7 @@ public class GuiPlansza extends GridPane
 {
     private ObslugaPlanszy gracz;
     public Label lbl;
-    public List<Button> pionki= new ArrayList<>();
+    public List<PrzyciskPionek> pionki= new ArrayList<>();
     public Color kolor;
 
     GuiPlansza()
@@ -44,7 +44,7 @@ public class GuiPlansza extends GridPane
 
         for (int row = 1; row < 20; row++) {
             for (int col = 0; col < 19; col++) {
-                Button button = new PrzyciskPionek(gracz, ((row -1)* 19) + col, kolor);
+                PrzyciskPionek button = new PrzyciskPionek(gracz, row-1, col);
                 button.setStyle("-fx-background-color: white;");
 
                 add(button, col, row);

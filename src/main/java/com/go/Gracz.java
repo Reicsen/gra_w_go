@@ -7,6 +7,7 @@ import java.net.Socket;
 import com.go.GUI.GuiPlansza;
 
 import javafx.application.Platform;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class Gracz implements Klient, ObslugaPlanszy, Runnable
@@ -120,6 +121,9 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     public void dodaniePionka(int nrpola, Color kolor)
     {
         //ma dodać pionek o kolorze kolor na ole nrpola
+        Platform.runLater(() -> {
+        plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
+        });
     }
 
     public void usunieciePionka(int nrpola)

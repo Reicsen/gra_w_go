@@ -9,7 +9,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 public class PrzyciskPionek extends Button{
-    PrzyciskPionek(ObslugaPlanszy gracz, int nrpola, Color kolor){
+    PrzyciskPionek(ObslugaPlanszy gracz, int x, int y){
         super();
         setMaxSize(30, 30);
 
@@ -27,13 +27,11 @@ public class PrzyciskPionek extends Button{
         setGraphic(stackPane);
 
         setOnAction(event -> {
-            if(gracz.dodaniePionka(nrpola, kolor)){
-                toggleButtonState(this, kolor);
-            }
+            gracz.wykonajRuch(y, x);
         });
     }
 
-    private void toggleButtonState(Button button, Color kolor) {
+    public void zmienPrzyciskNaKolo(Button button, Color kolor) {
         Circle circle = new Circle(18, kolor);
         circle.setStroke(Color.BLACK);
 
