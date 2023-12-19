@@ -117,7 +117,6 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     public void wlaczGUI()
     {
         new Aplikacja().main(this);
-
     }
 
     GuiPlansza plansza;
@@ -141,11 +140,11 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     }
 
     /*
-     * Funkcja zwraca String którego chcemy wypisać na planszy jako komunikat
+     * Funkcja wypisuje komunikat na planszy 
      */
-    public String wypiszKomunikatNaPlanszy(String komunikat)
+    public void wypiszKomunikatNaPlanszy(String komunikat)
     {
-        return "";
+        plansza.lbl.setText(komunikat);
     }
 
     /*

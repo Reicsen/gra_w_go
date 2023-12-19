@@ -23,9 +23,9 @@ public interface ObslugaPlanszy
     void usunieciePionka(int nrpola);
 
     /*
-     * Funkcja zwraca String którego chcemy wypisać na planszy jako komunikat
+     * Funkcja wypisuje komunikat na planszy 
      */
-    String wypiszKomunikatNaPlanszy(String komunikat);
+    void wypiszKomunikatNaPlanszy(String komunikat);
 
     //void wlaczGUI(Label komunikaty);
 }

@@ -13,9 +13,9 @@ import javafx.scene.text.Font;
 
 public class GuiPlansza extends GridPane 
 {
-    ObslugaPlanszy gracz;
-    Label lbl;
-    List<Button> pionki= new ArrayList<>();
+    private ObslugaPlanszy gracz;
+    public Label lbl;
+    public List<Button> pionki= new ArrayList<>();
 
     GuiPlansza(ObslugaPlanszy ob)
     {
@@ -66,13 +66,8 @@ public class GuiPlansza extends GridPane
         gracz = ob;
         gracz.setGuiPlansza(this);
     }
-    public void czekanieNaGracza(){
+    public void rozpoczecieGry(){
     
-        while(true){
-            if(!gracz.rozpoczniGre()){
-                break;
-            }
-        }
         lbl.setText("Gra się rozpoczęła!");
         for(Button b : pionki){
             b.setDisable(false);
