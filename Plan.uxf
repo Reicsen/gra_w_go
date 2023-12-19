@@ -1,60 +1,64 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>200</x><y>80</y><w>180</w><h>140</h></coordinates><panel_attributes>Gracz
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>220</y><w>180</w><h>120</h></coordinates><panel_attributes>Gracz
 --
 -aktywny: boolean
 -ilosc_jencow: int
--kolor: String
+-kolor: Color
+-kolorPrzeciwnika: Color
+-plansza: GuiPlansza
 --
--void wykonaj_ruch(int x, int y)
--void pomin_ruch()
--void poddaj_sie()
--void zmien_stan()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>810</x><y>140</y><w>320</w><h>150</h></coordinates><panel_attributes>Serwer
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>280</y><w>320</w><h>100</h></coordinates><panel_attributes>Gra
 --
--ilosc_graczy: int
--kolor: String
--plansza: Plansza
+-aktywnyKolor: String
+-plansza: IPlansza
 --
--void wyswietl()
--boolean sprawdz_poprawnosc(String kolor, int x, int y)
--void dodaj_pionek(String kolor, int x, int y)
--void zmien_kolor()
--void koniec_gry()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>700</x><y>110</y><w>130</w><h>70</h></coordinates><panel_attributes>lt=-
+-void zmienKolor()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>250</y><w>140</w><h>70</h></coordinates><panel_attributes>lt=-
 m1=2
-m2=1</panel_attributes><additional_attributes>10;10;110;50</additional_attributes></element><element><id>Text</id><coordinates><x>50</x><y>130</y><w>100</w><h>70</h></coordinates><panel_attributes>[zamiast tego można zrobić wzorzec state]
-style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>140</x><y>100</y><w>80</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>60;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>140</y><w>90</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>70;70;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>280</y><w>40</w><h>150</h></coordinates><panel_attributes>lt=-
+m2=1</panel_attributes><additional_attributes>10;10;120;50</additional_attributes></element><element><id>Relation</id><coordinates><x>730</x><y>370</y><w>40</w><h>150</h></coordinates><panel_attributes>lt=-
 m1=1
-m2=1</panel_attributes><additional_attributes>20;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>500</y><w>50</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=1</panel_attributes><additional_attributes>10;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>590</y><w>50</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
-m2=361</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Text</id><coordinates><x>40</x><y>260</y><w>460</w><h>190</h></coordinates><panel_attributes>Wizualizacja klienta:
--przyciski ,,wykonaj ruch", ,,pomiń ruch", ,,poddaj się"
--licznik jeńców
--dwa pola tekstowe (,,podaj kolumnę", ,,podaj wiersz" - dzzięki temu nie trzeba zajmować się obsługą klikania na planszę)
--gdzieś może być napis, który ma się kolor (jeśli nie, to niepotrzebne pole ,,kolor")
-
-Przyciski ,,wykonaj ruch" i ,,pomiń ruch" aktywne tylko, gdy klient ma stan aktywny.
-
-Jeńcy na razie cały czas 0.
-style=wordwrap</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>750</x><y>410</y><w>350</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+m2=361</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>500</y><w>350</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 IPlansza
 --
-#boolean sparwdz_poprawnosc(String kolor, int x, int y)
-# void dodaj_pionek(String kolor, int x, int y)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>210</x><y>470</y><w>330</w><h>90</h></coordinates><panel_attributes>Plansza
+boolean sprawdzPoprawnosc(String kolor, int x, int y)
+void dodajPionek(String kolor, int x, int y)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>550</y><w>180</w><h>60</h></coordinates><panel_attributes>Plansza
 --
 #pola: ArrayList&lt;Pole&gt;
 --
-#boolean sprawdz_poprawnosc(String kolor, int x, int y)
-#void dodaj_pionek(String kolor, int x, int y)
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>530</x><y>450</y><w>240</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>216;17;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>690</x><y>580</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>560</y><w>250</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>226;17;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>750</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 IPole
 --
-#void dodaj_pionek(String kolor, int x, int y)
-#String podaj_pionek()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>610</y><w>330</w><h>90</h></coordinates><panel_attributes>Pole
+void dodajPionek(String kolor, int x, int y)
+String podajPionek()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>190</x><y>780</y><w>140</w><h>60</h></coordinates><panel_attributes>Pole
 --
 -pionek: String
 --
-#void dodaj_pionek(String kolor, int x, int y)
-#String podaj_pionek()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>640</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>500</x><y>80</y><w>210</w><h>80</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>810</y><w>190</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>170;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>220</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 Klient
 --
-void wykonaj ruch(int x, int y)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>130</y><w>150</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>830</x><y>40</y><w>210</w><h>70</h></coordinates><panel_attributes>Bot
+void wykonajRuch(int x, int y)
+void pominRuch()
+void poddajSie()
+void ustawKolor(int nrGracza)
+void zmienAktywnosc()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>170</x><y>270</y><w>150</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>180</y><w>210</w><h>70</h></coordinates><panel_attributes>Bot
 --
-void wykonaj_ruch(int x, int y)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>700</x><y>70</y><w>150</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;20;130;10</additional_attributes></element></diagram>
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>210</y><w>150</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;30;130;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>250</x><y>10</y><w>310</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+ObslugaPlanszy
+--
+boolean rozpoczniGre()
+boolean dodaniePionka(int nrpola, Color kolor)
+void usunieciePionka(int nrpola)
+void wypiszKomunikatNaPlanszy(String komunikat)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>170</x><y>130</y><w>140</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>120;10;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>130</y><w>130</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;110;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1110</x><y>380</y><w>160</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+IGra
+--
+void koniecGry()
+void pominiecieTury()
+void probaRuchu()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>930</x><y>340</y><w>200</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;180;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1060</x><y>550</y><w>240</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+IGra2
+--
+boolean sprawdzPoprawnosc(int nrpola)
+void dodajPionek(int nrpola)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>930</x><y>370</y><w>150</w><h>250</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;130;230</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1040</x><y>180</y><w>210</w><h>70</h></coordinates><panel_attributes>Serwer
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>930</x><y>220</y><w>130</w><h>120</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=1</panel_attributes><additional_attributes>10;100;110;10</additional_attributes></element></diagram>
