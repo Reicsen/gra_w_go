@@ -32,11 +32,10 @@ public class PrzyciskPionek extends Button{
     }
 
     public void zmienPrzyciskNaKolo(Button button, Color kolor) {
-        Circle circle = new Circle(18, kolor);
+        Circle circle = new Circle(15, kolor);
         circle.setStroke(Color.BLACK);
         circle.setStrokeWidth(3);
 
         button.setGraphic(circle);
-        button.setDisable(false);
     }
 }

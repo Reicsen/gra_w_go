@@ -34,7 +34,7 @@ public class GuiPlansza extends GridPane
         setStyle("-fx-background-color: black;");
     
         lbl = new Label();
-        lbl.setPrefWidth(940);
+        lbl.setPrefWidth(965);
         lbl.setPrefHeight(50);
         lbl.setStyle("-fx-background-color: white;");
         lbl.setFont(Font.font(20));
@@ -57,7 +57,7 @@ public class GuiPlansza extends GridPane
         }
 
         Button b1 = new Button("Poddaj się");
-        b1.setPrefWidth(480);
+        b1.setPrefWidth(500);
         b1.setPrefHeight(50);
         b1.setStyle("-fx-background-color: aquamarine");
         b1.setFont(Font.font(20));
