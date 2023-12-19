@@ -156,10 +156,11 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                         ruch=odbieranieOdSerwera.readInt();
                         dodaniePionka(ruch, kolor);
                         zmienAktywnosc();
+                        wypiszKomunikatNaPlanszy("Tura przeciwnika");
                     }
                     else
                     {
-                        wypiszKomunikatNaPlanszy("Niepoprawny ruch!");
+                        wypiszKomunikatNaPlanszy("Niepoprawny ruch, spróbuj ponownie");
                     }
                 }
                 else
@@ -181,12 +182,14 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                     if (sygnal==2)
                     {
                         zmienAktywnosc();
+                        wypiszKomunikatNaPlanszy("Twoja tura");
                     }
                     if (sygnal==1)
                     {
                         ruch=odbieranieOdSerwera.readInt();
                         dodaniePionka(ruch, kolorPrzeciwnika);
                         zmienAktywnosc();
+                        wypiszKomunikatNaPlanszy("Twoja tura");
                     }
                     if (sygnal==-1)
                     {
@@ -196,6 +199,10 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                             usunieciePionka(ruch);
                             ruch=odbieranieOdSerwera.readInt();
                         }
+                    }
+                    if(sygnal==10)
+                    {
+                        wypiszKomunikatNaPlanszy("Tura przeciwnika");
                     }
                     //na razie obsługa jeńców nie jest implementowana, bo i tak mechanika ich nie obejmuje
                 }

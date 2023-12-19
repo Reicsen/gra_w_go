@@ -174,6 +174,8 @@ public class Gra implements IGra,IGra2,Runnable
     {
         try
         {
+            wysylanieDoGracza1.writeInt(10);
+            wysylanieDoGracza2.writeInt(10);
             wysylanieDoGracza1.writeInt(2);
             int sygnal;
 

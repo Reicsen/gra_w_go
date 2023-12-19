@@ -10,8 +10,10 @@ Komunikat serwera do aktywnego gracza (po ruchu):
 -1 = ruch niepoprawny - gracz wyświetla na dole komunikat o niepoprawności ruchu i ma ,,ponowioną turę"
 
 Komunikat serwera do nieaktywnego gracza:
+-1; n1, n2, ..., nk; -1 - usunięcie z wizualnej planszy pionków z pól n1, ..., nk
 0; -1 - przegrana - gracz wyświetla informację ,,Przegrałeś!"
 0; 1 - wygrana - gracz wyświetla informację ,,Wygrałeś!"
 1; n - gracz dodaje do planszy pionek przeciwnika na pole n i włącza swoją turę ruchu
 2 - gracz włącza swoją turę ruchu bez dodawania pionka do planszy (na starcie lub po pominięciu ruchu)
 3; m - gracz dodaje do swojego licznika jeńców m
+10 - start gry
