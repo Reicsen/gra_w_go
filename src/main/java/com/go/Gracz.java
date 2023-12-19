@@ -52,7 +52,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         }
     }
 
-    public void wykonajRuch(int x, int y)
+    public boolean wykonajRuch(int x, int y)
     {
         if (aktywny)
         {
@@ -60,12 +60,14 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
             {
                 wysylanieDoSerwera.writeInt(1);
                 wysylanieDoSerwera.writeInt(x+19*y);
+                return true;
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
         }
+        return false;
     }
 
     public void ustawKolor(int nrGracza)
@@ -74,11 +76,15 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         {
             this.kolor=Color.BLACK;
             this.kolorPrzeciwnika=Color.WHITE;
+            plansza.kolor=Color.BLACK;
+            System.out.println("Ustawiony kolor");
         }
         else
         {
             this.kolor=Color.WHITE;
             this.kolorPrzeciwnika=Color.BLACK;
+            plansza.kolor=Color.WHITE;
+            System.out.println("Ustawiony kolor");
         }
     }
 
@@ -102,33 +108,23 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
             this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
             int nrGracza = odbieranieOdSerwera.readInt();
+            this.plansza=plansza;
             ustawKolor(nrGracza);
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-
-        this.plansza=plansza;
         Thread watek = new Thread(this);
         watek.start();
     }
-
-    /*public void wlaczGUI()
-    {
-            new Aplikacja().main(this);
-            System.out.println("GUI uruchomione");
-        
-        
-    }*/
-
     /*
      * Funkcja zwraca true jeśli udało się dodać pionek do Planszy 
      * Funkcja zwaraca false jeśli nie udało się dodać pionka do planszy
      */
     public boolean dodaniePionka(int nrpola, Color kolor)
     {
-        return true;
+        return wykonajRuch(nrpola % 19, nrpola / 19);
     }
 
     public void usunieciePionka(int nrpola)
@@ -228,7 +224,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                         }
                         if(sygnal==10)
                         {
-                            
+
                             plansza.rozpoczecieGry();
                             wypiszKomunikatNaPlanszy("Tura przeciwnika");
                             System.out.println("sygnal 10");
