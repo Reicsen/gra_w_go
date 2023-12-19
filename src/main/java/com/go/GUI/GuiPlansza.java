@@ -58,12 +58,11 @@ public class GuiPlansza extends GridPane
         setColumnSpan(b2, 16); // Rozciąganie przez 16 kolumn
         add(b2, 0, 18);
 
-        gracz = new Gracz();
-        czekanieNaGracza();
+        gracz = new Gracz(this);
     }
-    void czekanieNaGracza(){
+    public void czekanieNaGracza(){
         while(true){
-            if(gracz.rozpoczniGre()){
+            if(!gracz.rozpoczniGre()){
                 break;
             }
         }

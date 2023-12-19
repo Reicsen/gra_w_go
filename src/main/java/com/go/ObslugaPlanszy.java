@@ -1,5 +1,6 @@
 package com.go;
 
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
 public interface ObslugaPlanszy
@@ -15,11 +16,13 @@ public interface ObslugaPlanszy
      * Funkcja zwaraca false jeśli nie udało się dodać pionka do planszy
      */
     boolean dodaniePionka(int nrpola, Color kolor);
-    
+
     void usunieciePionka(int nrpola);
 
     /*
      * Funkcja zwraca String którego chcemy wypisać na planszy jako komunikat
      */
     String wypiszKomunikatNaPlanszy(String komunikat);
+
+    void wlaczGUI(Label komunikaty);
 }
