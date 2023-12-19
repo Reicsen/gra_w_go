@@ -5,9 +5,9 @@ import javafx.stage.Stage;
 
 public class Aplikacja extends Application
 {
-    public static void main(String[] args) 
+    public static void main() 
     {
-        Application.launch(args);
+        Application.launch();
     }
 
     @Override

@@ -5,8 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import com.go.GUI.Aplikacja;
 import com.go.GUI.GuiPlansza;
-
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
@@ -113,17 +113,12 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         Thread watek = new Thread(this);
         watek.start();
     }
-    GuiPlansza gui;
-    public Gracz(GuiPlansza gui){
-        this.gui = gui;
-        wlaczGUI();
-    }
 
     public void wlaczGUI()
     {
-        //miejsce na GUI? (a przynajmniej tak było w przykładzie)
+        Aplikacja  app = new Aplikacja();
+        app.main();
 
-        polacz();
     }
 
     /*
@@ -160,7 +155,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     public static void main(String[] args)
     {
         Gracz gracz = new Gracz();
-        gracz.wlaczGUI();
+        
     }
 
     @Override

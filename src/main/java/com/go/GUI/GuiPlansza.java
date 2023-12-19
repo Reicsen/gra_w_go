@@ -35,6 +35,7 @@ public class GuiPlansza extends GridPane
         for (int row = 1; row < 17; row++) {
             for (int col = 0; col < 16; col++) {
                 Button button = new PrzyciskPionek();
+                button.setStyle("-fx-background-color: white;");
 
                 add(button, col, row);
 
@@ -58,7 +59,7 @@ public class GuiPlansza extends GridPane
         setColumnSpan(b2, 16); // Rozciąganie przez 16 kolumn
         add(b2, 0, 18);
 
-        gracz = new Gracz(this);
+        //gracz = new Gracz();
     }
     public void czekanieNaGracza(){
         while(true){

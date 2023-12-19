@@ -24,5 +24,5 @@ public interface ObslugaPlanszy
      */
     String wypiszKomunikatNaPlanszy(String komunikat);
 
-    void wlaczGUI(Label komunikaty);
+    //void wlaczGUI(Label komunikaty);
 }
