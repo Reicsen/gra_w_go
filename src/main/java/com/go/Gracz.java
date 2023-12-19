@@ -103,19 +103,19 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     {
         try
         {
+            this.plansza=plansza;
             this.polaczenieZSerwerem = new Socket("localhost", 8000);
             this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
             int nrGracza = odbieranieOdSerwera.readInt();
-            this.plansza=plansza;
             ustawKolor(nrGracza);
+            Thread watek = new Thread(this);
+            watek.start();
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        Thread watek = new Thread(this);
-        watek.start();
     }
 
     public void dodaniePionka(int nrpola, Color kolor)

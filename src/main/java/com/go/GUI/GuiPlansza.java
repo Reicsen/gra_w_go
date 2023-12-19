@@ -22,7 +22,7 @@ public class GuiPlansza extends GridPane
     public List<PrzyciskPionek> pionki= new ArrayList<>();
     public Color kolor;
 
-    GuiPlansza()
+    public GuiPlansza()
     {
         //Tworzymy nowy GridPane
         super();
@@ -88,8 +88,6 @@ public class GuiPlansza extends GridPane
     //Uruchamia ona przyciski dostawiające pionki
     public void rozpoczecieGry(){
         Platform.runLater(() -> {
-        
-        //lbl.setText("Gra się rozpoczęła!");
         for (Button b : pionki) {
             b.setDisable(false);
         }
