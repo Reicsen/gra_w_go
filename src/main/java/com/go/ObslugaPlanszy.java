@@ -5,11 +5,13 @@ import javafx.scene.paint.Color;
 public interface ObslugaPlanszy
 {
     /*
-     * Funkcja zwraca true jeśli udało się dodać pionek do Planszy 
-     * Funkcja zwaraca false jeśli nie udało się dodać pionka do planszy
+     *Funkcja dodaje na GuiPlanszy pionek w odpowiednim miejscu
      */
     void dodaniePionka(int nrpola, Color kolor);
 
+    /*
+     * Funkcja usuwa pionek z GuiPlanszy w odpowiednim miejscu
+     */
     void usunieciePionka(int nrpola);
 
     /*
@@ -17,7 +19,18 @@ public interface ObslugaPlanszy
      */
     void wypiszKomunikatNaPlanszy(String komunikat);
 
+    /*
+     * Funkcja pisze do serweru czy można postawić pionek w tym miejscu
+     */
     void wykonajRuch(int x, int y);
+
+    /*
+     * Funkcja powoduje poddanie się jednego z gracz
+     */
     void poddajSie();
+
+    /*
+     * Funkcja powoduje pominięcie ruchu przez jednego z graczy jednego z gracz
+     */
     void pominRuch();
 }
