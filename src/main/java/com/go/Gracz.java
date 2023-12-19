@@ -117,6 +117,10 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         polacz();
     }
 
+    /*
+     * Funkcja zwraca true jeśli udało się dodać pionek do Planszy 
+     * Funkcja zwaraca false jeśli nie udało się dodać pionka do planszy
+     */
     public boolean dodaniePionka(int nrpola, Color kolor)
     {
         return true;
@@ -128,6 +132,9 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         //usunięcie z wizualnej planszy na wskazanym polu pionka (zamiana go w ,,krzyżyk"); na razie puste
     }
 
+    /*
+     * Funkcja zwraca String którego chcemy wypisać na planszy jako komunikat
+     */
     public String wypiszKomunikatNaPlanszy(String komunikat)
     {
         //wyświetlenie w okienku GUI komunikatu

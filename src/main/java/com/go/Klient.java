@@ -1,6 +1,6 @@
 package com.go;
 
-interface Klient
+public interface Klient
 {
     void wykonajRuch(int x, int y);
     void pominRuch();

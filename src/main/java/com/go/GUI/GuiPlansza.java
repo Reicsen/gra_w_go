@@ -59,6 +59,7 @@ public class GuiPlansza extends GridPane
         add(b2, 0, 18);
 
         gracz = new Gracz();
+        czekanieNaGracza();
     }
     void czekanieNaGracza(){
         while(true){
