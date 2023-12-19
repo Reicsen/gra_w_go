@@ -23,7 +23,7 @@ public class PrzyciskGraZGraczem extends Button{
 
                 stage.setTitle("Gra w go");
 
-                Scene scene = new Scene(gridPane, 1000, 1000);
+                Scene scene = new Scene(gridPane, 1300, 1000);
                 stage.setScene(scene);
                 stage.show();
             }
