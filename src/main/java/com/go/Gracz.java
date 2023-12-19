@@ -91,8 +91,9 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         }
     }
 
-    private void polacz()
+    public Gracz()
     {
+        wlaczGUI();
         try
         {
             this.polaczenieZSerwerem = new Socket("localhost", 8000);
@@ -113,8 +114,6 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     private void wlaczGUI()
     {
         //miejsce na GUI? (a przynajmniej tak było w przykładzie)
-
-        polacz();
     }
 
     /*
@@ -151,7 +150,6 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     public static void main(String[] args)
     {
         Gracz gracz = new Gracz();
-        gracz.wlaczGUI();
     }
 
     @Override
