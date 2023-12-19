@@ -52,7 +52,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         }
     }
 
-    public boolean wykonajRuch(int x, int y)
+    public void wykonajRuch(int x, int y)
     {
         if (aktywny)
         {
@@ -60,14 +60,12 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
             {
                 wysylanieDoSerwera.writeInt(1);
                 wysylanieDoSerwera.writeInt(x+19*y);
-                return true;
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
     public void ustawKolor(int nrGracza)
@@ -118,13 +116,10 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         Thread watek = new Thread(this);
         watek.start();
     }
-    /*
-     * Funkcja zwraca true jeśli udało się dodać pionek do Planszy 
-     * Funkcja zwaraca false jeśli nie udało się dodać pionka do planszy
-     */
-    public boolean dodaniePionka(int nrpola, Color kolor)
+
+    public void dodaniePionka(int nrpola, Color kolor)
     {
-        return wykonajRuch(nrpola % 19, nrpola / 19);
+        //ma dodać pionek o kolorze kolor na ole nrpola
     }
 
     public void usunieciePionka(int nrpola)
@@ -142,24 +137,9 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         });
     }
 
-    /*
-     * Funkcja zwraca true jeśli do serwera dołączyło dwóch graczy
-     * Funkcja zwraca false jeśli jeszcze czekamy na kolejnego gracza
-     */
-    public boolean rozpoczniGre()
-    {
-        return true;
-    }
-
-    public static void main(String[] args)
-    {
-        //new Gracz(); 
-    }
-
     @Override
     public void run()
     {
-        //wlaczGUI();
         System.out.println("in run");
         int sygnal;
         int ruch;
