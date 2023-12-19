@@ -1,5 +1,7 @@
 package com.go.GUI;
 
+import com.go.ObslugaPlanszy;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -7,13 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 
 public class GUI {
-    public GUI(Stage stage){
+    public GUI(Stage stage, ObslugaPlanszy ob){
     
         stage.setTitle("Gra w go");
 
         BorderPane root = new BorderPane();
 
-        Button b1 = new PrzyciskGraZGraczem(stage);
+        Button b1 = new PrzyciskGraZGraczem(stage, ob);
         b1.setPrefWidth(400);
         b1.setPrefHeight(200);
         b1.setStyle("-fx-background-color: aquamarine");
@@ -32,7 +34,6 @@ public class GUI {
         Scene scene = new Scene(root, 800, 200);
         stage.setScene(scene);
         stage.show(); 
-
     }
     
 }

@@ -116,9 +116,14 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
 
     public void wlaczGUI()
     {
-        Aplikacja  app = new Aplikacja();
-        app.main();
+        new Aplikacja().main(this);
 
+    }
+
+    GuiPlansza plansza;
+    @Override
+    public void setGuiPlansza(GuiPlansza plansza) {
+        this.plansza=plansza;
     }
 
     /*
@@ -154,7 +159,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
 
     public static void main(String[] args)
     {
-        Gracz gracz = new Gracz();
+        new Gracz();
         
     }
 

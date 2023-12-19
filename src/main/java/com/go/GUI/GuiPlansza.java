@@ -1,6 +1,7 @@
 package com.go.GUI;
 
-import com.go.Gracz;
+import java.util.ArrayList;
+import java.util.List;
 import com.go.ObslugaPlanszy;
 
 import javafx.geometry.HPos;
@@ -14,8 +15,9 @@ public class GuiPlansza extends GridPane
 {
     ObslugaPlanszy gracz;
     Label lbl;
+    List<Button> pionki= new ArrayList<>();
 
-    GuiPlansza()
+    GuiPlansza(ObslugaPlanszy ob)
     {
         super();
         setAlignment(Pos.CENTER);
@@ -40,6 +42,9 @@ public class GuiPlansza extends GridPane
                 add(button, col, row);
 
                 setHalignment(button, HPos.CENTER);
+
+                pionki.add(button);
+                button.setDisable(true);
             }
         }
 
@@ -58,15 +63,19 @@ public class GuiPlansza extends GridPane
         b2.setFont(Font.font(20));
         setColumnSpan(b2, 16); // Rozciąganie przez 16 kolumn
         add(b2, 0, 18);
-
-        //gracz = new Gracz();
+        gracz = ob;
+        gracz.setGuiPlansza(this);
     }
     public void czekanieNaGracza(){
+    
         while(true){
             if(!gracz.rozpoczniGre()){
                 break;
             }
         }
         lbl.setText("Gra się rozpoczęła!");
+        for(Button b : pionki){
+            b.setDisable(false);
+        }
     }
 }
