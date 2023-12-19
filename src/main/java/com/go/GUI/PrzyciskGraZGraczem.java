@@ -1,8 +1,5 @@
 package com.go.GUI;
 
-import com.go.Gracz;
-import com.go.ObslugaPlanszy;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

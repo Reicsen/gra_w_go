@@ -5,9 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import com.go.GUI.GuiPlansza;
-
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class Gracz implements Klient, ObslugaPlanszy, Runnable
@@ -45,6 +43,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
             {
                 zmienAktywnosc();
                 wysylanieDoSerwera.writeInt(0);
+                wypiszKomunikatNaPlanszy("Tura przeciwnika");
             }
             catch (IOException e)
             {

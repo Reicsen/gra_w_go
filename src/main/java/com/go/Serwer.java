@@ -31,6 +31,7 @@ public class Serwer
 
     public static void main(String[] args)
     {
-        Serwer serwer = new Serwer();       
+        //Serwer serwer = new Serwer();  
+        new Serwer();      
     }
 }

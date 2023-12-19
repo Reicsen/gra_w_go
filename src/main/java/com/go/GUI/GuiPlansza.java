@@ -63,6 +63,9 @@ public class GuiPlansza extends GridPane
         b1.setFont(Font.font(20));
         setColumnSpan(b1, 10); 
         add(b1, 0, 20);
+        b1.setOnAction(event -> {
+            gracz.poddajSie();
+        });
 
         Button b2 = new Button("Pomiń ruch");
         b2.setPrefWidth(480);
@@ -71,6 +74,9 @@ public class GuiPlansza extends GridPane
         b2.setFont(Font.font(20));
         setColumnSpan(b2, 9);
         add(b2, 10, 20);
+        b2.setOnAction(event -> {
+            gracz.pominRuch();
+        });
     }
     public void rozpoczecieGry(){
         Platform.runLater(() -> {

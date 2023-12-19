@@ -1,8 +1,5 @@
 package com.go;
 
-import com.go.GUI.GuiPlansza;
-
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
 public interface ObslugaPlanszy
@@ -21,4 +18,6 @@ public interface ObslugaPlanszy
     void wypiszKomunikatNaPlanszy(String komunikat);
 
     void wykonajRuch(int x, int y);
+    void poddajSie();
+    void pominRuch();
 }
