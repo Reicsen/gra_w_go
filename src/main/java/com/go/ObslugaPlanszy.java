@@ -25,12 +25,12 @@ public interface ObslugaPlanszy
     void wykonajRuch(int x, int y);
 
     /*
-     * Funkcja powoduje poddanie się jednego z gracz
+     * Funkcja powoduje poddanie się jednego z graczy
      */
     void poddajSie();
 
     /*
-     * Funkcja powoduje pominięcie ruchu przez jednego z graczy jednego z gracz
+     * Funkcja powoduje pominięcie ruchu przez jednego z graczy 
      */
     void pominRuch();
 }
