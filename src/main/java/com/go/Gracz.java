@@ -7,7 +7,7 @@ import java.net.Socket;
 
 import javafx.scene.paint.Color;
 
-public class Gracz implements Klient, Runnable
+public class Gracz implements Klient, ObslugaPlanszy, Runnable
 {
     private boolean aktywny=false;
     private int iloscJencow=0;
@@ -117,6 +117,21 @@ public class Gracz implements Klient, Runnable
         polacz();
     }
 
+    public void dodaniePionka(int nrpola, Color kolor)
+    {
+        //dodanie do wizualnej planszy na wskazanym polu pionka o danym kolorze
+    }
+
+    public void usunieciePionka(int nrpola)
+    {
+        //usunięcie z wizualnej planszy na wskazanym polu pionka (zamiana go w ,,krzyżyk"); na razie puste
+    }
+
+    public void wypiszKomunikatNaPlanszy(String komunikat)
+    {
+        //wyświetlenie w okienku GUI komunikatu
+    }
+
     public static void main(String[] args)
     {
         Gracz gracz = new Gracz();
@@ -139,12 +154,12 @@ public class Gracz implements Klient, Runnable
                     if (sygnal==0)
                     {
                         ruch=odbieranieOdSerwera.readInt();
-                        //dodanie do wizualnej planszy pionka na wskazane pole z kolorem z pola kolor
+                        dodaniePionka(ruch, kolor);
                         zmienAktywnosc();
                     }
                     else
                     {
-                        //wypisanie na dole okienka, że ruch był niepoprawny
+                        wypiszKomunikatNaPlanszy("Niepoprawny ruch!");
                     }
                 }
                 else
@@ -154,12 +169,12 @@ public class Gracz implements Klient, Runnable
                         ruch=odbieranieOdSerwera.readInt();
                         if (ruch==-1)
                         {
-                            //wypisuje porażkę
+                            wypiszKomunikatNaPlanszy("Przegrałeś!");
                             break;
                         }
                         else
                         {
-                            //wypisuje wygraną
+                            wypiszKomunikatNaPlanszy("Wygrałeś!");
                             break;
                         }
                     }
@@ -170,8 +185,17 @@ public class Gracz implements Klient, Runnable
                     if (sygnal==1)
                     {
                         ruch=odbieranieOdSerwera.readInt();
-                        //dodanie do wizualnej planszy pionka na wskazane pole z kolorem z pola kolorPrzeciwnika
+                        dodaniePionka(ruch, kolorPrzeciwnika);
                         zmienAktywnosc();
+                    }
+                    if (sygnal==-1)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                        while (ruch!=-1)
+                        {
+                            usunieciePionka(ruch);
+                            ruch=odbieranieOdSerwera.readInt();
+                        }
                     }
                     //na razie obsługa jeńców nie jest implementowana, bo i tak mechanika ich nie obejmuje
                 }
