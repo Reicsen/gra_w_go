@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
 
 public interface ObslugaPlanszy
 {
-    void setGuiPlansza(GuiPlansza plansza);
     /*
      * Funkcja zwraca true jeśli do serwera dołączyło dwóch graczy
      * Funkcja zwraca false jeśli jeszcze czekamy na kolejnego gracza

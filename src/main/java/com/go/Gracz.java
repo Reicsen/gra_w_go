@@ -4,8 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-
-import com.go.GUI.Aplikacja;
 import com.go.GUI.GuiPlansza;
 
 import javafx.application.Platform;
@@ -20,6 +18,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     private DataInputStream odbieranieOdSerwera;
     private DataOutputStream wysylanieDoSerwera;
     Socket polaczenieZSerwerem;
+    GuiPlansza plansza;
 
     public void poddajSie()
     {
@@ -95,7 +94,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         }
     }
 
-    public Gracz()
+    public Gracz(GuiPlansza plansza)
     {
         try
         {
@@ -110,23 +109,18 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
             e.printStackTrace();
         }
 
+        this.plansza=plansza;
         Thread watek = new Thread(this);
         watek.start();
     }
 
-    public void wlaczGUI()
+    /*public void wlaczGUI()
     {
             new Aplikacja().main(this);
             System.out.println("GUI uruchomione");
         
         
-    }
-
-    GuiPlansza plansza;
-    @Override
-    public void setGuiPlansza(GuiPlansza plansza) {
-        this.plansza=plansza;
-    }
+    }*/
 
     /*
      * Funkcja zwraca true jeśli udało się dodać pionek do Planszy 
@@ -147,7 +141,9 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
      */
     public void wypiszKomunikatNaPlanszy(String komunikat)
     {
-        plansza.lbl.setText(komunikat);
+        Platform.runLater(() -> {
+            plansza.lbl.setText(komunikat);
+        });
     }
 
     /*
@@ -161,15 +157,13 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
 
     public static void main(String[] args)
     {
-        new Gracz(); 
+        //new Gracz(); 
     }
 
     @Override
     public void run()
     {
-        
-        wlaczGUI();
-        
+        //wlaczGUI();
         System.out.println("in run");
         int sygnal;
         int ruch;
@@ -234,6 +228,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                         }
                         if(sygnal==10)
                         {
+                            
                             plansza.rozpoczecieGry();
                             wypiszKomunikatNaPlanszy("Tura przeciwnika");
                             System.out.println("sygnal 10");

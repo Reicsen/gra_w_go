@@ -9,13 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 
 public class GUI {
-    public GUI(Stage stage, ObslugaPlanszy ob){
+    public GUI(Stage stage){
     
         stage.setTitle("Gra w go");
 
         BorderPane root = new BorderPane();
 
-        Button b1 = new PrzyciskGraZGraczem(stage, ob);
+        Button b1 = new PrzyciskGraZGraczem(stage);
         b1.setPrefWidth(400);
         b1.setPrefHeight(200);
         b1.setStyle("-fx-background-color: aquamarine");

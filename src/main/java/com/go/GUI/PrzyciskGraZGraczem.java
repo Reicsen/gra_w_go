@@ -1,5 +1,6 @@
 package com.go.GUI;
 
+import com.go.Gracz;
 import com.go.ObslugaPlanszy;
 
 import javafx.event.ActionEvent;
@@ -10,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class PrzyciskGraZGraczem extends Button{
-    PrzyciskGraZGraczem(Stage stage, ObslugaPlanszy ob){
+    PrzyciskGraZGraczem(Stage stage){
         super("Gra z innym graczem");
 
         setOnAction(new EventHandler<ActionEvent>() 
@@ -18,7 +19,7 @@ public class PrzyciskGraZGraczem extends Button{
             @Override
             public void handle(ActionEvent e) 
             {
-                GridPane gridPane = new GuiPlansza(ob);
+                GridPane gridPane = new GuiPlansza();
 
                 stage.setTitle("Gra w go");
 

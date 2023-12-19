@@ -1,25 +1,18 @@
 package com.go.GUI;
 
-import com.go.ObslugaPlanszy;
-
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 
 public class Aplikacja extends Application
 {
-    static ObslugaPlanszy ob;
-    public static void main(ObslugaPlanszy gracz) 
+    public static void main(String[] args) 
     {
-        ob = gracz;
-        Application.launch();
+        Application.launch(args);
     }
 
     @Override
     public void start(Stage stage) 
     {
-        Platform.runLater(() -> {
-            new GUI(stage, ob);
-        });
+        new GUI(stage);
     }
 }
