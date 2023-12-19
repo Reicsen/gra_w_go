@@ -166,7 +166,6 @@ public class Gra implements IGra,IGra2,Runnable
                 e.printStackTrace();
             }
         }
-        zmienKolor();
     }
 
     @Override
