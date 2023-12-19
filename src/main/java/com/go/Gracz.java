@@ -19,7 +19,26 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     private Socket polaczenieZSerwerem;
     private GuiPlansza plansza;
 
-    
+    public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
+    {
+        try
+        {
+            this.polaczenieZSerwerem = new Socket("localhost", 8000);
+            this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
+            this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
+            int nrGracza = odbieranieOdSerwera.readInt();
+            this.plansza=plansza;
+            ustawKolor(nrGracza);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        Thread watek = new Thread(this); //stworzenie wątku
+        watek.start();
+    }
+
+
     public void poddajSie()
     {
         if (aktywny)
@@ -99,25 +118,6 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         }
     }
 
-    public Gracz(GuiPlansza plansza)
-    {
-        try
-        {
-            this.polaczenieZSerwerem = new Socket("localhost", 8000);
-            this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
-            this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
-            int nrGracza = odbieranieOdSerwera.readInt();
-            this.plansza=plansza;
-            ustawKolor(nrGracza);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        Thread watek = new Thread(this);
-        watek.start();
-    }
-
     public void dodaniePionka(int nrpola, Color kolor)
     {
         Platform.runLater(() -> {
@@ -138,7 +138,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     }
 
     @Override
-    public void run()
+    public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
         System.out.println("in run");
         int sygnal;

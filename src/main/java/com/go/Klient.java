@@ -17,7 +17,7 @@ public interface Klient
      */
     void poddajSie();
     /*
-     * Funkcja ustawia prawidłowy kolor dla danego gracza
+     * Funkcja ustawia prawidłowy kolor dla danego gracza i jego przeciwnika
      * Biały dla gracza jeśli doszedł do gry jako drugi
      * Czarny jeśli był pierwszy
      */
