@@ -120,7 +120,6 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
 
     public void dodaniePionka(int nrpola, Color kolor)
     {
-        //ma dodać pionek o kolorze kolor na ole nrpola
         Platform.runLater(() -> {
         plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
         });
@@ -131,9 +130,6 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     
     }
 
-    /*
-     * Funkcja wypisuje komunikat na planszy 
-     */
     public void wypiszKomunikatNaPlanszy(String komunikat)
     {
         Platform.runLater(() -> {

@@ -15,7 +15,7 @@ Aby zainstalować projekt, wykonaj następujące kroki:
 1. Sklonuj repozytorium: `git clone [adres_repozytorium]`
 2. Przejdź do katalogu projektu: `cd gra_w_go`
 3. Uruchom serwer: `mvn exec:java -Dexec.mainClass=com.go.Serwer`
-4. Uruchom gre: `mvn exec:java -Dexec.mainClass=com.go.GUI.Aplikacja`
+4. Uruchom dwukrotnie grę: `mvn exec:java -Dexec.mainClass=com.go.GUI.Aplikacja` i wybierz opcję (gracz/bot)
 
 ### Użycie
 

@@ -18,19 +18,4 @@ public interface ObslugaPlanszy
      * Funkcja wypisuje komunikat na planszy 
      */
     void wypiszKomunikatNaPlanszy(String komunikat);
-
-    /*
-     * Funkcja pisze do serweru czy można postawić pionek w tym miejscu
-     */
-    void wykonajRuch(int x, int y);
-
-    /*
-     * Funkcja powoduje poddanie się jednego z graczy
-     */
-    void poddajSie();
-
-    /*
-     * Funkcja powoduje pominięcie ruchu przez jednego z graczy 
-     */
-    void pominRuch();
 }

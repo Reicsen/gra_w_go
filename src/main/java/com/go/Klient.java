@@ -3,7 +3,7 @@ package com.go;
 public interface Klient
 {
     /*
-     * Funkcja pisze do serweru czy można postawić pionek w tym miejscu
+     * Funkcja wysyła do serwera informację o próbie postawienia pionka na podanym polu
      */
     void wykonajRuch(int x, int y);
 
@@ -17,7 +17,7 @@ public interface Klient
      */
     void poddajSie();
     /*
-     * Funkcja ustawia prawidłowy kolor dla danego gracza i jego przeciwnika
+     * Funkcja ustawia prawidłowy kolor dla danego gracza
      * Biały dla gracza jeśli doszedł do gry jako drugi
      * Czarny jeśli był pierwszy
      */
