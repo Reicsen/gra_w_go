@@ -8,14 +8,20 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class PrzyciskGraZGraczem extends Button{
+
+    //konsturktor przycisku
     PrzyciskGraZGraczem(Stage stage){
+
+        //Stworzenie przycisku z tekstem w środku
         super("Gra z innym graczem");
 
+        //Ustawienie co sie zdarzy po naciśnięciu przycisku
         setOnAction(new EventHandler<ActionEvent>() 
         { 
             @Override
             public void handle(ActionEvent e) 
             {
+                //Tworzymy nowy Pane (który wyświetla plansze do gry) i zastępujemy stary nowym
                 GridPane gridPane = new GuiPlansza();
 
                 stage.setTitle("Gra w go");
