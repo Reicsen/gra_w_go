@@ -13,7 +13,7 @@ public class GUI {
 
         BorderPane root = new BorderPane();
 
-        Button b1 = new PrzyciskGraZGraczem();
+        Button b1 = new PrzyciskGraZGraczem(stage);
         b1.setPrefWidth(400);
         b1.setPrefHeight(200);
         b1.setStyle("-fx-background-color: aquamarine");
@@ -22,7 +22,7 @@ public class GUI {
         Button b2 = new PrzyciskGraZBotem();
         b2.setPrefWidth(400);
         b2.setPrefHeight(200);
-        b2.setStyle("-fx-background-color: lightblue");
+        b2.setStyle("-fx-background-color: turquoise");
         b2.setFont(Font.font(20));
 
 
