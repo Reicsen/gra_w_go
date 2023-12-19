@@ -16,10 +16,29 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     private Color kolorPrzeciwnika=null;
     private DataInputStream odbieranieOdSerwera;
     private DataOutputStream wysylanieDoSerwera;
-    Socket polaczenieZSerwerem;
-    GuiPlansza plansza;
+    private Socket polaczenieZSerwerem;
+    private GuiPlansza plansza;
 
-    
+    public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
+    {
+        try
+        {
+            this.polaczenieZSerwerem = new Socket("localhost", 8000);
+            this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
+            this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
+            int nrGracza = odbieranieOdSerwera.readInt();
+            this.plansza=plansza;
+            ustawKolor(nrGracza);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        Thread watek = new Thread(this); //stworzenie wątku
+        watek.start();
+    }
+
+
     public void poddajSie()
     {
         if (aktywny)
@@ -99,28 +118,9 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         }
     }
 
-    public Gracz(GuiPlansza plansza)
-    {
-        try
-        {
-            this.plansza=plansza;
-            this.polaczenieZSerwerem = new Socket("localhost", 8000);
-            this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
-            this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
-            int nrGracza = odbieranieOdSerwera.readInt();
-            ustawKolor(nrGracza);
-            Thread watek = new Thread(this);
-            watek.start();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
 
     public void dodaniePionka(int nrpola, Color kolor)
     {
-        //ma dodać pionek o kolorze kolor na ole nrpola
         Platform.runLater(() -> {
         plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
         });
@@ -131,9 +131,6 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     
     }
 
-    /*
-     * Funkcja wypisuje komunikat na planszy 
-     */
     public void wypiszKomunikatNaPlanszy(String komunikat)
     {
         Platform.runLater(() -> {
@@ -142,7 +139,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     }
 
     @Override
-    public void run()
+    public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
         System.out.println("in run");
         int sygnal;

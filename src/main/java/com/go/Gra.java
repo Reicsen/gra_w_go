@@ -16,7 +16,7 @@ public class Gra implements IGra,IGra2,Runnable
     private DataInputStream odbieranieOdGracza2;
     private DataOutputStream wysylanieDoGracza2;
 
-    public Gra(Socket s1, Socket s2)
+    public Gra(Socket s1, Socket s2) //konstruktor
     {
         this.aktywnyKolor="czarny";
         this.plansza=new Plansza();
@@ -35,7 +35,7 @@ public class Gra implements IGra,IGra2,Runnable
         }
     }
 
-    private void zmienKolor()
+    private void zmienKolor() //metoda zmieniająca aktywny kolor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
         if ("czarny".equals(this.aktywnyKolor))
         {
@@ -169,13 +169,13 @@ public class Gra implements IGra,IGra2,Runnable
     }
 
     @Override
-    public void run()
+    public void run() //metoda obsługująca działanie wątkowe poprzez wywoływanie odpowiednich metod z interfejsów
     {
         try
         {
             wysylanieDoGracza1.writeInt(10);
             wysylanieDoGracza2.writeInt(10);
-            wysylanieDoGracza1.writeInt(2);
+            wysylanieDoGracza1.writeInt(2); //poinformowanie graczy o starcie gry, a gracza 1. o początku jego tury
             int sygnal;
 
             while (true)

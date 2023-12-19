@@ -3,7 +3,7 @@ package com.go;
 public interface Klient
 {
     /*
-     * Funkcja pisze do serweru czy można postawić pionek w tym miejscu
+     * Funkcja wysyła do serwera informację o próbie postawienia pionka na podanym polu
      */
     void wykonajRuch(int x, int y);
 
