@@ -1,1 +1,107 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLActor</id><coordinates><x>260</x><y>180</y><w>60</w><h>110</h></coordinates><panel_attributes>Gracz</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>330</x><y>70</y><w>120</w><h>40</h></coordinates><panel_attributes>Graj z botem</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>410</x><y>180</y><w>160</w><h>70</h></coordinates><panel_attributes>Graj a innym graczem</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>180</y><w>90</w><h>40</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;20;70;20</additional_attributes></element><element><id>Relation</id><coordinates><x>290</x><y>110</y><w>80</w><h>80</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;60;60;10</additional_attributes></element></diagram>
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLActor</id><coordinates><x>10</x><y>110</y><w>60</w><h>110</h></coordinates><panel_attributes>Gracz</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>80</x><y>0</y><w>120</w><h>40</h></coordinates><panel_attributes>Graj z botem</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>160</x><y>110</y><w>160</w><h>70</h></coordinates><panel_attributes>Graj a innym graczem</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>70</x><y>110</y><w>90</w><h>40</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;20;70;20</additional_attributes></element><element><id>Relation</id><coordinates><x>40</x><y>40</y><w>80</w><h>80</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;60;60;10</additional_attributes></element><element><id>UMLActor</id><coordinates><x>0</x><y>510</y><w>60</w><h>110</h></coordinates><panel_attributes>Gracz</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>0</x><y>320</y><w>60</w><h>110</h></coordinates><panel_attributes>Bot</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>30</x><y>350</y><w>170</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>150;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>30</x><y>480</y><w>170</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>150;10;10;80</additional_attributes></element><element><id>UMLActor</id><coordinates><x>170</x><y>430</y><w>60</w><h>110</h></coordinates><panel_attributes>Klient</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>350</y><w>180</w><h>100</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;80;160;10</additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>320</x><y>320</y><w>120</w><h>40</h></coordinates><panel_attributes>Wykonanie ruchu</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>320</x><y>430</y><w>120</w><h>40</h></coordinates><panel_attributes>Poddanie się </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>320</x><y>530</y><w>120</w><h>40</h></coordinates><panel_attributes>Pominięcie ruchu</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>490</y><w>140</w><h>70</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;120;50</additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>430</y><w>120</w><h>40</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;20;100;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>740</x><y>70</y><w>160</w><h>200</h></coordinates><panel_attributes>PU01
+--
+Aktorzy
+--
+Warunki wstępne
+
+--
+Przepływ główny
+
+
+
+--
+Warunki końcowe</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>900</x><y>70</y><w>270</w><h>200</h></coordinates><panel_attributes>Poddanie się
+--
+Klient
+--
+-gra trwa
+-jest obecnie aktywnym graczem
+--
+1. Aktor naciska przycisk ,,Poddaj się"
+2. System wysyła do serwera sygnał
+3. Serwer wysyła do obu graczy sygnały
+    o końcu gry i rezultacie
+--
+Gra się kończy, na ekranie zostaje
+wyświetlone powiadomienie o porażce,
+a u drugiego gracza - o zwycięstwie.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>740</x><y>310</y><w>160</w><h>220</h></coordinates><panel_attributes>PU02
+--
+Aktorzy
+--
+Warunki wstępne
+
+--
+Przepływ główny
+
+
+
+
+
+--
+Warunki końcowe</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>900</x><y>310</y><w>270</w><h>220</h></coordinates><panel_attributes>Pominięcie ruchu
+--
+Klient
+--
+-gra trwa
+-jest obecnie aktywnym graczem
+--
+1. Aktor naciska przycisk ,,Pomiń ruch"
+2. System wysyła do serwera sygnał
+    i zmienia swój status aktywności
+3. Serwer wysyła do drugiego gracza sygnał
+    o początku jego tury (co powoduje zmianę
+    jego statusu aktywności)
+--
+Gracz staje się nieaktywny, a drugi gracz
+staje się aktywny (zaczyna się jego tura).</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>740</x><y>550</y><w>160</w><h>360</h></coordinates><panel_attributes>PU03
+--
+Aktorzy
+--
+Warunki wstępne
+
+--
+Przepływ główny
+
+
+
+
+
+
+
+--
+Przepływy alternatywne
+
+
+
+--
+Warunki końcowe
+
+
+--
+Wyjątki</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>900</x><y>550</y><w>440</w><h>360</h></coordinates><panel_attributes>Wykonanie ruchu
+--
+Klient
+--
+-gra trwa
+-jest obecnie aktywnym graczem
+--
+1. Aktor naciska miejsce na planszy, w którym chce postawić pionek
+2. System wysyła do serwera sygnały (o próbie ruchu i numerze pola)
+3. Serwer zwraca sygnał o powodzeniu ruchu
+4. System dodaje pionek na planszy graficznej i zmienia status aktywności
+5. Serwer wysyła do drugiego gracza sygnały (o ruchu przeciwnika
+    i numerze pola)
+6. Drugi gracz dodaje pionek na planszy graficznej i zmienia status
+    aktywności
+--
+I ruch jest niepoprawny
+3. Serwer zwraca sygnał o niepowodzeniu ruchu
+4. System wyświetla na planszy powiadomienie o błędnym ruchu i czeka
+     na nowy ruch aktora
+--
+-dla przepływu gł. - zmiany na obu planszach graficznych; gracz staje się
+ nieaktywny, a drugi gracz staje się aktywny (zaczyna się jego tura)
+-dla I - system czeka na nowe działanie aktora
+--
+-ruch jest niepoprawny (przy przejściu z 2. do 3.) - serwer zwraca sygnał o
+ niepowodzeniu i system czeka na nowe działanie aktora</panel_attributes><additional_attributes></additional_attributes></element></diagram>
