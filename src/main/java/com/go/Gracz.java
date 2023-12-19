@@ -7,7 +7,6 @@ import java.net.Socket;
 
 import com.go.GUI.Aplikacja;
 import com.go.GUI.GuiPlansza;
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
 public class Gracz implements Klient, ObslugaPlanszy, Runnable
@@ -158,8 +157,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
 
     public static void main(String[] args)
     {
-        new Gracz();
-        
+        new Gracz(); 
     }
 
     @Override
@@ -226,6 +224,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                     }
                     if(sygnal==10)
                     {
+                        plansza.rozpoczecieGry();
                         wypiszKomunikatNaPlanszy("Tura przeciwnika");
                     }
                     //na razie obsługa jeńców nie jest implementowana, bo i tak mechanika ich nie obejmuje
