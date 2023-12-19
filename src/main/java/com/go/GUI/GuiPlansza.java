@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.go.ObslugaPlanszy;
 
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -67,9 +68,9 @@ public class GuiPlansza extends GridPane
         gracz.setGuiPlansza(this);
     }
     public void rozpoczecieGry(){
-    
+        
         lbl.setText("Gra się rozpoczęła!");
-        for(Button b : pionki){
+        for (Button b : pionki) {
             b.setDisable(false);
         }
     }
