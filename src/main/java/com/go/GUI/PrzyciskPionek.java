@@ -1,6 +1,6 @@
 package com.go.GUI;
 
-import com.go.ObslugaPlanszy;
+import com.go.Klient;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -10,7 +10,7 @@ import javafx.scene.shape.Line;
 
 public class PrzyciskPionek extends Button{
 
-    PrzyciskPionek(ObslugaPlanszy gracz, int x, int y){
+    PrzyciskPionek(Klient gracz, int x, int y){
 
         //Stworzenie przycisku który ma na sobie grafike (krzyż)
         super();

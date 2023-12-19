@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.go.Gracz;
-import com.go.ObslugaPlanszy;
+import com.go.Klient;
 
 import javafx.application.Platform;
 import javafx.geometry.HPos;
@@ -17,7 +17,7 @@ import javafx.scene.text.Font;
 
 public class GuiPlansza extends GridPane 
 {
-    private ObslugaPlanszy gracz;
+    private Klient gracz;
     public Label lbl;
     public List<PrzyciskPionek> pionki= new ArrayList<>();
     public Color kolor;

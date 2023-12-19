@@ -16,8 +16,8 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     private Color kolorPrzeciwnika=null;
     private DataInputStream odbieranieOdSerwera;
     private DataOutputStream wysylanieDoSerwera;
-    Socket polaczenieZSerwerem;
-    GuiPlansza plansza;
+    private Socket polaczenieZSerwerem;
+    private GuiPlansza plansza;
 
     
     public void poddajSie()
