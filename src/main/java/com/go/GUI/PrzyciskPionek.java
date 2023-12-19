@@ -5,7 +5,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.StrokeType;
 
 public class PrzyciskPionek extends Button{
     PrzyciskPionek(){
@@ -31,10 +30,10 @@ public class PrzyciskPionek extends Button{
     }
 
     private void toggleButtonState(Button button) {
-        Circle circle = new Circle(18, Color.TRANSPARENT);
+        Circle circle = new Circle(18, Color.WHITE);
         circle.setStroke(Color.BLACK);
 
         button.setGraphic(circle);
-        button.setDisable(true);
+        button.setDisable(false);
     }
 }

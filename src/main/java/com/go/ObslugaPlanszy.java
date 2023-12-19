@@ -4,7 +4,8 @@ import javafx.scene.paint.Color;
 
 public interface ObslugaPlanszy
 {
-    void dodaniePionka(int nrpola, Color kolor);
+    boolean rozpoczniGre();
+    boolean dodaniePionka(int nrpola, Color kolor);
     void usunieciePionka(int nrpola);
-    void wypiszKomunikatNaPlanszy(String komunikat);
+    String wypiszKomunikatNaPlanszy(String komunikat);
 }

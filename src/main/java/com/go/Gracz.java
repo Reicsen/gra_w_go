@@ -117,8 +117,9 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         polacz();
     }
 
-    public void dodaniePionka(int nrpola, Color kolor)
+    public boolean dodaniePionka(int nrpola, Color kolor)
     {
+        return true;
         //dodanie do wizualnej planszy na wskazanym polu pionka o danym kolorze
     }
 
@@ -127,9 +128,19 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         //usunięcie z wizualnej planszy na wskazanym polu pionka (zamiana go w ,,krzyżyk"); na razie puste
     }
 
-    public void wypiszKomunikatNaPlanszy(String komunikat)
+    public String wypiszKomunikatNaPlanszy(String komunikat)
     {
         //wyświetlenie w okienku GUI komunikatu
+        return "";
+    }
+
+    /*
+     * Funkcja zwraca true jeśli do serwera dołączyło dwóch graczy
+     * Funkcja zwraca false jeśli jeszcze czekamy na kolejnego gracza
+     */
+    public boolean rozpoczniGre()
+    {
+        return true;
     }
 
     public static void main(String[] args)
