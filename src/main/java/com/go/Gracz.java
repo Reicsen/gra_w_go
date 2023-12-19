@@ -19,6 +19,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     Socket polaczenieZSerwerem;
     GuiPlansza plansza;
 
+    
     public void poddajSie()
     {
         if (aktywny)

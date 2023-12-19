@@ -24,15 +24,17 @@ public class GuiPlansza extends GridPane
 
     GuiPlansza()
     {
+        //Tworzymy nowy GridPane
         super();
-
-        gracz = new Gracz(this);
-
         setAlignment(Pos.CENTER);
         setHgap(0);
         setVgap(0);
         setStyle("-fx-background-color: black;");
+
+        //Tworzymy nowego gracza
+        gracz = new Gracz(this);
     
+        //Tworzymy label na którym będą wyświetlać się komunikaty
         lbl = new Label();
         lbl.setPrefWidth(965);
         lbl.setPrefHeight(50);
@@ -42,6 +44,8 @@ public class GuiPlansza extends GridPane
         setColumnSpan(lbl, 19); // Rozciąganie przez 16 kolumn
         add(lbl, 0, 0);
 
+        //Tworzymy przyciski, które po wciśnięciu dodają pionek w danym miejscu
+        //Przycisków jest tyle ile przecięć linji w planszy
         for (int row = 1; row < 20; row++) {
             for (int col = 0; col < 19; col++) {
                 PrzyciskPionek button = new PrzyciskPionek(gracz, row-1, col);
@@ -56,6 +60,7 @@ public class GuiPlansza extends GridPane
             }
         }
 
+        //Dodajemy przycisk który po naciśnięciu powoduje poddanie się gracza
         Button b1 = new Button("Poddaj się");
         b1.setPrefWidth(500);
         b1.setPrefHeight(50);
@@ -67,6 +72,7 @@ public class GuiPlansza extends GridPane
             gracz.poddajSie();
         });
 
+        //Dodajemy przycisk który po naciśnięciu powoduje pominięcie ruchu przez gracza
         Button b2 = new Button("Pomiń ruch");
         b2.setPrefWidth(480);
         b2.setPrefHeight(50);
@@ -78,6 +84,8 @@ public class GuiPlansza extends GridPane
             gracz.pominRuch();
         });
     }
+    //Funkcja, która wywoływana jest na początku rozgrywki
+    //Uruchamia ona przyciski dostawiające pionki
     public void rozpoczecieGry(){
         Platform.runLater(() -> {
         

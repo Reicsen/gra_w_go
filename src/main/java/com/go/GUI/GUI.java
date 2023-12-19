@@ -13,12 +13,14 @@ public class GUI {
 
         BorderPane root = new BorderPane();
 
+        //Dodanie przycisku, który po naciśnięciu uruchamia grę z drugim graczem
         Button b1 = new PrzyciskGraZGraczem(stage);
         b1.setPrefWidth(400);
         b1.setPrefHeight(200);
         b1.setStyle("-fx-background-color: aquamarine");
         b1.setFont(Font.font(20));
 
+        //Dodanie przycisku, który po naciśnięciu uruchamia grę z botem (jeszcze przycisk jest nieaktywny)
         Button b2 = new PrzyciskGraZBotem();
         b2.setPrefWidth(400);
         b2.setPrefHeight(200);
