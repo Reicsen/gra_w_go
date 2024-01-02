@@ -128,7 +128,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
 
     public void usunieciePionka(int nrpola)
     {
-    
+        //do implementacji
     }
 
     public void wypiszKomunikatNaPlanszy(String komunikat)
@@ -149,70 +149,71 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         {
             try
             {
-                sygnal=odbieranieOdSerwera.readInt();
-                
-                    if (aktywny)
+                sygnal=odbieranieOdSerwera.readInt();                
+                if (aktywny)
+                {
+                    if (sygnal==0)
                     {
-                        if (sygnal==0)
-                        {
-                            ruch=odbieranieOdSerwera.readInt();
-                            dodaniePionka(ruch, kolor);
-                            zmienAktywnosc();
-                            wypiszKomunikatNaPlanszy("Tura przeciwnika");
-                        }
-                        else
-                        {
-                            wypiszKomunikatNaPlanszy("Niepoprawny ruch, spróbuj ponownie");
-                        }
+                        ruch=odbieranieOdSerwera.readInt();
+                        dodaniePionka(ruch, kolor);
+                        zmienAktywnosc();
+                        wypiszKomunikatNaPlanszy("Tura przeciwnika");
                     }
                     else
                     {
-                        if (sygnal==0)
-                        {
-                            ruch=odbieranieOdSerwera.readInt();
-                            
-                            if (ruch==-1)
-                            {
-                                wypiszKomunikatNaPlanszy("Przegrałeś!");
-                                break;
-                            }
-                            else
-                            {
-                                wypiszKomunikatNaPlanszy("Wygrałeś!");
-                                break;
-                            }
-                        }
-                        if (sygnal==2)
-                        {
-                            zmienAktywnosc();
-                            wypiszKomunikatNaPlanszy("Twoja tura");
-                        }
-                        if (sygnal==1)
-                        {
-                            ruch=odbieranieOdSerwera.readInt();
-                            dodaniePionka(ruch, kolorPrzeciwnika);
-                            zmienAktywnosc();
-                            wypiszKomunikatNaPlanszy("Twoja tura");
-                        }
-                        if (sygnal==-1)
-                        {
-                            ruch=odbieranieOdSerwera.readInt();
-                            while (ruch!=-1)
-                            {
-                                usunieciePionka(ruch);
-                                ruch=odbieranieOdSerwera.readInt();
-                            }
-                        }
-                        if(sygnal==10)
-                        {
-
-                            plansza.rozpoczecieGry();
-                            wypiszKomunikatNaPlanszy("Tura przeciwnika");
-                            System.out.println("sygnal 10");
-                        }
-                        //na razie obsługa jeńców nie jest implementowana, bo i tak mechanika ich nie obejmuje
+                        wypiszKomunikatNaPlanszy("Niepoprawny ruch, spróbuj ponownie");
                     }
-                
+                }
+                else
+                {
+                    if (sygnal==0)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                    
+                        if (ruch==-1)
+                        {
+                            wypiszKomunikatNaPlanszy("Przegrałeś!");
+                            break;
+                        }
+                        else
+                        {
+                            wypiszKomunikatNaPlanszy("Wygrałeś!");
+                            break;
+                        }
+                    }
+                    if (sygnal==2)
+                    {
+                        zmienAktywnosc();
+                        wypiszKomunikatNaPlanszy("Twoja tura");
+                    }
+                    if (sygnal==1)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                        dodaniePionka(ruch, kolorPrzeciwnika);
+                        zmienAktywnosc();
+                        wypiszKomunikatNaPlanszy("Twoja tura");
+                    }
+                    if (sygnal==-1)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                        while (ruch!=-1)
+                        {
+                            usunieciePionka(ruch);
+                            ruch=odbieranieOdSerwera.readInt();
+                        }
+                    }
+                    if(sygnal==10)
+                    {
+                        plansza.rozpoczecieGry();
+                        wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                        System.out.println("sygnal 10");
+                    }
+                    if(sygnal==3)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                        this.iloscJencow=this.iloscJencow+ruch;
+                    }
+                }                
             }
 
             catch (IOException e)
@@ -220,7 +221,5 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                 e.printStackTrace();
             }
         }
-    
-
     }
 }

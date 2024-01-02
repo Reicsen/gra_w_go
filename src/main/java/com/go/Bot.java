@@ -19,6 +19,7 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
     private DataInputStream odbieranieOdSerwera;
     private DataOutputStream wysylanieDoSerwera;
     private Socket polaczenieZSerwerem;
+    //private GuiPlansza plansza;
     MersenneTwister generator = new MersenneTwister();
 
     public Bot(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
@@ -30,6 +31,7 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
             int nrGracza = odbieranieOdSerwera.readInt();
             ustawKolor(nrGracza);
+            //this.plansza=plansza;
         }
         catch (IOException e)
         {
@@ -132,7 +134,9 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
 
     public void dodaniePionka(int nrpola, Color kolor)
     {
-        //do implementacji
+        //Platform.runLater(() -> {
+        //plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
+        //});
     }
 
     public void usunieciePionka(int nrpola)
@@ -142,7 +146,9 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
 
     public void wypiszKomunikatNaPlanszy(String komunikat)
     {
-       //do implementacji
+        //Platform.runLater(() -> {
+        //    plansza.lbl.setText(komunikat);
+        //});
     }
 
     @Override
@@ -194,37 +200,39 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
                     }
                     if (sygnal==1)
                     {
-                            ruch=odbieranieOdSerwera.readInt();
-                            dodaniePionka(ruch, kolorPrzeciwnika);
-                            zmienAktywnosc();
-                            wypiszKomunikatNaPlanszy("Twoja tura");
-                            losujRuch();
-                        }
-                        if (sygnal==-1)
+                        ruch=odbieranieOdSerwera.readInt();
+                        dodaniePionka(ruch, kolorPrzeciwnika);
+                        zmienAktywnosc();
+                        wypiszKomunikatNaPlanszy("Twoja tura");
+                        losujRuch();
+                    }
+                    if (sygnal==-1)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                        while (ruch!=-1)
                         {
+                            usunieciePionka(ruch);
                             ruch=odbieranieOdSerwera.readInt();
-                            while (ruch!=-1)
-                            {
-                                usunieciePionka(ruch);
-                                ruch=odbieranieOdSerwera.readInt();
-                            }
                         }
-                        if(sygnal==10)
-                        {
-                            //plansza.rozpoczecieGry();
-                            wypiszKomunikatNaPlanszy("Tura przeciwnika");
-                            System.out.println("sygnal 10");
-                        }
-                        //na razie obsługa jeńców nie jest implementowana, bo i tak mechanika ich nie obejmuje
-                    }                
+                    }
+                    if(sygnal==10)
+                    {
+                        //plansza.rozpoczecieGry();
+                        wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                        System.out.println("sygnal 10");
+                    }
+                    if(sygnal==3)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                        this.iloscJencow=this.iloscJencow+ruch;
+                    }
+                }                
             }
 
             catch (IOException e)
             {
                 e.printStackTrace();
             }
-        }
-    
-
+        }    
     }
 }
