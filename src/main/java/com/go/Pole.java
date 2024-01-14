@@ -6,21 +6,34 @@ public class Pole implements IPole
 
     public Pole() //konstruktor; metody opisane w interfejsie
     {
-        this.kamien=new Kamien();
+        this.kamien=null;
     }
 
     public String podajPionek()
     {
-        return kamien.podajKolor();
+        if(kamien!=null){
+            return kamien.podajKolor();
+        }
+        else{
+            return null;
+        }
     }
 
-    public void dodajPionek(String kolor)
+    public void dodajPionek(String kolor, IPole gora, IPole dol, IPole prawy, IPole lewy)
     {
-        kamien.dodajKamien(kolor);
+        IKamien temp = new Kamien();
+        kamien = temp.dodajKamien(kolor, gora, dol, prawy, lewy);
     }
 
     public void usunPionek()
     {
         kamien.usunKamien();
+    }
+
+    public IKamien podajKamien(){
+        return kamien;
+    }
+    public void ustawKamien(IKamien kamien){
+        this.kamien = kamien;
     }
 }
