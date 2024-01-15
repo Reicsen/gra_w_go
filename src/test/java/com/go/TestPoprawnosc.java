@@ -23,7 +23,7 @@ public class TestPoprawnosc {
         assertTrue( !(warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")) );  
     }
     @Test
-    public void ko(){
+    public void testKo(){
         IPoprawnosc warunek = new Ko();
         Plansza p = new Plansza();
 
@@ -34,6 +34,11 @@ public class TestPoprawnosc {
         //Sprawdzamy czy sprawdzanie warunku nie dodaje pionka
         IPoprawnosc warunek2 = new NachodzacePionki();
         assertTrue(warunek2.sprawdzPoprawnosc(p, 0, 0, "czarny"));
+
+        p.dodajPionek("Bialy", 0, 0);
+        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
+        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
+        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
 
     }
 }

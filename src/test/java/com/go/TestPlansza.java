@@ -20,6 +20,11 @@ public class TestPlansza {
         if(p.sprawdzPoprawnosc("Czarny", 12, 7)){
             assert false;
         }
+
+        p.usunPionek(12, 7);
+        if(!p.sprawdzPoprawnosc("Czarny", 12, 7)){
+            assert false;
+        }
         
     }
     

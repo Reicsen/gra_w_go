@@ -15,6 +15,10 @@ public class Ko implements IPoprawnosc{
         planszaDwaRuchyWczesniej = null;
     }
 
+    //TODO poprawić błędy i zrobić z usuwaniem
+    //najlepiej sprawdzic czy jakiś obok ma 1 oddech
+    // wtedy nie sprawdzać go w forze
+    //ale sprawdzic czy to przeciwnik
     public boolean sprawdzPoprawnosc(IPlansza plansza, int x, int y, String kolor){
 
         boolean s = true;
@@ -29,13 +33,16 @@ public class Ko implements IPoprawnosc{
 
             int miejsceDodanegoPionka = 19*y + x;
 
-            for(int i = 0; i < 361; i++){
+            if((wczesniej.get(miejsceDodanegoPionka).podajPionek() == null ) || !(wczesniej.get(miejsceDodanegoPionka).podajPionek().equals(kolor))){
+                s = true;
+            }
 
-                if((wczesniej.get(miejsceDodanegoPionka).podajPionek() == null ) || !(wczesniej.get(miejsceDodanegoPionka).podajPionek().equals(kolor))){
-                    s = true;
+            for(int i = 0; i < 361; i++){
+                if(i == miejsceDodanegoPionka){
+                    i++;
                 }
 
-                if(!(wczesniej.get(i).equals(teraz.get(i))) && i != miejsceDodanegoPionka){
+                if( !(wczesniej.get(i).equals(teraz.get(i))) ){
                     s = true;
                 }
             }
