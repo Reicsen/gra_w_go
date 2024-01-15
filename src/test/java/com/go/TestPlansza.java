@@ -1,5 +1,7 @@
 package com.go;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
+
 import org.junit.jupiter.api.Test;
 
 public class TestPlansza {
@@ -20,6 +22,7 @@ public class TestPlansza {
         if(p.sprawdzPoprawnosc("Czarny", 12, 7)){
             assert false;
         }
+        
     }
     
 }

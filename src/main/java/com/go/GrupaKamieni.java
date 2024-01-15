@@ -20,22 +20,42 @@ public class GrupaKamieni implements IKamien {
         return kamienie.get(0).podajKolor();
     }
 
-    public IKamien dodajKamien(String kolor, IPole gora, IPole dol, IPole prawy, IPole lewy){
-        return this;
+    public void dodanieKamienia(ArrayList<IKamien> kamienie){
+
+        //jak dodajemy kolejny kamień to zmieniamy liczbę oddechów
+
+        //dodajemy kamien do listy
     }
 
-    public IKamien polacz(IKamien dodawany, IKamien drugi){
+    public void dodajKamien(String kolor,IPole pole, IPole gora, IPole dol, IPole prawy, IPole lewy){
+        
+    }
+
+    public IKamien polacz(ArrayList<IKamien> kamienie){
+        //TODO
         return this;
     }
 
     public void usunKamien(){
-
-
+        //usuwamy wszyskie kamienie z grupy z ich pól
+        for(IKamien kamien : kamienie){
+            kamien.podajPole().usunPionek();
+        }
     }
     public IKamien podajKamien(){
         return this;
     }
-    
+
+    public void ustawPole(){
+        //dla każdego kamienia z listy ustawiamy tą GrupęKamieni jako kamien
+        for(IKamien kamien : kamienie){
+            kamien.podajPole().ustawKamien(this);
+        }
+    }
+    public IPole podajPole(){
+        return null;
+    }
+
     public void ustawKolor(String kolor){
         
     }

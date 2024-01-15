@@ -28,7 +28,7 @@ public class TestPole {
         //Sprawdzamy czy dobrze ustawia się liczba oddechów 
         assertSame(2, p.podajKamien().podajOddechy());
 
-        //Sprawdzamy czy oddechy się odejmuja
+        //Sprawdzamy czy oddechy się odejmuja jak dodamy obok inny pionek
         assertSame(2, prawy.podajKamien().podajOddechy());
 
     }

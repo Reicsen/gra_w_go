@@ -1,6 +1,10 @@
 package com.go;
 
+import java.util.ArrayList;
+
 public class Kamien implements IKamien{
+
+    private IPole pole;
 
     private int oddechy;
 
@@ -21,9 +25,17 @@ public class Kamien implements IKamien{
         this.kolor = kolor;
     }
 
-    public IKamien dodajKamien(String kolor, IPole gora, IPole dol, IPole prawy, IPole lewy){
+    public void ustawPole(){
+        pole.ustawKamien(this);
+    }
+    public IPole podajPole(){
+        return pole;
+    }
+
+    public void dodajKamien(String kolor, IPole pole, IPole gora, IPole dol, IPole prawy, IPole lewy){
         this.kolor = kolor;
         int tempOddechy = 0;
+        this.pole = pole;
 
         //Jeżeli pole istnieje 
         //i jest puste to zwiększamy oddechy o 1 
@@ -64,33 +76,85 @@ public class Kamien implements IKamien{
 
         //Jeżeli kamień położymy koło innego kamienia o tym samym kolorze to tworzą one grupę kamieni
         if((gora != null && dol != null && prawy != null && lewy != null ) &&
-            (gora.podajPionek() == kolor || dol.podajPionek() == kolor || prawy.podajPionek() == kolor || lewy.podajPionek() == kolor)){
+            (gora.podajPionek().equals(kolor) || dol.podajPionek().equals(kolor) || prawy.podajPionek().equals(kolor) || lewy.podajPionek().equals(kolor))){
+            
             IKamien temp = this;
-            if(gora.podajPionek() == kolor){
-                temp = temp.polacz(temp, gora.podajKamien());
+
+            //lista do której wrzucamy kamienie lub grupy kamieni które chcemy połączyć w jedną grupę
+            ArrayList<IKamien> kamienie = new ArrayList<>();
+
+            if(gora.podajPionek().equals(kolor)){
+                kamienie.add(gora.podajKamien());
             }
-            if(dol.podajPionek() == kolor){
-                temp = temp.polacz(temp, dol.podajKamien());
+
+            if(dol.podajPionek().equals(kolor)){
+
+                if(kamienie.size() > 0){
+
+                    //sprawdzamy czy nie dodajemy tego samego 
+                    if( !(kamienie.get(0) == dol.podajKamien()) ){
+                        kamienie.add(dol.podajKamien());
+                    }
+                }
+                else{
+                    kamienie.add(dol.podajKamien());
+                }
             }
-            if(prawy.podajPionek() == kolor){
-                temp = temp.polacz(temp, prawy.podajKamien());
+            if(prawy.podajPionek().equals(kolor)){
+
+                if(kamienie.size() == 0){
+                    kamienie.add(prawy.podajKamien());
+                }
+                else{
+                    boolean n = true;
+                    for(IKamien kamien : kamienie){
+                        if(prawy.podajKamien() == kamien){
+                            n = false;
+                        }
+                    }
+                    if(n == true){
+                        kamienie.add(prawy.podajKamien());
+                    }
+                }
             }
-            if(lewy.podajPionek() == kolor){
-                temp = temp.polacz(temp, lewy.podajKamien());
+            if(lewy.podajPionek().equals(kolor)){
+                if(kamienie.size() == 0){
+                    kamienie.add(lewy.podajKamien());
+                }
+                else{
+                    boolean n = true;
+                    for(IKamien kamien : kamienie){
+                        if(lewy.podajKamien() == kamien){
+                            n = false;
+                        }
+                    }
+                    if(n == true){
+                        kamienie.add(lewy.podajKamien());
+                    }
+                }
             }
-            return temp;
+
+            kamienie.add(this);
+
+            temp = temp.polacz(kamienie);
+
+            // pole na którym jest nasz kamień nie ma już Kamienia a jest GrupaKamieni więc to zmieniamy
+            temp.ustawPole();
         }
 
-        return this;
     }
-    public IKamien polacz(IKamien dodawany, IKamien drugi){
-        return new GrupaKamieni();
+    public IKamien polacz(ArrayList<IKamien> kamienie){
+
+        //tworzymy nową grupę kamieni
+        GrupaKamieni temp = new GrupaKamieni();
+        //TODO
+
+        return temp;
     }
     public void usunKamien(){
-
+        
     }
     public IKamien podajKamien(){
         return this;
     }
-    
 }

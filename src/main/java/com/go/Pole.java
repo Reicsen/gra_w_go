@@ -4,7 +4,7 @@ public class Pole implements IPole
 {
     private IKamien kamien;
 
-    public Pole() //konstruktor; metody opisane w interfejsie
+    public Pole() //konstruktor
     {
         this.kamien=null;
     }
@@ -21,13 +21,14 @@ public class Pole implements IPole
 
     public void dodajPionek(String kolor, IPole gora, IPole dol, IPole prawy, IPole lewy)
     {
-        IKamien temp = new Kamien();
-        kamien = temp.dodajKamien(kolor, gora, dol, prawy, lewy);
+        kamien = new Kamien();
+        kamien.dodajKamien(kolor, this, gora, dol, prawy, lewy);
     }
 
     public void usunPionek()
     {
         kamien.usunKamien();
+        kamien = null;
     }
 
     public IKamien podajKamien(){

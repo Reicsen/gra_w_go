@@ -1,4 +1,7 @@
 package com.go;
+
+import java.util.ArrayList;
+
 /**
  * IKamien
  * Composite Design Pattern
@@ -23,7 +26,7 @@ public interface IKamien {
      * zwracamy IKamien który ma ustawiony odpowiedni kolor oraz liczbę oddechów
      * zwracamy Kamien lub GrupeKamieni
      */
-    public IKamien dodajKamien(String kolor, IPole gora, IPole dol, IPole prawy, IPole lewy);
+    public void dodajKamien(String kolor, IPole pole, IPole gora, IPole dol, IPole prawy, IPole lewy);
 
     /*
      * usuwamy dany Kamien lub GrupeKamieni
@@ -38,8 +41,12 @@ public interface IKamien {
     /*
      * Łączymy dane IKamienie w jeden IKamień
      */
-    public IKamien polacz(IKamien dodawany, IKamien drugi);
+    public IKamien polacz(ArrayList<IKamien> kamienie);
 
     public void ustawKolor(String kolor);
+
+    public void ustawPole();
+
+    public IPole podajPole();
     
 } 
