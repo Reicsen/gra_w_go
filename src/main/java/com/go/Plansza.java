@@ -3,9 +3,18 @@ package com.go;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.go.Poprawnosc.IPoprawnosc;
+import com.go.Poprawnosc.Ko;
+import com.go.Poprawnosc.NachodzacePionki;
+import com.go.Poprawnosc.PoprawnaLiczbaOddechow;
+
 public class Plansza implements IPlansza
 {
     protected List<IPole> pola; //lista 361 pól
+
+    IPoprawnosc warunekPierwszy = new NachodzacePionki();
+    IPoprawnosc warunekDrugi = new PoprawnaLiczbaOddechow();
+    IPoprawnosc warunekTrzeci = new Ko();
 
     public Plansza() //konstruktor; metody opisane w interfejsie
     {
@@ -48,10 +57,12 @@ public class Plansza implements IPlansza
 
     public boolean sprawdzPoprawnosc(String kolor, int x, int y)
     {
-        if (pola.get(19*y+x).podajPionek()!=null)
-        {
-            return false;
+        if(warunekPierwszy.sprawdzPoprawnosc(this, x, y, kolor) && warunekDrugi.sprawdzPoprawnosc(this, x, y, kolor) && warunekTrzeci.sprawdzPoprawnosc(this, x, y, kolor)){
+            return true;
         }
-        return true;
+        return false;
+    }
+    public List<IPole> podajPola(){
+        return pola;
     }
 }
