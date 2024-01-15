@@ -147,7 +147,8 @@ public class Kamien implements IKamien{
 
         //tworzymy nową grupę kamieni
         GrupaKamieni temp = new GrupaKamieni();
-        //TODO
+        
+        temp.polacz(kamienie);
 
         return temp;
     }

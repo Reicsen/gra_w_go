@@ -22,13 +22,10 @@ public class GrupaKamieni implements IKamien {
 
     public void dodanieKamienia(ArrayList<IKamien> kamienie){
 
+        //TODO
         //jak dodajemy kolejny kamień to zmieniamy liczbę oddechów
 
         //dodajemy kamien do listy
-    }
-
-    public void dodajKamien(String kolor,IPole pole, IPole gora, IPole dol, IPole prawy, IPole lewy){
-        
     }
 
     public IKamien polacz(ArrayList<IKamien> kamienie){
@@ -57,6 +54,9 @@ public class GrupaKamieni implements IKamien {
     }
 
     public void ustawKolor(String kolor){
+        
+    }
+    public void dodajKamien(String kolor,IPole pole, IPole gora, IPole dol, IPole prawy, IPole lewy){
         
     }
 }
