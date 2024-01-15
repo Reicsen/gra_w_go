@@ -146,14 +146,14 @@ public class Kamien implements IKamien{
     public IKamien polacz(ArrayList<IKamien> kamienie){
 
         //tworzymy nową grupę kamieni
-        GrupaKamieni temp = new GrupaKamieni();
+        IKamien temp = new GrupaKamieni();
         
-        temp.polacz(kamienie);
+        temp = temp.polacz(kamienie);
 
         return temp;
     }
     public void usunKamien(){
-        
+        pole.ustawKamien(null);
     }
     public IKamien podajKamien(){
         return this;

@@ -20,23 +20,28 @@ public class GrupaKamieni implements IKamien {
         return kamienie.get(0).podajKolor();
     }
 
-    public void dodanieKamienia(ArrayList<IKamien> kamienie){
+    public IKamien polacz(ArrayList<IKamien> listakamieni){
 
-        //TODO
-        //jak dodajemy kolejny kamień to zmieniamy liczbę oddechów
+         //obliczmy oddechy
+        int oddechy = 0;
+        for(IKamien kamien : listakamieni){
+            oddechy = oddechy + kamien.podajOddechy();
+        }
 
-        //dodajemy kamien do listy
-    }
+         //dodajmy kamienie do listy
+        for(IKamien kamien : listakamieni){
+            kamienie.add(kamien);
+        }
 
-    public IKamien polacz(ArrayList<IKamien> kamienie){
-        //TODO
+        ustawOddechy(oddechy);
+        
         return this;
     }
 
     public void usunKamien(){
         //usuwamy wszyskie kamienie z grupy z ich pól
         for(IKamien kamien : kamienie){
-            kamien.podajPole().usunPionek();
+            kamien.usunKamien();
         }
     }
     public IKamien podajKamien(){
