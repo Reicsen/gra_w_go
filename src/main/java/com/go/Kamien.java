@@ -10,10 +10,10 @@ public class Kamien implements IKamien{
 
     private String kolor;
 
-    public void ustawOddechy(int oddechy)
-    {
+    public void ustawOddechy(int oddechy){
         this.oddechy = oddechy;
     }
+
     public int podajOddechy (){
         return oddechy;
     }
@@ -21,6 +21,7 @@ public class Kamien implements IKamien{
     public String podajKolor(){
         return kolor;
     }
+
     public void ustawKolor(String kolor){
         this.kolor = kolor;
     }
@@ -28,6 +29,7 @@ public class Kamien implements IKamien{
     public void ustawKamien(){
         pole.ustawKamien(this);
     }
+
     public IPole podajPole(){
         return pole;
     }
@@ -36,13 +38,15 @@ public class Kamien implements IKamien{
         this.pole = pole;
     }
     public void dodajKamien(String kolor, IPole pole, IPole gora, IPole dol, IPole prawy, IPole lewy){
+
         this.kolor = kolor;
-        int tempOddechy = 0;
         this.pole = pole;
 
+        int tempOddechy = 0;
+
         //Jeżeli pole istnieje 
-        //i jest puste to zwiększamy oddechy o 1 
-        //a jeżeli jest na nim pionek przeciwnika to odejmujemy mu 1 oddech
+        //i jest puste to zwiększamy nasze oddechy o 1 
+        //a jeżeli jest na nim pionek to odejmujemy mu 1 oddech
         if(gora != null ){
             if(gora.podajPionek()==null){
                 tempOddechy++;
@@ -75,6 +79,7 @@ public class Kamien implements IKamien{
                 lewy.podajKamien().ustawOddechy(lewy.podajKamien().podajOddechy() - 1);
             }
         }
+        //ustawiamy oddechy
         oddechy = tempOddechy;
 
         //Jeżeli kamień położymy koło innego kamienia o tym samym kolorze to tworzą one grupę kamieni

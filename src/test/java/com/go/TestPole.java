@@ -59,8 +59,15 @@ public class TestPole {
         p.dodajPionek("Biały",gora, dol, prawy, lewy);
 
         assertSame(5, p.podajKamien().podajOddechy());
+        assertSame(5, gora.podajKamien().podajOddechy());
 
         assertSame(p.podajKamien(), prawy.podajKamien());
         assertSame(gora.podajKamien(), prawy.podajKamien());
+
+        IPole przeciwnik = new Pole();
+        przeciwnik.dodajPionek("Czarny", gora, dol, prawy, lewy);
+
+        assertSame(3, p.podajKamien().podajOddechy());
+        assertSame(1, przeciwnik.podajKamien().podajOddechy());
     }
 }
