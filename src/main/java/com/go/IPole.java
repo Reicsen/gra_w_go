@@ -6,4 +6,5 @@ interface IPole {
     void usunPionek(); //metoda usuwająca pionek z pola
     IKamien podajKamien();
     void ustawKamien(IKamien kamien);
+    void ustawPole();
 }

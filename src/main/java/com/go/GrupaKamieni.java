@@ -34,7 +34,7 @@ public class GrupaKamieni implements IKamien {
         }
 
         ustawOddechy(oddechy);
-        
+
         return this;
     }
 
@@ -48,10 +48,15 @@ public class GrupaKamieni implements IKamien {
         return this;
     }
 
-    public void ustawPole(){
+    public void ustawKamien(){
         //dla każdego kamienia z listy ustawiamy tą GrupęKamieni jako kamien
         for(IKamien kamien : kamienie){
-            kamien.podajPole().ustawKamien(this);
+            if(kamien instanceof Kamien){
+                kamien.podajPole().ustawKamien(this);
+            }
+            else{
+                kamien.ustawKamien();
+            }
         }
     }
     public IPole podajPole(){
@@ -63,5 +68,7 @@ public class GrupaKamieni implements IKamien {
     }
     public void dodajKamien(String kolor,IPole pole, IPole gora, IPole dol, IPole prawy, IPole lewy){
         
+    }
+    public void ustawPole(IPole pole){
     }
 }

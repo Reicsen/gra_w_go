@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import org.junit.jupiter.api.Test;
 
 public class TestPole {
+    /*
+     * Sprawdzamy czy odpowiednio się ustawiają oddechy i kolory dla pojedyńczych kamieni
+     */
     @Test
     public void testPole()
     {
@@ -31,5 +34,33 @@ public class TestPole {
         //Sprawdzamy czy oddechy się odejmuja jak dodamy obok inny pionek
         assertSame(2, prawy.podajKamien().podajOddechy());
 
+    }
+    /*
+     * Sprawdzamy czy odpowiednio się ustawiają oddechy dla grup kamieni kamieni
+     */
+    @Test
+    public void testPoleGrupyKamieni(){
+        IPole p = new Pole();
+        IPole gora = new Pole();
+        IPole dol = new Pole();
+        IPole prawy = new Pole();
+        IPole lewy = null;
+
+        prawy.ustawKamien(new Kamien());
+        prawy.podajKamien().ustawKolor("Biały");
+        prawy.podajKamien().ustawOddechy(3);
+        prawy.ustawPole();
+
+        gora.ustawKamien(new Kamien());
+        gora.podajKamien().ustawKolor("Biały");
+        gora.podajKamien().ustawOddechy(3);
+        gora.ustawPole();
+
+        p.dodajPionek("Biały",gora, dol, prawy, lewy);
+
+        assertSame(5, p.podajKamien().podajOddechy());
+
+        assertSame(p.podajKamien(), prawy.podajKamien());
+        assertSame(gora.podajKamien(), prawy.podajKamien());
     }
 }

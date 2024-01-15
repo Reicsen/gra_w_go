@@ -3,8 +3,6 @@ package com.go;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.IIOParam;
-
 public class Plansza implements IPlansza
 {
     protected List<IPole> pola; //lista 361 pól

@@ -45,8 +45,10 @@ public interface IKamien {
 
     public void ustawKolor(String kolor);
 
-    public void ustawPole();
+    public void ustawKamien();
 
     public IPole podajPole();
+
+    public void ustawPole(IPole pole);
     
 } 

@@ -25,13 +25,16 @@ public class Kamien implements IKamien{
         this.kolor = kolor;
     }
 
-    public void ustawPole(){
+    public void ustawKamien(){
         pole.ustawKamien(this);
     }
     public IPole podajPole(){
         return pole;
     }
 
+    public void ustawPole(IPole pole){
+        this.pole = pole;
+    }
     public void dodajKamien(String kolor, IPole pole, IPole gora, IPole dol, IPole prawy, IPole lewy){
         this.kolor = kolor;
         int tempOddechy = 0;
@@ -75,19 +78,21 @@ public class Kamien implements IKamien{
         oddechy = tempOddechy;
 
         //Jeżeli kamień położymy koło innego kamienia o tym samym kolorze to tworzą one grupę kamieni
-        if((gora != null && dol != null && prawy != null && lewy != null ) &&
-            (gora.podajPionek().equals(kolor) || dol.podajPionek().equals(kolor) || prawy.podajPionek().equals(kolor) || lewy.podajPionek().equals(kolor))){
-            
+        if( (gora != null && !(gora.podajPionek()==null) && gora.podajPionek().equals(kolor)) ||
+        (dol != null && !(dol.podajPionek()==null) && dol.podajPionek().equals(kolor)) ||
+        (prawy != null && !(prawy.podajPionek()==null) && prawy.podajPionek().equals(kolor)) || 
+        (lewy != null && !(lewy.podajPionek()==null) && lewy.podajPionek().equals(kolor))){
+
             IKamien temp = this;
 
             //lista do której wrzucamy kamienie lub grupy kamieni które chcemy połączyć w jedną grupę
             ArrayList<IKamien> kamienie = new ArrayList<>();
 
-            if(gora.podajPionek().equals(kolor)){
+            if(gora != null  && !(gora.podajPionek()==null) && gora.podajPionek().equals(kolor)){
                 kamienie.add(gora.podajKamien());
             }
 
-            if(dol.podajPionek().equals(kolor)){
+            if(dol != null && !(dol.podajPionek()==null) && dol.podajPionek().equals(kolor)){
 
                 if(kamienie.size() > 0){
 
@@ -100,7 +105,7 @@ public class Kamien implements IKamien{
                     kamienie.add(dol.podajKamien());
                 }
             }
-            if(prawy.podajPionek().equals(kolor)){
+            if(prawy != null && !(prawy.podajPionek()==null) && prawy.podajPionek().equals(kolor)){
 
                 if(kamienie.size() == 0){
                     kamienie.add(prawy.podajKamien());
@@ -117,7 +122,7 @@ public class Kamien implements IKamien{
                     }
                 }
             }
-            if(lewy.podajPionek().equals(kolor)){
+            if(lewy != null && !(lewy.podajPionek()==null) && lewy.podajPionek().equals(kolor)){
                 if(kamienie.size() == 0){
                     kamienie.add(lewy.podajKamien());
                 }
@@ -139,7 +144,7 @@ public class Kamien implements IKamien{
             temp = temp.polacz(kamienie);
 
             // pole na którym jest nasz kamień nie ma już Kamienia a jest GrupaKamieni więc to zmieniamy
-            temp.ustawPole();
+            temp.ustawKamien();
         }
 
     }

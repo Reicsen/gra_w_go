@@ -37,4 +37,7 @@ public class Pole implements IPole
     public void ustawKamien(IKamien kamien){
         this.kamien = kamien;
     }
+    public void ustawPole(){
+        kamien.ustawPole(this);
+    }
 }
