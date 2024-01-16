@@ -60,4 +60,7 @@ public class Ko implements IPoprawnosc{
         planszaRuchWcześniej = plansza;
         return s;
     }
+    public IPlansza podajPlansza(){
+        return planszaDwaRuchyWczesniej;
+    }
 }
