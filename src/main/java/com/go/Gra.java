@@ -58,7 +58,6 @@ public class Gra implements IGra,IGra2,Runnable
     public void dodajPionek(int nrpola)
     {
         plansza.dodajPionek(this.aktywnyKolor, nrpola%19, nrpola/19);
-        this.zmienKolor();
     }
 
     public void usunPionki(){
@@ -167,6 +166,7 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza1.writeInt(jency);
 
                     usunPionki();
+                    this.zmienKolor();
 
                 }
                 else
@@ -197,6 +197,7 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza2.writeInt(jency);
 
                     usunPionki();
+                    this.zmienKolor();
                 }
                 else
                 {

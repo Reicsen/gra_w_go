@@ -23,15 +23,15 @@ public class TestPoprawnosc {
 
         assertTrue( !(warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")) );  
     }
-   /*  @Test
+    @Test
     public void testKo(){
         Ko warunek = new Ko();
         Plansza p = new Plansza();
 
-        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
+        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Biały")));
 
         //plansza jest pusta i wykonano ruch wczesniej
-        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
+        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Biały")));
 
         //Sprawdzamy czy sprawdzanie warunku nie dodaje pionka
         IPoprawnosc warunek2 = new NachodzacePionki();
@@ -50,13 +50,14 @@ public class TestPoprawnosc {
 
         assertTrue(warunek.sprawdzPoprawnosc(p, 1, 1, "Czarny"));
         p.dodajPionek("Czarny", 1, 1);
+        assertSame(0, p.podajPola().get(20).podajKamien().podajOddechy());
+        assertSame(0, p.podajPola().get(21).podajKamien().podajOddechy());
         p.usunPionek(2, 1);
-        p.podajPola().get(19*1+1).podajKamien().ustawOddechy(1);
-        p.podajPola().get(2).podajKamien().ustawOddechy(2);
+        assertSame(1, p.podajPola().get(20).podajKamien().podajOddechy());
 
         assertTrue(!warunek.sprawdzPoprawnosc(p, 2, 1, "Biały"));
     }
-*/
+
     @Test
     public void TestOddechy(){
         IPoprawnosc warunek = new PoprawnaLiczbaOddechow();
@@ -97,6 +98,25 @@ public class TestPoprawnosc {
 
         //sprawdzamy czy da się włożyć pionek w wolne miejsce
         assertTrue(!warunek.sprawdzPoprawnosc(p, 1, 0, "Biały"));
+
+        //sprawdzamy czy da się położyć w miejscu gdzie nie ma oddechu aby udusić przeciwnika
+        IPlansza plansza2 = new Plansza();
+        plansza2.dodajPionek("Biały", 2, 2);
+        plansza2.dodajPionek("Biały", 2, 4);
+        plansza2.dodajPionek("Biały", 1, 3);
+        plansza2.dodajPionek("Biały", 3, 3);
+
+        plansza2.dodajPionek("Czarny", 1, 2);
+        plansza2.dodajPionek("Czarny", 2, 1);
+        plansza2.dodajPionek("Czarny", 3, 2);
+        plansza2.dodajPionek("Czarny", 4, 3);
+        plansza2.dodajPionek("Czarny", 3, 4);
+        plansza2.dodajPionek("Czarny", 2, 5);
+        plansza2.dodajPionek("Czarny", 1, 4);
+        plansza2.dodajPionek("Czarny", 0, 3);
+
+        assertTrue(warunek.sprawdzPoprawnosc(plansza2, 2, 3, "Czarny"));
+
     }
 }
 

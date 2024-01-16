@@ -19,7 +19,7 @@ public class Ko implements IPoprawnosc{
 
         boolean s = true;
 
-        /*if(planszaWczesniej.size() > 0){
+        if(planszaWczesniej.size() > 0){
             s = false;
 
             int miejsceDodanegoPionka = 19*y + x;
@@ -35,37 +35,44 @@ public class Ko implements IPoprawnosc{
             //szukamy pionka który usuniemy jak położymy nasz pionek w tym miejscu
             int miejsceUsuwanegoPionka = -1;
 
-            if(y > 0 && !(plansza.podajPola().get(19 * (y-1) + x).podajPionek() == null) && !(plansza.podajPola().get(19 * (y-1) + x).podajPionek().equals(kolor))){
-                if(plansza.podajPola().get(19 * (y-1) + x).podajKamien().podajOddechy() == 1){
+            IPole gora = plansza.podajPola().get(19 * (y-1) + x);
+            IPole dol = plansza.podajPola().get(19 * (y+1) + x);
+            IPole lewy = plansza.podajPola().get(19 * y + (x-1));
+            IPole prawy = plansza.podajPola().get(19 * y + (x+1));
+
+            if(y > 0 && !(gora.podajPionek() == null) && !(gora.podajPionek().equals(kolor))){
+                if(gora.podajKamien().podajOddechy() == 1){
                     miejsceUsuwanegoPionka = 19 * (y-1) + x;
                 }
             }
 
-            else if(y < 18 && !(plansza.podajPola().get(19 * (y+1) + x).podajPionek() == null) && !(plansza.podajPola().get(19 * (y+1) + x).podajPionek().equals(kolor))){
-                if(plansza.podajPola().get(19 * (y+1) + x).podajKamien().podajOddechy() == 1){
+            else if(y < 18 && !(dol.podajPionek() == null) && !(dol.podajPionek().equals(kolor))){
+                if(dol.podajKamien().podajOddechy() == 1){
                     miejsceUsuwanegoPionka = 19 * (y+1) + x;
                 }
             }
 
-            else if(x > 0 && !(plansza.podajPola().get(19 * y + (x-1)).podajPionek() == null) && !(plansza.podajPola().get(19 * y + (x-1)).podajPionek().equals(kolor))){
-                if(plansza.podajPola().get(19 * y + (x-1)).podajKamien().podajOddechy() == 1){
+            else if(x > 0 && !(lewy.podajPionek() == null) && !(lewy.podajPionek().equals(kolor))){
+                if(lewy.podajKamien().podajOddechy() == 1){
                     miejsceUsuwanegoPionka = 19 * y + (x-1);
                 }
             }
 
-            else if(x < 18 && !(plansza.podajPola().get(19* y + (x + 1)).podajPionek() == null) && !(plansza.podajPola().get(19 * y + (x+1)).podajPionek().equals(kolor))){
-                if(plansza.podajPola().get(19 * y + (x+1)).podajKamien().podajOddechy() == 1){
+            else if(x < 18 && !(prawy.podajPionek() == null) && !(prawy.podajPionek().equals(kolor))){
+                if(prawy.podajKamien().podajOddechy() == 1){
                     miejsceUsuwanegoPionka = 19 * y + (x+1);
                 }
             }
 
             //sprawdzamy czy tam gdzie usuwamy pionek wcześniej było pusto
+            //sprawdzamy czy kasujemy ostatnio wstawiony pionek
+            
             if( miejsceUsuwanegoPionka == -1 || !(planszaWczesniej.get(miejsceUsuwanegoPionka) == null)){
                 s = true;
                 ustawListe(plansza);
                 return s;
             }
-            for(int i = 0; i < 361; i++){
+            /*for(int i = 0; i < 361; i++){
                 //sprawdzamy czy wszystkie miejsca są takie same oprócz miejca gdzie wstawiamy i gdzie jest usuwany pionek
                 if( i != miejsceDodanegoPionka && i != miejsceUsuwanegoPionka &&
                     (!(planszaWczesniej.get(i) == null && plansza.podajPola().get(i).podajPionek() == null) &&
@@ -76,11 +83,11 @@ public class Ko implements IPoprawnosc{
                     ustawListe(plansza);
                     return s;
                 }
-            }
+            }*/
         }
         if(s == true){
             ustawListe(plansza);
-        }*/
+        }
         return s;
     }
 
@@ -88,7 +95,15 @@ public class Ko implements IPoprawnosc{
 
         planszaWczesniej = new ArrayList<>();
         for(IPole pole : plansza.podajPola()){
-            planszaWczesniej.add(pole.podajPionek());
+            if(pole.podajPionek() == null){
+                planszaWczesniej.add(null);
+            }
+            else if(pole.podajPionek().equals("Biały")){
+                planszaWczesniej.add("Biały");
+            }
+            else{
+                planszaWczesniej.add("Czarny");
+            }
         }
 
     }
