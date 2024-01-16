@@ -9,6 +9,7 @@ public class Gra implements IGra,IGra2,Runnable
 {
     private String aktywnyKolor;
     private IPlansza plansza;
+    private IUsuwaniePionkow usuwaniePionkow;
     private Socket gracz1;
     private Socket gracz2;
     private DataInputStream odbieranieOdGracza1;
@@ -20,6 +21,7 @@ public class Gra implements IGra,IGra2,Runnable
     {
         this.aktywnyKolor="czarny";
         this.plansza=new Plansza();
+        this.usuwaniePionkow = new UsuwaniePionkow();
         this.gracz1=s1;
         this.gracz2=s2;
         try
@@ -132,6 +134,24 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza2.writeInt(1);
                     wysylanieDoGracza2.writeInt(ruch);
                     dodajPionek(ruch);
+
+                    int jency = usuwaniePionkow.obliczanieJencow(plansza);
+                    wysylanieDoGracza1.writeInt(3);
+                    wysylanieDoGracza1.writeInt(jency);
+
+                    wysylanieDoGracza1.writeInt(5);
+                    wysylanieDoGracza1.writeInt(miejsce);
+                    wysylanieDoGracza1.writeInt(miejsce);
+                    wysylanieDoGracza1.writeInt(-1);
+
+                    wysylanieDoGracza2.writeInt(5);
+                    wysylanieDoGracza2.writeInt(miejsce);
+                    wysylanieDoGracza2.writeInt(miejsce);
+                    wysylanieDoGracza2.writeInt(-1);
+
+                    
+
+                    //TODO liczenie jeńców i usuwanie pionków
                 }
                 else
                 {
@@ -155,6 +175,11 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza1.writeInt(1);
                     wysylanieDoGracza1.writeInt(ruch);
                     dodajPionek(ruch);
+                    //TODO liczenie jeńców i usuwanie pionków
+
+                    int jency = usuwaniePionkow.obliczanieJencow(plansza);
+                    wysylanieDoGracza1.writeInt(3);
+                    wysylanieDoGracza1.writeInt(jency);
                 }
                 else
                 {

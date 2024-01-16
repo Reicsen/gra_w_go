@@ -29,6 +29,7 @@ public class TestPlansza {
             assert false;
         }
         
+        //sprawdzamy czy grupy się dobrze dodają i usuwają
         p.dodajPionek("Biały", 0, 0);
         p.dodajPionek("Czarny", 1, 0);
         assertTrue(p.podajPola().get(1).podajKamien().podajOddechy() == 2);
