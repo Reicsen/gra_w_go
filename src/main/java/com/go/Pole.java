@@ -2,25 +2,52 @@ package com.go;
 
 public class Pole implements IPole
 {
-    private String pionek; //pole przechowujące informację o tym, jaki pionek znajduje się obecnie na polu
+    private IKamien kamien;
+    private int x;
+    private int y;
 
-    public Pole() //konstruktor; metody opisane w interfejsie
+    public Pole(int x, int y) //konstruktor
     {
-        this.pionek=null;
+        this.kamien=null;
+        this.x = x;
+        this.y = y;
+    }
+
+    public int podajX(){
+        return x;
+    }
+    public int podajY(){
+        return y;
     }
 
     public String podajPionek()
     {
-        return this.pionek;
+        if(kamien!=null){
+            return kamien.podajKolor();
+        }
+        else{
+            return null;
+        }
     }
 
-    public void dodajPionek(String kolor)
+    public void dodajPionek(String kolor, IPole gora, IPole dol, IPole prawy, IPole lewy)
     {
-        this.pionek=kolor;
+        kamien = new Kamien();
+        kamien.dodajKamien(kolor, this, gora, dol, prawy, lewy);
     }
 
-    public void usunPionek()
+    public void usunPionek( IPlansza plansza)
     {
-        this.pionek=null;
+        kamien.usunKamien(plansza);
+    }
+
+    public IKamien podajKamien(){
+        return kamien;
+    }
+    public void ustawKamien(IKamien kamien){
+        this.kamien = kamien;
+    }
+    public void ustawPole(){
+        kamien.ustawPole(this);
     }
 }
