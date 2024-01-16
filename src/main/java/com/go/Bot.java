@@ -163,6 +163,20 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
             try
             {
                 sygnal=odbieranieOdSerwera.readInt();
+                if(sygnal==3)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    this.iloscJencow=this.iloscJencow+ruch;
+                }
+                if (sygnal==5)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    while (ruch!=-1)
+                    {
+                        usunieciePionka(ruch);
+                        ruch=odbieranieOdSerwera.readInt();
+                    }
+                }
                 if (aktywny)
                 {
                     if (sygnal==0)
@@ -206,25 +220,11 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
                         wypiszKomunikatNaPlanszy("Twoja tura");
                         losujRuch();
                     }
-                    if (sygnal==-1)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();
-                        while (ruch!=-1)
-                        {
-                            usunieciePionka(ruch);
-                            ruch=odbieranieOdSerwera.readInt();
-                        }
-                    }
                     if(sygnal==10)
                     {
                         //plansza.rozpoczecieGry();
                         wypiszKomunikatNaPlanszy("Tura przeciwnika");
                         System.out.println("sygnal 10");
-                    }
-                    if(sygnal==3)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();
-                        this.iloscJencow=this.iloscJencow+ruch;
                     }
                 }                
             }
