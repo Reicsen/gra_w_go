@@ -50,10 +50,16 @@ public class TestPoprawnosc {
 
         assertTrue(warunek.sprawdzPoprawnosc(p, 1, 1, "Czarny"));
         p.dodajPionek("Czarny", 1, 1);
+
         assertSame(0, p.podajPola().get(20).podajKamien().podajOddechy());
         assertSame(0, p.podajPola().get(21).podajKamien().podajOddechy());
+        assertSame(warunek.podajPlansze().get(21), p.podajPola().get(21).podajPionek());
+
         p.usunPionek(2, 1);
         assertSame(1, p.podajPola().get(20).podajKamien().podajOddechy());
+
+        assertSame(warunek.podajPlansze().get(0), p.podajPola().get(0).podajPionek());
+        assertSame("Czarny", p.podajPola().get(20).podajPionek());
 
         assertTrue(!warunek.sprawdzPoprawnosc(p, 2, 1, "Biały"));
     }

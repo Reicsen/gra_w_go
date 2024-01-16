@@ -1,7 +1,6 @@
 package com.go.Poprawnosc;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.go.IPlansza;
 import com.go.IPole;
@@ -46,19 +45,19 @@ public class Ko implements IPoprawnosc{
                 }
             }
 
-            else if(y < 18 && !(dol.podajPionek() == null) && !(dol.podajPionek().equals(kolor))){
+            if(y < 18 && !(dol.podajPionek() == null) && !(dol.podajPionek().equals(kolor))){
                 if(dol.podajKamien().podajOddechy() == 1){
                     miejsceUsuwanegoPionka = 19 * (y+1) + x;
                 }
             }
 
-            else if(x > 0 && !(lewy.podajPionek() == null) && !(lewy.podajPionek().equals(kolor))){
+            if(x > 0 && !(lewy.podajPionek() == null) && !(lewy.podajPionek().equals(kolor))){
                 if(lewy.podajKamien().podajOddechy() == 1){
                     miejsceUsuwanegoPionka = 19 * y + (x-1);
                 }
             }
 
-            else if(x < 18 && !(prawy.podajPionek() == null) && !(prawy.podajPionek().equals(kolor))){
+            if(x < 18 && !(prawy.podajPionek() == null) && !(prawy.podajPionek().equals(kolor))){
                 if(prawy.podajKamien().podajOddechy() == 1){
                     miejsceUsuwanegoPionka = 19 * y + (x+1);
                 }
@@ -106,5 +105,8 @@ public class Ko implements IPoprawnosc{
             }
         }
 
+    }
+    public ArrayList<String> podajPlansze(){
+        return planszaWczesniej;
     }
 }
