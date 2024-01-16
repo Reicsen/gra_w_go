@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Gra implements IGra,IGra2,Runnable
 {
@@ -58,6 +59,32 @@ public class Gra implements IGra,IGra2,Runnable
     {
         plansza.dodajPionek(this.aktywnyKolor, nrpola%19, nrpola/19);
         this.zmienKolor();
+    }
+
+    public void usunPionki(){
+        ArrayList <Integer> pionki = usuwaniePionkow.pionkiDoUsuniecia(plansza);
+        try{      
+            wysylanieDoGracza1.writeInt(5);
+
+            for(int i = 0; i< pionki.size();i++){
+                wysylanieDoGracza1.writeInt(pionki.get(i));
+            }
+
+            wysylanieDoGracza1.writeInt(-1);
+            
+            wysylanieDoGracza2.writeInt(5);
+
+            for(int i = 0; i< pionki.size();i++){
+                wysylanieDoGracza2.writeInt(pionki.get(i));
+            }
+                    
+            wysylanieDoGracza2.writeInt(-1);
+
+            usuwaniePionkow.usunPionki(plansza);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void koniecGry()
@@ -139,19 +166,8 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza1.writeInt(3);
                     wysylanieDoGracza1.writeInt(jency);
 
-                    wysylanieDoGracza1.writeInt(5);
-                    wysylanieDoGracza1.writeInt(miejsce);
-                    wysylanieDoGracza1.writeInt(miejsce);
-                    wysylanieDoGracza1.writeInt(-1);
+                    usunPionki();
 
-                    wysylanieDoGracza2.writeInt(5);
-                    wysylanieDoGracza2.writeInt(miejsce);
-                    wysylanieDoGracza2.writeInt(miejsce);
-                    wysylanieDoGracza2.writeInt(-1);
-
-                    
-
-                    //TODO liczenie jeńców i usuwanie pionków
                 }
                 else
                 {
@@ -175,11 +191,12 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza1.writeInt(1);
                     wysylanieDoGracza1.writeInt(ruch);
                     dodajPionek(ruch);
-                    //TODO liczenie jeńców i usuwanie pionków
 
                     int jency = usuwaniePionkow.obliczanieJencow(plansza);
-                    wysylanieDoGracza1.writeInt(3);
-                    wysylanieDoGracza1.writeInt(jency);
+                    wysylanieDoGracza2.writeInt(3);
+                    wysylanieDoGracza2.writeInt(jency);
+
+                    usunPionki();
                 }
                 else
                 {
