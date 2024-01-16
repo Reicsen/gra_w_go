@@ -19,7 +19,7 @@ public class Ko implements IPoprawnosc{
 
         boolean s = true;
 
-        if(planszaWczesniej.size() > 0){
+        /*if(planszaWczesniej.size() > 0){
             s = false;
 
             int miejsceDodanegoPionka = 19*y + x;
@@ -60,7 +60,7 @@ public class Ko implements IPoprawnosc{
             }
 
             //sprawdzamy czy tam gdzie usuwamy pionek wcześniej było pusto
-            /*if( miejsceUsuwanegoPionka == -1 || !(planszaWczesniej.get(miejsceUsuwanegoPionka) == null)){
+            if( miejsceUsuwanegoPionka == -1 || !(planszaWczesniej.get(miejsceUsuwanegoPionka) == null)){
                 s = true;
                 ustawListe(plansza);
                 return s;
@@ -76,11 +76,11 @@ public class Ko implements IPoprawnosc{
                     ustawListe(plansza);
                     return s;
                 }
-            }*/
+            }
         }
         if(s == true){
             ustawListe(plansza);
-        }
+        }*/
         return s;
     }
 

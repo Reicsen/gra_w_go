@@ -22,30 +22,30 @@ public class PoprawnaLiczbaOddechow implements IPoprawnosc {
         }
 
         //jeżeli obok są jego własne pionki to ich oddechy się sumują
-        else if(y > 0 && plansza.podajPola().get(19 * (y-1) + x).podajPionek().equals(kolor) && plansza.podajPola().get(19 * (y-1) + x).podajKamien().podajOddechy() > 1){
+        else if(y > 0 && plansza .podajPola().get(19 * (y-1) + x).podajPionek() != null && plansza.podajPola().get(19 * (y-1) + x).podajPionek().equals(kolor) && plansza.podajPola().get(19 * (y-1) + x).podajKamien().podajOddechy() > 1){
             n = true;
         }
-        else if(y < 18 && plansza.podajPola().get(19 * (y+1) + x).podajPionek().equals(kolor) && plansza.podajPola().get(19 * (y+1) + x).podajKamien().podajOddechy() > 1){
+        else if(y < 18 && plansza .podajPola().get(19 * (y+1) + x).podajPionek() != null && plansza.podajPola().get(19 * (y+1) + x).podajPionek().equals(kolor) && plansza.podajPola().get(19 * (y+1) + x).podajKamien().podajOddechy() > 1){
             n = true;
         }
-        else if(x > 0 && plansza.podajPola().get(19 * y + (x-1)).podajPionek().equals(kolor) && plansza.podajPola().get(19 * y + (x-1)).podajKamien().podajOddechy() > 1){
+        else if(x > 0 && plansza .podajPola().get(19 * y + (x-1)).podajPionek() != null && plansza.podajPola().get(19 * y + (x-1)).podajPionek().equals(kolor) && plansza.podajPola().get(19 * y + (x-1)).podajKamien().podajOddechy() > 1){
             n = true;
         }
-        else if(x < 18 && plansza.podajPola().get(19* y + (x + 1)).podajPionek().equals(kolor) && plansza.podajPola().get(19 * y + (x+1)).podajKamien().podajOddechy() > 1){
+        else if(x < 18 && plansza .podajPola().get(19* y + (x + 1)).podajPionek() != null && plansza.podajPola().get(19* y + (x + 1)).podajPionek().equals(kolor) && plansza.podajPola().get(19 * y + (x+1)).podajKamien().podajOddechy() > 1){
             n = true;
         }
 
         //wyjątek: duszenie przeciwnika
-        else if(y > 0 && !plansza.podajPola().get(19 * (y-1) + x).podajPionek().equals(kolor) && plansza.podajPola().get(19 * (y-1) + x).podajKamien().podajOddechy() == 1){
+        else if(y > 0 && plansza .podajPola().get(19 * (y-1) + x).podajPionek() != null && !plansza.podajPola().get(19 * (y-1) + x).podajPionek().equals(kolor) && plansza.podajPola().get(19 * (y-1) + x).podajKamien().podajOddechy() == 1){
             n = true;
         }
-        else if(y < 18 && !plansza.podajPola().get(19 * (y+1) + x).podajPionek().equals(kolor) && plansza.podajPola().get(19 * (y+1) + x).podajKamien().podajOddechy() == 1){
+        else if(y < 18 && plansza .podajPola().get(19 * (y+1) + x).podajPionek() != null && !plansza.podajPola().get(19 * (y+1) + x).podajPionek().equals(kolor) && plansza.podajPola().get(19 * (y+1) + x).podajKamien().podajOddechy() == 1){
             n = true;
         }
-        else if(x > 0 && !plansza.podajPola().get(19 * y + (x-1)).podajPionek().equals(kolor) && plansza.podajPola().get(19 * y + (x-1)).podajKamien().podajOddechy() == 1){
+        else if(x > 0 && plansza .podajPola().get(19 * y + (x-1)).podajPionek() != null && !plansza.podajPola().get(19 * y + (x-1)).podajPionek().equals(kolor) && plansza.podajPola().get(19 * y + (x-1)).podajKamien().podajOddechy() == 1){
             n = true;
         }
-        else if(x < 18 && !plansza.podajPola().get(19* y + (x + 1)).podajPionek().equals(kolor) && plansza.podajPola().get(19 * y + (x+1)).podajKamien().podajOddechy() == 1){
+        else if(x < 18 && plansza .podajPola().get(19* y + (x + 1)).podajPionek() != null && !plansza.podajPola().get(19* y + (x + 1)).podajPionek().equals(kolor) && plansza.podajPola().get(19 * y + (x+1)).podajKamien().podajOddechy() == 1){
             n = true;
         }
 

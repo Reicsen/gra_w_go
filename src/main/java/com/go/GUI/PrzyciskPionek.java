@@ -45,4 +45,19 @@ public class PrzyciskPionek extends Button{
 
         button.setGraphic(circle);
     }
+
+    public void zmienPrzyciskNaKrzyzyk(Button button){
+        Line cross1 = new Line(15, 0, 15, 30);
+        Line cross2 = new Line(0, 15, 30, 15);
+        cross1.setStroke(Color.BLACK);
+        cross2.setStroke(Color.BLACK);
+        
+        cross1.setStrokeWidth(3);  
+        cross2.setStrokeWidth(3);
+
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().addAll(cross1, cross2);
+
+        button.setGraphic(stackPane);
+    }
 }

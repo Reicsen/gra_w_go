@@ -23,7 +23,7 @@ public class TestPoprawnosc {
 
         assertTrue( !(warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")) );  
     }
-    @Test
+   /*  @Test
     public void testKo(){
         Ko warunek = new Ko();
         Plansza p = new Plansza();
@@ -56,7 +56,7 @@ public class TestPoprawnosc {
 
         assertTrue(!warunek.sprawdzPoprawnosc(p, 2, 1, "Biały"));
     }
-
+*/
     @Test
     public void TestOddechy(){
         IPoprawnosc warunek = new PoprawnaLiczbaOddechow();

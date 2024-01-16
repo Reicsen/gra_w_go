@@ -128,7 +128,9 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
 
     public void usunieciePionka(int nrpola)
     {
-        //do implementacji
+        Platform.runLater(() -> {
+            plansza.pionki.get(nrpola).zmienPrzyciskNaKrzyzyk( plansza.pionki.get(nrpola));
+        });
     }
 
     public void wypiszKomunikatNaPlanszy(String komunikat)
@@ -173,7 +175,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                         zmienAktywnosc();
                         wypiszKomunikatNaPlanszy("Tura przeciwnika");
                     }
-                    else
+                    if (sygnal == -1)
                     {
                         wypiszKomunikatNaPlanszy("Niepoprawny ruch, spróbuj ponownie");
                     }
