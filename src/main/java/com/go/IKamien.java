@@ -31,7 +31,7 @@ public interface IKamien {
     /*
      * usuwamy dany Kamien lub GrupeKamieni
      */
-    public void usunKamien();
+    public void usunKamien(IPlansza plansza);
 
     /*
      * zwracamy dany IKamien
@@ -45,7 +45,7 @@ public interface IKamien {
 
     public void ustawKolor(String kolor);
 
-    public void ustawKamien();
+    public void ustawKamien(IKamien kamien);
 
     public IPole podajPole();
 

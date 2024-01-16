@@ -26,8 +26,8 @@ public class Kamien implements IKamien{
         this.kolor = kolor;
     }
 
-    public void ustawKamien(){
-        pole.ustawKamien(this);
+    public void ustawKamien(IKamien kamien){
+        pole.ustawKamien(kamien);
     }
 
     public IPole podajPole(){
@@ -149,7 +149,7 @@ public class Kamien implements IKamien{
             temp = temp.polacz(kamienie);
 
             // pole na którym jest nasz kamień nie ma już Kamienia a jest GrupaKamieni więc to zmieniamy
-            temp.ustawKamien();
+            temp.ustawKamien(temp);
         }
 
     }
@@ -162,7 +162,25 @@ public class Kamien implements IKamien{
 
         return temp;
     }
-    public void usunKamien(){
+    public void usunKamien(IPlansza plansza){
+
+        if(podajPole().podajY() > 0 && plansza.podajPola().get(19*(podajPole().podajY()-1) + podajPole().podajX()).podajKamien() != null){
+            IPole gora = plansza.podajPola().get(19*(podajPole().podajY()-1) + podajPole().podajX());
+            gora.podajKamien().ustawOddechy(gora.podajKamien().podajOddechy()+1);
+        }
+        if(podajPole().podajY() < 18 && plansza.podajPola().get(19*(podajPole().podajY()+1) + podajPole().podajX()).podajKamien() != null){
+            IPole dol = plansza.podajPola().get(19*(podajPole().podajY()+1)+ podajPole().podajX());
+            dol.podajKamien().ustawOddechy(dol.podajKamien().podajOddechy()+1);
+        }
+        if(podajPole().podajX() > 0 && plansza.podajPola().get(19*podajPole().podajY() + (podajPole().podajX() -1)).podajKamien() != null){
+            IPole lewy = plansza.podajPola().get(19*podajPole().podajY() + (podajPole().podajX()-1));
+            lewy.podajKamien().ustawOddechy(lewy.podajKamien().podajOddechy()+1);
+        }
+        if(podajPole().podajX() < 18 && plansza.podajPola().get(19*podajPole().podajY() + (podajPole().podajX() + 1)).podajKamien() != null){
+            IPole prawy = plansza.podajPola().get(19*podajPole().podajY() + (podajPole().podajX()+1));
+            prawy.podajKamien().ustawOddechy(prawy.podajKamien().podajOddechy()+1);
+        }
+        
         pole.ustawKamien(null);
     }
     public IKamien podajKamien(){

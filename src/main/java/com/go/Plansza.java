@@ -21,7 +21,7 @@ public class Plansza implements IPlansza
         this.pola = new ArrayList<IPole>();
         for (int i=0;i<361;i++)
         {
-            IPole temp = new Pole();
+            IPole temp = new Pole(i%19, i/19);
             pola.add(temp);
         }
     }
@@ -52,7 +52,7 @@ public class Plansza implements IPlansza
     public void usunPionek(int x, int y)
     {
         IPole temp = pola.get(19*y+x);
-        temp.usunPionek();
+        temp.usunPionek( this);
     }
 
     public boolean sprawdzPoprawnosc(String kolor, int x, int y)

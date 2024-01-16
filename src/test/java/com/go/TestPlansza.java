@@ -1,5 +1,8 @@
 package com.go;
 
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 public class TestPlansza {
@@ -26,6 +29,24 @@ public class TestPlansza {
             assert false;
         }
         
+        p.dodajPionek("Biały", 0, 0);
+        p.dodajPionek("Czarny", 1, 0);
+        assertTrue(p.podajPola().get(1).podajKamien().podajOddechy() == 2);
+        p.usunPionek(0, 0);
+        assertTrue(p.podajPola().get(1).podajKamien().podajOddechy() == 3);
+        p.dodajPionek("Czarny", 2, 0);
+        p.dodajPionek("Czarny", 3, 0);
+        assertSame(5, p.podajPola().get(1).podajKamien().podajOddechy());
+        assertSame(p.podajPola().get(1).podajKamien(), p.podajPola().get(3).podajKamien());
+
+        p.dodajPionek("Biały", 1, 1);
+        p.dodajPionek("Biały", 2, 1);
+        p.dodajPionek("Biały", 3, 1);
+        assertSame(2, p.podajPola().get(1).podajKamien().podajOddechy());
+        assertTrue(p.podajPola().get(20).podajKamien().podajOddechy() == 5);
+        p.usunPionek(1, 0);
+        assertTrue(p.sprawdzPoprawnosc("Czarny", 3, 0));
+        assertSame(8, p.podajPola().get(20).podajKamien().podajOddechy());
     }
     
 }

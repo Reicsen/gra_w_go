@@ -10,10 +10,10 @@ public class TestPole {
     @Test
     public void testPole()
     {
-        IPole p = new Pole();
-        IPole gora = new Pole();
-        IPole dol = new Pole();
-        IPole prawy = new Pole();
+        IPole p = new Pole(0,1);
+        IPole gora = new Pole(0,0);
+        IPole dol = new Pole(0,2);
+        IPole prawy = new Pole(1,1);
         IPole lewy = null;
 
         prawy.ustawKamien(new Kamien());
@@ -40,10 +40,10 @@ public class TestPole {
      */
     @Test
     public void testPoleGrupyKamieni(){
-        IPole p = new Pole();
-        IPole gora = new Pole();
-        IPole dol = new Pole();
-        IPole prawy = new Pole();
+        IPole p = new Pole(0,1);
+        IPole gora = new Pole(0,0);
+        IPole dol = new Pole(0,2);
+        IPole prawy = new Pole(1,1);
         IPole lewy = null;
 
         prawy.ustawKamien(new Kamien());
@@ -64,7 +64,7 @@ public class TestPole {
         assertSame(p.podajKamien(), prawy.podajKamien());
         assertSame(gora.podajKamien(), prawy.podajKamien());
 
-        IPole przeciwnik = new Pole();
+        IPole przeciwnik = new Pole(10,10);
         przeciwnik.dodajPionek("Czarny", gora, dol, prawy, lewy);
 
         assertSame(3, p.podajKamien().podajOddechy());

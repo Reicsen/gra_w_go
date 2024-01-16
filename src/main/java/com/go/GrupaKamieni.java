@@ -38,24 +38,24 @@ public class GrupaKamieni implements IKamien {
         return this;
     }
 
-    public void usunKamien(){
+    public void usunKamien(IPlansza plansza){
         //usuwamy wszyskie kamienie z grupy z ich pól
         for(IKamien kamien : kamienie){
-            kamien.usunKamien();
+            kamien.usunKamien(plansza);
         }
     }
     public IKamien podajKamien(){
         return this;
     }
 
-    public void ustawKamien(){
+    public void ustawKamien(IKamien dobrykamien){
         //dla każdego kamienia z listy ustawiamy tą GrupęKamieni jako kamien
         for(IKamien kamien : kamienie){
             if(kamien instanceof Kamien){
-                kamien.podajPole().ustawKamien(this);
+                kamien.podajPole().ustawKamien(dobrykamien);
             }
             else{
-                kamien.ustawKamien();
+                kamien.ustawKamien(dobrykamien);
             }
         }
     }
