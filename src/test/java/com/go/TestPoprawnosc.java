@@ -2,7 +2,6 @@ package com.go;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.never;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,24 +29,32 @@ public class TestPoprawnosc {
         Plansza p = new Plansza();
 
         assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
-        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
 
-        //plansza jest pusta i wykonano 2 ruchy wczesniej
-        //jak wstawimy biały pionek na (0,0) to plansza będzie się różnić 
+        //plansza jest pusta i wykonano ruch wczesniej
         assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
 
         //Sprawdzamy czy sprawdzanie warunku nie dodaje pionka
         IPoprawnosc warunek2 = new NachodzacePionki();
-        assertTrue(warunek2.sprawdzPoprawnosc(p, 0, 0, "czarny"));
+        assertTrue(warunek2.sprawdzPoprawnosc(p, 0, 0, "Czarny"));
 
-        p.dodajPionek("Bialy", 0, 0);
+        //tworzymy kształt ko 
+        p.dodajPionek("Biały", 1, 0);
+        p.dodajPionek("Biały", 0, 1);
+        p.dodajPionek("Biały", 1, 2);
+        p.dodajPionek("Czarny", 2, 0);
+        p.dodajPionek("Czarny", 3, 1);
+        p.dodajPionek("Czarny", 2, 2);
 
-        assertSame(p, warunek.podajPlansza());
+        assertTrue(warunek.sprawdzPoprawnosc(p, 2, 1, "Biały"));
+        p.dodajPionek("Biały", 2, 1);
 
-        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
-        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
-        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Bialy")));
+        assertTrue(warunek.sprawdzPoprawnosc(p, 1, 1, "Czarny"));
+        p.dodajPionek("Czarny", 1, 1);
+        p.usunPionek(2, 1);
+        p.podajPola().get(19*1+1).podajKamien().ustawOddechy(1);
+        p.podajPola().get(2).podajKamien().ustawOddechy(2);
 
+        assertTrue(!warunek.sprawdzPoprawnosc(p, 2, 1, "Biały"));
     }
 
     @Test

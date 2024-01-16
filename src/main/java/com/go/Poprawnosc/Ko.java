@@ -1,5 +1,6 @@
 package com.go.Poprawnosc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.go.IPlansza;
@@ -7,60 +8,88 @@ import com.go.IPole;
 import com.go.Plansza;
 
 public class Ko implements IPoprawnosc{
-    IPlansza planszaRuchWcześniej;
-    IPlansza planszaDwaRuchyWczesniej;
+    
+    ArrayList<String> planszaWczesniej;
 
     public Ko(){
-        planszaRuchWcześniej = null;
-        planszaDwaRuchyWczesniej = null;
+        planszaWczesniej = new ArrayList<>();
     }
-
-    //TODO zrobić z usuwaniem
-    //najlepiej sprawdzic czy jakiś obok ma 1 oddech
-    // wtedy nie sprawdzać go w forze
-    //ale sprawdzic czy to przeciwnik
 
     public boolean sprawdzPoprawnosc(IPlansza plansza, int x, int y, String kolor){
 
         boolean s = true;
 
-        //jeżeli było mniej niż dwa ruchy to niemożliwe jest ko
-        if( !(planszaDwaRuchyWczesniej == null)){
+        if(planszaWczesniej.size() > 0){
             s = false;
 
-            List<IPole> wczesniej = planszaDwaRuchyWczesniej.podajPola();
-            List<IPole> teraz = plansza.podajPola();
-
-            //sprawdzamy czy pionek który dodajemy znajdował się na planszy wczesniej
             int miejsceDodanegoPionka = 19*y + x;
 
-            //jeżeli miejsce było puste lub był tam pionek przeciwnika to niemożliwe jest ko
-            if((wczesniej.get(miejsceDodanegoPionka).podajPionek() == null ) || !(wczesniej.get(miejsceDodanegoPionka).podajPionek().equals(kolor))){
+            //sprawdzamy czy chcemy położyć pionek tam gdzie był wcześniej
+            if((planszaWczesniej.get(miejsceDodanegoPionka) == null ) || !(planszaWczesniej.get(miejsceDodanegoPionka).equals(kolor))){
+                //jeżeli to miejsce wczesniej było null lub był tam pionek przeciwnika to nie naruszamy zasady ko
                 s = true;
+                ustawListe(plansza);
+                return s;
             }
 
-            for(int i = 0; i < 361; i++){
-                //miejsce gdzie dodajemy pionek się różni bo jeszcze go nie dodaliśmy więc to miesce pomijamy
-                if(i == miejsceDodanegoPionka){
-                    i++;
-                }
+            //szukamy pionka który usuniemy jak położymy nasz pionek w tym miejscu
+            int miejsceUsuwanegoPionka = -1;
 
-                //sprawdzamy czy wszystkie miejsca są takie same
-                //jeżeli nie są to niemożliwe jest ko
-                if(!(wczesniej.get(i).podajPionek() == null && teraz.get(i).podajPionek() == null) || 
-                !(wczesniej.get(i).podajPionek() != null && wczesniej.get(i).podajPionek() != null &&
-                (wczesniej.get(i).podajPionek().equals(teraz.get(i).podajPionek()))) )
+            if(y > 0 && !(plansza.podajPola().get(19 * (y-1) + x).podajPionek() == null) && !(plansza.podajPola().get(19 * (y-1) + x).podajPionek().equals(kolor))){
+                if(plansza.podajPola().get(19 * (y-1) + x).podajKamien().podajOddechy() == 1){
+                    miejsceUsuwanegoPionka = 19 * (y-1) + x;
+                }
+            }
+
+            else if(y < 18 && !(plansza.podajPola().get(19 * (y+1) + x).podajPionek() == null) && !(plansza.podajPola().get(19 * (y+1) + x).podajPionek().equals(kolor))){
+                if(plansza.podajPola().get(19 * (y+1) + x).podajKamien().podajOddechy() == 1){
+                    miejsceUsuwanegoPionka = 19 * (y+1) + x;
+                }
+            }
+
+            else if(x > 0 && !(plansza.podajPola().get(19 * y + (x-1)).podajPionek() == null) && !(plansza.podajPola().get(19 * y + (x-1)).podajPionek().equals(kolor))){
+                if(plansza.podajPola().get(19 * y + (x-1)).podajKamien().podajOddechy() == 1){
+                    miejsceUsuwanegoPionka = 19 * y + (x-1);
+                }
+            }
+
+            else if(x < 18 && !(plansza.podajPola().get(19* y + (x + 1)).podajPionek() == null) && !(plansza.podajPola().get(19 * y + (x+1)).podajPionek().equals(kolor))){
+                if(plansza.podajPola().get(19 * y + (x+1)).podajKamien().podajOddechy() == 1){
+                    miejsceUsuwanegoPionka = 19 * y + (x+1);
+                }
+            }
+
+            //sprawdzamy czy tam gdzie usuwamy pionek wcześniej było pusto
+            /*if( miejsceUsuwanegoPionka == -1 || !(planszaWczesniej.get(miejsceUsuwanegoPionka) == null)){
+                s = true;
+                ustawListe(plansza);
+                return s;
+            }
+            for(int i = 0; i < 361; i++){
+                //sprawdzamy czy wszystkie miejsca są takie same oprócz miejca gdzie wstawiamy i gdzie jest usuwany pionek
+                if( i != miejsceDodanegoPionka && i != miejsceUsuwanegoPionka &&
+                    (!(planszaWczesniej.get(i) == null && plansza.podajPola().get(i).podajPionek() == null) &&
+                    !((planszaWczesniej.get(i) != null && plansza.podajPola().get(i).podajPionek() != null) &&
+                    ( planszaWczesniej.get(i).equals(plansza.podajPola().get(i).podajPionek())))) )
                 {
                     s = true;
+                    ustawListe(plansza);
+                    return s;
                 }
-            }
+            }*/
         }
-
-        planszaDwaRuchyWczesniej = planszaRuchWcześniej;
-        planszaRuchWcześniej = plansza;
+        if(s == true){
+            ustawListe(plansza);
+        }
         return s;
     }
-    public IPlansza podajPlansza(){
-        return planszaDwaRuchyWczesniej;
+
+    private void ustawListe(IPlansza plansza){
+
+        planszaWczesniej = new ArrayList<>();
+        for(IPole pole : plansza.podajPola()){
+            planszaWczesniej.add(pole.podajPionek());
+        }
+
     }
 }
