@@ -20,9 +20,9 @@ public class TestUsuwaniePionkow {
         plansza.dodajPionek("Czarny", 2, 1);
         plansza.dodajPionek("Czarny", 2, 0);
     
-        assertSame(2, obliczenia.obliczanieJencow(plansza));
+        assertSame(2, obliczenia.obliczanieJencow(plansza, "Biały"));
 
-        ArrayList<Integer> pionki = obliczenia.pionkiDoUsuniecia(plansza);
+        ArrayList<Integer> pionki = obliczenia.pionkiDoUsuniecia(plansza, "Biały");
         assertSame(2, pionki.size());
         assertSame(0, pionki.get(0));
         assertSame(1, pionki.get(1));
@@ -30,7 +30,7 @@ public class TestUsuwaniePionkow {
         assertSame(5, plansza.podajPola().get(2).podajKamien().podajOddechy());
         assertTrue(!plansza.sprawdzPoprawnosc("Czarny", 0, 0));
 
-        obliczenia.usunPionki(plansza);
+        obliczenia.usunPionki(plansza, "Biały");
 
         assertSame(8, plansza.podajPola().get(2).podajKamien().podajOddechy());
         assertTrue(plansza.sprawdzPoprawnosc("Czarny", 0, 0));

@@ -58,10 +58,11 @@ public class Gra implements IGra,IGra2,Runnable
     public void dodajPionek(int nrpola)
     {
         plansza.dodajPionek(this.aktywnyKolor, nrpola%19, nrpola/19);
+        this.zmienKolor();
     }
 
     public void usunPionki(){
-        ArrayList <Integer> pionki = usuwaniePionkow.pionkiDoUsuniecia(plansza);
+        ArrayList <Integer> pionki = usuwaniePionkow.pionkiDoUsuniecia(plansza, aktywnyKolor);
         try{      
             wysylanieDoGracza1.writeInt(5);
 
@@ -79,7 +80,7 @@ public class Gra implements IGra,IGra2,Runnable
                     
             wysylanieDoGracza2.writeInt(-1);
 
-            usuwaniePionkow.usunPionki(plansza);
+            usuwaniePionkow.usunPionki(plansza, aktywnyKolor);
         }
         catch(IOException e){
             e.printStackTrace();
@@ -161,13 +162,11 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza2.writeInt(ruch);
                     dodajPionek(ruch);
 
-                    int jency = usuwaniePionkow.obliczanieJencow(plansza);
+                    int jency = usuwaniePionkow.obliczanieJencow(plansza, aktywnyKolor);
                     wysylanieDoGracza1.writeInt(3);
                     wysylanieDoGracza1.writeInt(jency);
 
                     usunPionki();
-                    this.zmienKolor();
-
                 }
                 else
                 {
@@ -192,12 +191,11 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza1.writeInt(ruch);
                     dodajPionek(ruch);
 
-                    int jency = usuwaniePionkow.obliczanieJencow(plansza);
+                    int jency = usuwaniePionkow.obliczanieJencow(plansza, aktywnyKolor);
                     wysylanieDoGracza2.writeInt(3);
                     wysylanieDoGracza2.writeInt(jency);
 
                     usunPionki();
-                    this.zmienKolor();
                 }
                 else
                 {
