@@ -123,6 +123,38 @@ public class TestPoprawnosc {
 
         assertTrue(warunek.sprawdzPoprawnosc(plansza2, 2, 3, "Czarny"));
 
+        //sprawdzamy dla grup
+        IPlansza plansza3 = new Plansza();
+        plansza3.dodajPionek("Biały", 3, 1);
+        plansza3.dodajPionek("Biały", 2, 2);
+        plansza3.dodajPionek("Biały", 4, 2);
+        plansza3.dodajPionek("Biały", 2, 3);
+        plansza3.dodajPionek("Biały", 3, 3);
+
+        plansza3.dodajPionek("Czarny", 3, 0);
+        plansza3.dodajPionek("Czarny", 2, 1);
+        plansza3.dodajPionek("Czarny", 4, 1);
+        plansza3.dodajPionek("Czarny", 1, 2);
+        plansza3.dodajPionek("Czarny", 5, 2);
+        plansza3.dodajPionek("Czarny", 1, 3);
+        plansza3.dodajPionek("Czarny", 4, 3);
+        plansza3.dodajPionek("Czarny", 2, 4);
+        plansza3.dodajPionek("Czarny", 3, 4);
+
+        assertSame(2,plansza3.podajPola().get(19*2+2).podajKamien().podajOddechy() );
+
+        assertTrue(!warunek.sprawdzPoprawnosc(plansza3, 3, 2, "Biały"));
+
+        assertSame(2,plansza3.podajPola().get(19*2+2).podajKamien().podajOddechy() );
+
+        assertTrue(warunek.sprawdzPoprawnosc(plansza3, 3, 2, "Czarny"));
+
+        assertSame(2,plansza3.podajPola().get(19*2+2).podajKamien().podajOddechy() );
+
+        plansza3.dodajPionek("Czarny", 3, 2);
+
+        assertSame(0,plansza3.podajPola().get(19*2+2).podajKamien().podajOddechy() );
+
     }
 }
 

@@ -71,7 +71,7 @@ public class Ko implements IPoprawnosc{
                 ustawListe(plansza);
                 return s;
             }
-            /*for(int i = 0; i < 361; i++){
+            for(int i = 0; i < 361; i++){
                 //sprawdzamy czy wszystkie miejsca są takie same oprócz miejca gdzie wstawiamy i gdzie jest usuwany pionek
                 if( i != miejsceDodanegoPionka && i != miejsceUsuwanegoPionka &&
                     (!(planszaWczesniej.get(i) == null && plansza.podajPola().get(i).podajPionek() == null) &&
@@ -82,7 +82,7 @@ public class Ko implements IPoprawnosc{
                     ustawListe(plansza);
                     return s;
                 }
-            }*/
+            }
         }
         if(s == true){
             ustawListe(plansza);
