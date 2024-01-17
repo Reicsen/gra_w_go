@@ -64,7 +64,7 @@ public class Gra implements IGra,IGra2,Runnable
     public void usunPionki(){
         ArrayList <Integer> pionki = usuwaniePionkow.pionkiDoUsuniecia(plansza, aktywnyKolor);
         try{      
-            wysylanieDoGracza1.writeInt(5);
+            wysylanieDoGracza1.writeInt(4);
 
             for(int i = 0; i< pionki.size();i++){
                 wysylanieDoGracza1.writeInt(pionki.get(i));
@@ -72,7 +72,7 @@ public class Gra implements IGra,IGra2,Runnable
 
             wysylanieDoGracza1.writeInt(-1);
             
-            wysylanieDoGracza2.writeInt(5);
+            wysylanieDoGracza2.writeInt(4);
 
             for(int i = 0; i< pionki.size();i++){
                 wysylanieDoGracza2.writeInt(pionki.get(i));
@@ -93,9 +93,9 @@ public class Gra implements IGra,IGra2,Runnable
         {
             try
             {
-                wysylanieDoGracza1.writeInt(0);
+                wysylanieDoGracza1.writeInt(5);
                 wysylanieDoGracza1.writeInt(-1);
-                wysylanieDoGracza2.writeInt(0);
+                wysylanieDoGracza2.writeInt(5);
                 wysylanieDoGracza2.writeInt(1);
             }
             catch(IOException e)
@@ -107,9 +107,9 @@ public class Gra implements IGra,IGra2,Runnable
         {
             try
             {
-                wysylanieDoGracza2.writeInt(0);
+                wysylanieDoGracza2.writeInt(5);
                 wysylanieDoGracza2.writeInt(-1);
-                wysylanieDoGracza1.writeInt(0);
+                wysylanieDoGracza1.writeInt(5);
                 wysylanieDoGracza1.writeInt(1);
             }
             catch(IOException e)

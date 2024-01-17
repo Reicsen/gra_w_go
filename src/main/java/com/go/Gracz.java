@@ -152,12 +152,37 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
             try
             {
                 sygnal=odbieranieOdSerwera.readInt();
+                if (sygnal==0)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    dodaniePionka(ruch, kolor);
+                    zmienAktywnosc();
+                    wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                }
+                if (sygnal == -1)
+                {
+                    wypiszKomunikatNaPlanszy("Niepoprawny ruch, spróbuj ponownie");
+                }
+
+                if (sygnal==1)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    dodaniePionka(ruch, kolorPrzeciwnika);
+                    zmienAktywnosc();
+                    wypiszKomunikatNaPlanszy("Twoja tura");
+                }
+                if (sygnal==2)
+                {
+                    zmienAktywnosc();
+                    wypiszKomunikatNaPlanszy("Twoja tura");
+                }
+
                 if(sygnal==3)
                 {
                     ruch=odbieranieOdSerwera.readInt();
                     this.iloscJencow=this.iloscJencow+ruch;
                 }
-                if (sygnal==5)
+                if (sygnal==4)
                 {
                     ruch=odbieranieOdSerwera.readInt();
                     while (ruch!=-1)
@@ -165,57 +190,28 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                         usunieciePionka(ruch);
                         ruch=odbieranieOdSerwera.readInt();
                     }
-                }         
-                if (aktywny)
+                }  
+                       
+                if (sygnal==5)
                 {
-                    if (sygnal==0)
+                    ruch=odbieranieOdSerwera.readInt();                    
+                    if (ruch==-1)
                     {
-                        ruch=odbieranieOdSerwera.readInt();
-                        dodaniePionka(ruch, kolor);
-                        zmienAktywnosc();
-                        wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                        wypiszKomunikatNaPlanszy("Przegrałeś!");
+                        break;
                     }
-                    if (sygnal == -1)
+                    else
                     {
-                        wypiszKomunikatNaPlanszy("Niepoprawny ruch, spróbuj ponownie");
-                    }
-                }
-                else
-                {
-                    if (sygnal==0)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();
-                    
-                        if (ruch==-1)
-                        {
-                            wypiszKomunikatNaPlanszy("Przegrałeś!");
-                            break;
-                        }
-                        else
-                        {
-                            wypiszKomunikatNaPlanszy("Wygrałeś!");
-                            break;
-                        }
-                    }
-                    if (sygnal==2)
-                    {
-                        zmienAktywnosc();
-                        wypiszKomunikatNaPlanszy("Twoja tura");
-                    }
-                    if (sygnal==1)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();
-                        dodaniePionka(ruch, kolorPrzeciwnika);
-                        zmienAktywnosc();
-                        wypiszKomunikatNaPlanszy("Twoja tura");
-                    }
-                    if(sygnal==10)
-                    {
-                        plansza.rozpoczecieGry();
-                        wypiszKomunikatNaPlanszy("Tura przeciwnika");
-                        System.out.println("sygnal 10");
+                        wypiszKomunikatNaPlanszy("Wygrałeś!");
+                        break;
                     }
                 }                
+                if(sygnal==10)
+                {
+                    plansza.rozpoczecieGry();
+                    wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                    System.out.println("sygnal 10");
+                }               
             }
 
             catch (IOException e)
