@@ -42,7 +42,9 @@ Będą dostępne 3 opcje:
 - odtworzenie jednej w wcześniejszych gier
 
 Po kliknieciu przycisku "Gra z innym graczem", wyświetla się plansza. Jeśli nie ma drugiego gracza czeka się na niego.
+
 Po kliknieciu przycisku "Gra z botem", wyświetla się plansza.
+
 Po kliknieciu przycisku "Odtworzenie gry", wybiera się którą grę chce się odtworzyć po czym wyświetlana jest plansza na której wyświetlana jest stara gra.
 
 ## Autorzy
