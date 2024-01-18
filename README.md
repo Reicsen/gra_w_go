@@ -5,10 +5,11 @@ Projekt jest w fazie rozwoju.
 ## Opis
 
 Gra w Go to implementacja popularnej gry planszowej Go. Projekt rozwijany jest w celu dostarczenia platformy do gry dla użytkowników.
+
 Można zagrać z przeciwnikiem bądź z botem lub odtworzyć jedną z wcześniejszych gier.
+
 Gra toczy się na planszy będącej siatką 19 poziomych i 19 pionowych linii tworzących 361 przecięć.
 
-## Instrukcje
 Gracze kładą na przemian czarne i białe kamienie na przecięciu linii. Rozpoczynają czarne.
 
 Plansza jest początkowo pusta. Celem gry jest otoczenie własnymi kamieniami obszaru większego niż obszar przeciwnika.
@@ -19,6 +20,8 @@ Kształt, w którym gracze mogą naprzemiennie dusić kamień przeciwnika, zwany
 
 Gracz zawsze może zrezygnować z ruchu. Gdy obaj gracze bezpośrednio po sobie zrezygnują z ruchu, gra się zatrzymuje i wyświetlane są informacje dotyczące zajmowanego terenu i jeńców. Póżniej można zakończyć grę lub grać dalej.
 Jeśli gracze zdecydują, że gra się skończyła, usuwane są kamienie znajdujące się na terytorium przeciwnika i dodawane są do jeńców. Następnie jeńcy ustawiani są na terytorium przeciwnika, po czym podliczane i porównywane są punkty terytorium. Gracz z większym terytorium wygrywa.
+
+## Instrukcje
 
 ### Instalacja
 
