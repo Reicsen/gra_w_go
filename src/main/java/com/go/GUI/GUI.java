@@ -21,7 +21,7 @@ public class GUI {
         b1.setFont(Font.font(20));
 
         //Dodanie przycisku, który po naciśnięciu uruchamia grę z botem (przycisk jest jeszcze nieaktywny)
-        Button b2 = new PrzyciskGraZBotem();
+        Button b2 = new PrzyciskGraZBotem(stage);
         b2.setPrefWidth(400);
         b2.setPrefHeight(200);
         b2.setStyle("-fx-background-color: turquoise");

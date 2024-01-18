@@ -140,6 +140,12 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         });
     }
 
+    public void koniec(String komunikat){
+        Platform.runLater(() -> {
+            plansza.wyskakujaceOkienko(komunikat);
+        });
+    }
+
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
@@ -198,11 +204,13 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                     if (ruch==-1)
                     {
                         wypiszKomunikatNaPlanszy("Przegrałeś!");
+                        koniec("Przegrałeś :C");
                         break;
                     }
                     else
                     {
                         wypiszKomunikatNaPlanszy("Wygrałeś!");
+                        koniec("Wygrałeś!");
                         break;
                     }
                 }                

@@ -10,7 +10,7 @@ import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import org.apache.commons.math3.random.MersenneTwister;
 
-public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
+public class Bot implements Klient, IBot, Runnable
 {
     private boolean aktywny=false;
     private int iloscJencow=0;
@@ -66,7 +66,7 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
             {
                 zmienAktywnosc();
                 wysylanieDoSerwera.writeInt(0);
-                wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                //wypiszKomunikatNaPlanszy("Tura przeciwnika");
             }
             catch (IOException e)
             {
@@ -131,7 +131,7 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
         }
     }
 
-
+/* 
     public void dodaniePionka(int nrpola, Color kolor)
     {
         //Platform.runLater(() -> {
@@ -149,7 +149,7 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
         //Platform.runLater(() -> {
         //    plansza.lbl.setText(komunikat);
         //});
-    }
+    }*/
 
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
@@ -166,9 +166,9 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
                 if (sygnal==0)
                 {
                     ruch=odbieranieOdSerwera.readInt();
-                    dodaniePionka(ruch, kolor);
+                    //dodaniePionka(ruch, kolor);
                     zmienAktywnosc();
-                    wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                    //wypiszKomunikatNaPlanszy("Tura przeciwnika");
                 }
                 if (sygnal==-1)
                 {
@@ -178,9 +178,9 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
                 if (sygnal==1)
                 {
                     ruch=odbieranieOdSerwera.readInt();
-                    dodaniePionka(ruch, kolorPrzeciwnika);
+                    //dodaniePionka(ruch, kolorPrzeciwnika);
                     zmienAktywnosc();
-                    wypiszKomunikatNaPlanszy("Twoja tura");
+                    //wypiszKomunikatNaPlanszy("Twoja tura");
                     losujRuch();
                 }
                 if (sygnal==2)
@@ -199,7 +199,7 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
                     ruch=odbieranieOdSerwera.readInt();
                     while (ruch!=-1)
                     {
-                        usunieciePionka(ruch);
+                        //usunieciePionka(ruch);
                         ruch=odbieranieOdSerwera.readInt();
                     }
                 } 
@@ -209,19 +209,19 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
                     ruch=odbieranieOdSerwera.readInt();   
                     if (ruch==-1)
                     {
-                        wypiszKomunikatNaPlanszy("Przegrana!");
+                        //wypiszKomunikatNaPlanszy("Przegrana!");
                         break;
                     }
                     else
                     {
-                        wypiszKomunikatNaPlanszy("Wygrana!");
+                        //wypiszKomunikatNaPlanszy("Wygrana!");
                         break;
                     }
                 }                
                 if(sygnal==10)
                 {
                     //plansza.rozpoczecieGry();
-                    wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                    //wypiszKomunikatNaPlanszy("Tura przeciwnika");
                     System.out.println("sygnal 10");
                 }              
             }
