@@ -28,28 +28,28 @@ public class TestPoprawnosc {
         Ko warunek = new Ko();
         Plansza p = new Plansza();
 
-        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Biały")));
+        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "biały")));
 
         //plansza jest pusta i wykonano ruch wczesniej
-        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "Biały")));
+        assertTrue((warunek.sprawdzPoprawnosc(p, 0, 0, "biały")));
 
         //Sprawdzamy czy sprawdzanie warunku nie dodaje pionka
         IPoprawnosc warunek2 = new NachodzacePionki();
-        assertTrue(warunek2.sprawdzPoprawnosc(p, 0, 0, "Czarny"));
+        assertTrue(warunek2.sprawdzPoprawnosc(p, 0, 0, "czarny"));
 
         //tworzymy kształt ko 
-        p.dodajPionek("Biały", 1, 0);
-        p.dodajPionek("Biały", 0, 1);
-        p.dodajPionek("Biały", 1, 2);
-        p.dodajPionek("Czarny", 2, 0);
-        p.dodajPionek("Czarny", 3, 1);
-        p.dodajPionek("Czarny", 2, 2);
+        p.dodajPionek("biały", 1, 0);
+        p.dodajPionek("biały", 0, 1);
+        p.dodajPionek("biały", 1, 2);
+        p.dodajPionek("czarny", 2, 0);
+        p.dodajPionek("czarny", 3, 1);
+        p.dodajPionek("czarny", 2, 2);
 
-        assertTrue(warunek.sprawdzPoprawnosc(p, 2, 1, "Biały"));
-        p.dodajPionek("Biały", 2, 1);
+        assertTrue(warunek.sprawdzPoprawnosc(p, 2, 1, "biały"));
+        p.dodajPionek("biały", 2, 1);
 
-        assertTrue(warunek.sprawdzPoprawnosc(p, 1, 1, "Czarny"));
-        p.dodajPionek("Czarny", 1, 1);
+        assertTrue(warunek.sprawdzPoprawnosc(p, 1, 1, "czarny"));
+        p.dodajPionek("czarny", 1, 1);
 
         assertSame(0, p.podajPola().get(20).podajKamien().podajOddechy());
         assertSame(0, p.podajPola().get(21).podajKamien().podajOddechy());
@@ -59,9 +59,9 @@ public class TestPoprawnosc {
         assertSame(1, p.podajPola().get(20).podajKamien().podajOddechy());
 
         assertSame(warunek.podajPlansze().get(0), p.podajPola().get(0).podajPionek());
-        assertSame("Czarny", p.podajPola().get(20).podajPionek());
+        assertSame("czarny", p.podajPola().get(20).podajPionek());
 
-        assertTrue(!warunek.sprawdzPoprawnosc(p, 2, 1, "Biały"));
+        assertTrue(!warunek.sprawdzPoprawnosc(p, 2, 1, "biały"));
     }
 
     @Test

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import com.go.IPlansza;
 import com.go.IPole;
-import com.go.Plansza;
 
 public class Ko implements IPoprawnosc{
     
+    //lista która zawiera stringi (biały lub czarny) lub null tam gdzie na wcześniejszej na planszy były pola
     ArrayList<String> planszaWczesniej;
 
     public Ko(){
@@ -97,11 +97,11 @@ public class Ko implements IPoprawnosc{
             if(pole.podajPionek() == null){
                 planszaWczesniej.add(null);
             }
-            else if(pole.podajPionek().equals("Biały")){
-                planszaWczesniej.add("Biały");
+            else if(pole.podajPionek().equals("biały")){
+                planszaWczesniej.add("biały");
             }
             else{
-                planszaWczesniej.add("Czarny");
+                planszaWczesniej.add("czarny");
             }
         }
 
