@@ -163,12 +163,38 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
             try
             {
                 sygnal=odbieranieOdSerwera.readInt();
+                if (sygnal==0)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    dodaniePionka(ruch, kolor);
+                    zmienAktywnosc();
+                    wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                }
+                if (sygnal==-1)
+                {
+                    losujRuch();
+                }
+
+                if (sygnal==1)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    dodaniePionka(ruch, kolorPrzeciwnika);
+                    zmienAktywnosc();
+                    wypiszKomunikatNaPlanszy("Twoja tura");
+                    losujRuch();
+                }
+                if (sygnal==2)
+                {
+                    zmienAktywnosc();
+                    losujRuch();
+                }
+
                 if(sygnal==3)
                 {
                     ruch=odbieranieOdSerwera.readInt();
                     this.iloscJencow=this.iloscJencow+ruch;
                 }
-                if (sygnal==5)
+                if (sygnal==4)
                 {
                     ruch=odbieranieOdSerwera.readInt();
                     while (ruch!=-1)
@@ -176,57 +202,28 @@ public class Bot implements Klient, ObslugaPlanszy, IBot, Runnable
                         usunieciePionka(ruch);
                         ruch=odbieranieOdSerwera.readInt();
                     }
-                }
-                if (aktywny)
+                } 
+                               
+                if (sygnal==5)
                 {
-                    if (sygnal==0)
+                    ruch=odbieranieOdSerwera.readInt();   
+                    if (ruch==-1)
                     {
-                        ruch=odbieranieOdSerwera.readInt();
-                        dodaniePionka(ruch, kolor);
-                        zmienAktywnosc();
-                        wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                        wypiszKomunikatNaPlanszy("Przegrana!");
+                        break;
                     }
                     else
                     {
-                        losujRuch();
-                    }
-                }
-                else
-                {
-                    if (sygnal==0)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();   
-                        if (ruch==-1)
-                        {
-                            wypiszKomunikatNaPlanszy("Przegrana!");
-                            break;
-                        }
-                        else
-                        {
-                            wypiszKomunikatNaPlanszy("Wygrana!");
-                            break;
-                        }
-                    }
-                    if (sygnal==2)
-                    {
-                        zmienAktywnosc();
-                        losujRuch();
-                    }
-                    if (sygnal==1)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();
-                        dodaniePionka(ruch, kolorPrzeciwnika);
-                        zmienAktywnosc();
-                        wypiszKomunikatNaPlanszy("Twoja tura");
-                        losujRuch();
-                    }
-                    if(sygnal==10)
-                    {
-                        //plansza.rozpoczecieGry();
-                        wypiszKomunikatNaPlanszy("Tura przeciwnika");
-                        System.out.println("sygnal 10");
+                        wypiszKomunikatNaPlanszy("Wygrana!");
+                        break;
                     }
                 }                
+                if(sygnal==10)
+                {
+                    //plansza.rozpoczecieGry();
+                    wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                    System.out.println("sygnal 10");
+                }              
             }
 
             catch (IOException e)
