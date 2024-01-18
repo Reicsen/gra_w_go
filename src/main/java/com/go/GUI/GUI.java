@@ -29,7 +29,7 @@ public class GUI {
         b2.setFont(Font.font(20));
 
         //Dodanie przycisku, który po naciśnięciu wybiera się gre do odtworzenie
-        Button b3 = new Button("Odtworzenie gry");
+        Button b3 = new PrzyciskOdtworzGre(stage);
         b3.setPrefWidth(400);
         b3.setPrefHeight(200);
         b3.setStyle("-fx-background-color: turquoise");
