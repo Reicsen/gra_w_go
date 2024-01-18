@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>220</y><w>180</w><h>120</h></coordinates><panel_attributes>Gracz
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>560</x><y>210</y><w>180</w><h>120</h></coordinates><panel_attributes>Gracz
 --
 -aktywny: boolean
 -ilosc_jencow: int
@@ -6,60 +6,128 @@
 -kolorPrzeciwnika: Color
 -plansza: GuiPlansza
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>280</y><w>320</w><h>100</h></coordinates><panel_attributes>Gra
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1180</x><y>270</y><w>320</w><h>110</h></coordinates><panel_attributes>Gra
 --
 -aktywnyKolor: String
 -plansza: IPlansza
+-usuwaniePionkow: IUsuwaniePionkow
+-obliczanieTerytorium : ITerytorium
 --
--void zmienKolor()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>250</y><w>140</w><h>70</h></coordinates><panel_attributes>lt=-
+-void zmienKolor()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1060</x><y>240</y><w>140</w><h>70</h></coordinates><panel_attributes>lt=-
 m1=2
-m2=1</panel_attributes><additional_attributes>10;10;120;50</additional_attributes></element><element><id>Relation</id><coordinates><x>730</x><y>370</y><w>40</w><h>150</h></coordinates><panel_attributes>lt=-
+m2=1</panel_attributes><additional_attributes>10;10;120;50</additional_attributes></element><element><id>Relation</id><coordinates><x>1290</x><y>370</y><w>40</w><h>140</h></coordinates><panel_attributes>lt=-
 m1=1
-m2=1</panel_attributes><additional_attributes>10;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>590</y><w>50</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-m1=1
-m2=361</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>500</y><w>350</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+m2=1</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1160</x><y>590</y><w>50</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=0
+m2=361</panel_attributes><additional_attributes>10;10;10;150</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1110</x><y>490</y><w>350</w><h>110</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 IPlansza
 --
 boolean sprawdzPoprawnosc(String kolor, int x, int y)
 void dodajPionek(String kolor, int x, int y)
-void usunPionek(int x, int y)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>550</y><w>180</w><h>60</h></coordinates><panel_attributes>Plansza
+void usunPionek(int x, int y)
+List&lt;IPole&gt; podajPola()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>710</x><y>540</y><w>210</w><h>130</h></coordinates><panel_attributes>Plansza
 --
 #pola: ArrayList&lt;Pole&gt;
---
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>560</y><w>250</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>226;17;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>750</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+-warunekPierwszy: IPoprawnosc
+-warunekDrugi: IPoprawnosc
+-warunekTrzeci: IPoprawnosc
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>910</x><y>560</y><w>220</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>196;40;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1050</x><y>740</y><w>450</w><h>170</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 IPole
 --
-void dodajPionek(String kolor)
-void usunPionek()
-String podajPionek()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>190</x><y>780</y><w>140</w><h>60</h></coordinates><panel_attributes>Pole
---
--pionek: String
---
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>810</y><w>190</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>170;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>220</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+void dodajPionek(String kolor, IPole gora, IPole dol, IPole prawy, IPole lewy)
+void usunPionek(IPlansza plansza)
+String podajPionek()
+IKamien podajKamien();
+void ustawKamien(IKamien kamien);
+void ustawPole();
+int podajX();
+ int podajY();</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>880</x><y>800</y><w>190</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>170;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>860</x><y>210</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 Klient
 --
 void wykonajRuch(int x, int y)
 void pominRuch()
 void poddajSie()
 void ustawKolor(int nrGracza)
-void zmienAktywnosc()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>170</x><y>270</y><w>150</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>630</x><y>180</y><w>210</w><h>70</h></coordinates><panel_attributes>Bot
+void zmienAktywnosc()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>730</x><y>260</y><w>150</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1190</x><y>170</y><w>210</w><h>70</h></coordinates><panel_attributes>Bot
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>210</y><w>150</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;30;130;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>250</x><y>10</y><w>310</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1060</x><y>200</y><w>150</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;30;130;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>810</x><y>0</y><w>310</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 ObslugaPlanszy
 --
 void dodaniePionka(int nrpola, Color kolor)
 void usunieciePionka(int nrpola)
-void wypiszKomunikatNaPlanszy(String komunikat)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>170</x><y>130</y><w>140</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>120;10;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>130</y><w>130</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;110;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1110</x><y>380</y><w>160</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+void wypiszKomunikatNaPlanszy(String komunikat)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>730</x><y>120</y><w>140</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>120;10;10;140</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1670</x><y>370</y><w>160</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 IGra
 --
 void koniecGry()
 void pominiecieTury()
-void probaRuchu()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>930</x><y>340</y><w>200</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;180;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1060</x><y>550</y><w>240</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+void probaRuchu()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1490</x><y>330</y><w>200</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;180;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1620</x><y>540</y><w>240</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 IGra2
 --
 boolean sprawdzPoprawnosc(int nrpola)
-void dodajPionek(int nrpola)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>930</x><y>370</y><w>150</w><h>250</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;130;230</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1060</x><y>270</y><w>210</w><h>70</h></coordinates><panel_attributes>Serwer
+void dodajPionek(int nrpola)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1490</x><y>360</y><w>150</w><h>250</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;130;230</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1620</x><y>260</y><w>210</w><h>70</h></coordinates><panel_attributes>Serwer
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>930</x><y>310</y><w>150</w><h>40</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1490</x><y>300</y><w>150</w><h>40</h></coordinates><panel_attributes>lt=-
 m1=1
-m2=1</panel_attributes><additional_attributes>10;10;130;10</additional_attributes></element></diagram>
+m2=1</panel_attributes><additional_attributes>10;10;130;10</additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>610</y><w>110</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>190</x><y>530</y><w>440</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+IPoprawnosc
+--
++boolean sprawdzPoprawnosc(IPlansza plansza, int x, int y, String kolor)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>620</y><w>30</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>720</y><w>210</w><h>90</h></coordinates><panel_attributes>NachodzacePionki
+--
++boolean sprawdzPoprawnosc(IPlansza plansza, int x, int y, String kolor)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>620</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>240</x><y>730</y><w>240</w><h>110</h></coordinates><panel_attributes>Ko
+--
+-  planszaWczesniej: ArrayList&lt;String&gt;
+--
++boolean sprawdzPoprawnosc(IPlansza plansza, int x, int y, String kolor)
+-void ustawListe(IPlansza plansza)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>170</x><y>620</y><w>60</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>40;10;10;110</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>730</y><w>210</w><h>70</h></coordinates><panel_attributes>PoprawnaLiczbaOddechow
+--
++boolean sprawdzPoprawnosc(IPlansza plansza, int x, int y, String kolor)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>750</x><y>780</y><w>140</w><h>90</h></coordinates><panel_attributes>Pole
+--
+- kamien: IKamien
+- x: int 
+-y: int 
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>730</x><y>970</y><w>520</w><h>240</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+IKamien
+--
+void ustawOddechy(int oddechy)
+int podajOddechy()
+String podajKolor()
+void dodajKamien(String kolor, IPole pole, IPole gora, IPole dol, IPole prawy, IPole lewy)
+void usunKamien(IPlansza plansza)
+IKamien podajKamien()
+IKamien polacz(ArrayList&lt;IKamien&gt; kamienie)
+void ustawKolor(String kolor)
+void ustawKamien(IKamien kamien)
+IPole podajPole()
+void ustawPole(IPole pole)
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>830</x><y>860</y><w>40</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>1140</x><y>1200</y><w>30</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>880</x><y>1200</y><w>30</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1070</x><y>1330</y><w>210</w><h>100</h></coordinates><panel_attributes>Kamien
+--
+-pole: IPole
+-oddechy: int
+-kolor : String
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>750</x><y>1320</y><w>210</w><h>70</h></coordinates><panel_attributes>GrupaKamieni
+--
+-kamienie : ArrayList&lt;IKamien&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1540</x><y>680</y><w>410</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+IUsuwaniePionkow
+--
+int obliczanieJencow(IPlansza plansza, String kolor)
+ArrayList&lt;Integer&gt; pionkiDoUsuniecia(IPlansza plansza, String kolor)
+void usunPionki(IPlansza plansza, String kolor)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1450</x><y>370</y><w>160</w><h>330</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0
+m2=1</panel_attributes><additional_attributes>10;10;140;310</additional_attributes></element><element><id>Relation</id><coordinates><x>1640</x><y>790</y><w>40</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;20;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1580</x><y>860</y><w>210</w><h>80</h></coordinates><panel_attributes>UsuwaniePionkow
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1470</x><y>970</y><w>490</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
+ITerytorium
+--
+int obliczTerytorium(IPlansza plansza, String kolor)
+ArrayList &lt;Integer&gt; PionyNaTerytoriumPrzeciwnika(IPlansza plansza, String kolor)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1440</x><y>370</y><w>120</w><h>620</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0
+m2=1</panel_attributes><additional_attributes>10;10;100;600</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1460</x><y>1120</y><w>210</w><h>70</h></coordinates><panel_attributes>Terytorium
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1540</x><y>1060</y><w>30</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element></diagram>

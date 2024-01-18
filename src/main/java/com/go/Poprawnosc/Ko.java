@@ -8,7 +8,7 @@ import com.go.IPole;
 public class Ko implements IPoprawnosc{
     
     //lista która zawiera stringi (biały lub czarny) lub null tam gdzie na wcześniejszej na planszy były pola
-    ArrayList<String> planszaWczesniej;
+    private ArrayList<String> planszaWczesniej;
 
     public Ko(){
         planszaWczesniej = new ArrayList<>();
@@ -105,8 +105,5 @@ public class Ko implements IPoprawnosc{
             }
         }
 
-    }
-    public ArrayList<String> podajPlansze(){
-        return planszaWczesniej;
     }
 }

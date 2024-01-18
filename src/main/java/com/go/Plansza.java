@@ -12,9 +12,9 @@ public class Plansza implements IPlansza
 {
     protected List<IPole> pola; //lista 361 pól
 
-    IPoprawnosc warunekPierwszy = new NachodzacePionki();
-    IPoprawnosc warunekDrugi = new PoprawnaLiczbaOddechow();
-    IPoprawnosc warunekTrzeci = new Ko();
+    private IPoprawnosc warunekPierwszy = new NachodzacePionki();
+    private IPoprawnosc warunekDrugi = new PoprawnaLiczbaOddechow();
+    private IPoprawnosc warunekTrzeci = new Ko();
 
     public Plansza() //konstruktor; metody opisane w interfejsie
     {

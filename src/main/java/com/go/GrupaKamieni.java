@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GrupaKamieni implements IKamien {
 
-    ArrayList<IKamien> kamienie = new ArrayList<>();
+    private ArrayList<IKamien> kamienie = new ArrayList<>();
 
     public void ustawOddechy(int oddechy)
     {
