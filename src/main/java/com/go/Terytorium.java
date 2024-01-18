@@ -13,9 +13,7 @@ public class Terytorium implements ITerytorium {
     public ArrayList <Integer> PionyNaTerytoriumPrzeciwnika(IPlansza plansza, String kolor){
 
         ArrayList <Integer> martwePiony = new ArrayList<>();
-
-
-
+        
         return martwePiony;
     }
 }

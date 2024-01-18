@@ -11,18 +11,26 @@ public class Gra implements IGra,IGra2,Runnable
     private String aktywnyKolor;
     private IPlansza plansza;
     private IUsuwaniePionkow usuwaniePionkow;
+    private ITerytorium obliczanieTerytorium;
     private Socket gracz1;
     private Socket gracz2;
     private DataInputStream odbieranieOdGracza1;
     private DataOutputStream wysylanieDoGracza1;
     private DataInputStream odbieranieOdGracza2;
     private DataOutputStream wysylanieDoGracza2;
+    /*
+     * zmienna która zapamiętuje czy wcześniej wykonano pomnin ruch
+     * jeśli wcześniej pominięto ruch to zmienna wczesniejByloPomin =1
+     * a jeśli wcześniej wykonano ruch to zmienna wczesniejByloPomin =0
+     */
+    private int wczesniejByloPomin = 0;
 
     public Gra(Socket s1, Socket s2) //konstruktor
     {
         this.aktywnyKolor="czarny";
         this.plansza=new Plansza();
         this.usuwaniePionkow = new UsuwaniePionkow();
+        this.obliczanieTerytorium = new Terytorium();
         this.gracz1=s1;
         this.gracz2=s2;
         try
@@ -36,6 +44,10 @@ public class Gra implements IGra,IGra2,Runnable
         {
             e.printStackTrace();
         }
+    }
+
+    public void dwaRazyPominietoTure(){
+        //TODO
     }
 
     private void zmienKolor() //metoda zmieniająca aktywny kolor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
@@ -125,7 +137,14 @@ public class Gra implements IGra,IGra2,Runnable
         {
             try
             {
-                wysylanieDoGracza2.writeInt(2);
+                if(wczesniejByloPomin == 1){
+                    dwaRazyPominietoTure();
+                    wczesniejByloPomin = 0;
+                }
+                else{
+                    wysylanieDoGracza2.writeInt(2);
+                    wczesniejByloPomin = 1;
+                }
             }
             catch(IOException e)
             {
@@ -136,7 +155,14 @@ public class Gra implements IGra,IGra2,Runnable
         {
             try
             {
-                wysylanieDoGracza1.writeInt(2);
+                if(wczesniejByloPomin == 1){
+                    dwaRazyPominietoTure();
+                    wczesniejByloPomin = 0;
+                }
+                else{
+                    wysylanieDoGracza1.writeInt(2);
+                    wczesniejByloPomin = 1;
+                }
             }
             catch(IOException e)
             {
@@ -167,6 +193,8 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza1.writeInt(jency);
 
                     usunPionki();
+
+                    wczesniejByloPomin = 0;
                 }
                 else
                 {
@@ -196,6 +224,8 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza2.writeInt(jency);
 
                     usunPionki();
+
+                    wczesniejByloPomin = 0;
                 }
                 else
                 {
