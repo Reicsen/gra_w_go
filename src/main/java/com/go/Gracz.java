@@ -144,6 +144,18 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         Platform.runLater(() -> {
             plansza.wyskakujaceOkienko(komunikat);
         });
+        Platform.runLater(() -> {
+            plansza.oknoZTerenem(iloscJencow, iloscJencow, iloscJencow, iloscJencow, iloscJencow, iloscJencow);
+        });
+    }
+
+    public void kliknietoTak(){
+        System.out.println("Naciśnięto przycisk 'Tak'");
+        //TODO
+    }
+    public void kliknietoNie(){
+        System.out.println("Naciśnięto przycisk 'Nie'");
+        //TODO
     }
 
     @Override

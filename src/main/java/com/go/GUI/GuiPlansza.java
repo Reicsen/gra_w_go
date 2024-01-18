@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.go.Gracz;
-import com.go.Klient;
 
 import javafx.application.Platform;
 import javafx.geometry.HPos;
@@ -23,7 +22,7 @@ import javafx.scene.text.TextAlignment;
 
 public class GuiPlansza extends GridPane 
 {
-    private Klient gracz;
+    private Gracz gracz;
     public Label lbl;
     public List<PrzyciskPionek> pionki= new ArrayList<>();
     public Color kolor;
@@ -125,6 +124,58 @@ public class GuiPlansza extends GridPane
 
         // Dodaj przycisk "Ok"
         dialog.getDialogPane().getButtonTypes().add(type);
+
+        Platform.runLater(() -> {
+            dialog.showAndWait();
+        });
+    }
+    public void oknoZTerenem(int terenBialych, int terenCzarnych, int jencyCzarni, int jencyBiali, int bialiNaTerytoriumCzarnych, int czarniNaTerytoriumBialych){
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Gra w go");
+
+        // Panel dialogowy
+        DialogPane dialogPane = dialog.getDialogPane();
+
+        // Tworzymy etykietę do dodania do panelu dialogowego
+        Label label = new Label("Teren białych: " + terenBialych + "\nTeren czarnych: "+ terenCzarnych+ "\nJeńcy należący do białych: "+ jencyBiali+ "\nJeńcy należący do czarnych: "+ jencyCzarni+ "\nIlosc bialych pionków na terytorium czarnych: "+ bialiNaTerytoriumCzarnych+ "\nIlosc czarnych pionkow na terytorium bialych: "+ czarniNaTerytoriumBialych + "\nCzy chcesz skończyć gre?" );
+
+        // Dostosujemy styl etykiety 
+        label.setFont(new Font(23));
+        label.setTextAlignment(TextAlignment.CENTER);
+
+        // Utwórz kontener na etykietę
+        VBox vBox = new VBox(label);
+
+        // Ustaw kontener jako zawartość panelu dialogowego
+        dialogPane.setContent(vBox);
+
+        // Dodaj przyciski
+        ButtonType buttonTypeYes = new ButtonType("Tak");
+        ButtonType buttonTypeNo = new ButtonType("Nie");
+
+        // Dodaj przyciski do panelu dialogowego
+        dialog.getDialogPane().getButtonTypes().addAll(buttonTypeYes, buttonTypeNo);
+
+        // Obsługa zdarzenia po naciśnięciu przycisku 
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == buttonTypeYes) {
+                // Obsługa zdarzenia po naciśnięciu przycisku "Tak"
+                gracz.kliknietoTak();
+                Platform.runLater(() -> {
+                    dialog.setResult("Tak");
+                    dialog.close();
+                });
+            }
+            else{
+                // Obsługa zdarzenia po naciśnięciu przycisku "Nie"
+                gracz.kliknietoNie();
+                Platform.runLater(() -> {
+                    dialog.setResult("Tak");
+                    dialog.close();
+                });
+            }
+            return null;
+        });
 
         Platform.runLater(() -> {
             dialog.showAndWait();
