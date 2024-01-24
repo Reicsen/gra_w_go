@@ -32,6 +32,8 @@ Aby zainstalować projekt, wykonaj następujące kroki:
 3. Uruchom serwer: `mvn exec:java -Dexec.mainClass=com.go.Serwer`
 4. Uruchom dwukrotnie grę: `mvn exec:java -Dexec.mainClass=com.go.GUI.Aplikacja` i wybierz opcję (gracz/bot/odtworzenie gry)
 
+Przed pierwszym uruchomieniem należy upewnić się, że na komputerze zainstalowana i skonfigurowana jest MariaDB, a następnie zalogować się do niej poprzez roota i wkleić zawartość pliku StworzenieBazy.txt.
+
 ### Użycie
 
 Po uruchomieniu projektu, gra w Go będzie dostępna poprzez interfejs użytkownika. 
@@ -45,7 +47,7 @@ Po kliknieciu przycisku "Gra z innym graczem", wyświetla się plansza. Jeśli n
 
 Po kliknieciu przycisku "Gra z botem", wyświetla się plansza.
 
-Po kliknieciu przycisku "Odtworzenie gry", wybiera się którą grę chce się odtworzyć po czym wyświetlana jest plansza na której wyświetlana jest stara gra.
+Po kliknieciu przycisku "Odtworzenie gry", wybiera się którą grę chce się odtworzyć po czym wyświetlane są dwie plansze na któych wyświetlana jest stara gra.
 
 ## Autorzy
 
