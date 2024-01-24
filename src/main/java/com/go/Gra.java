@@ -23,7 +23,7 @@ public class Gra implements IGra,IGra2,Runnable
      * jeśli wcześniej pominięto ruch to zmienna wczesniejByloPomin =1
      * a jeśli wcześniej wykonano ruch to zmienna wczesniejByloPomin =0
      */
-    private int wczesniejByloPomin = 0;
+    private boolean wczesniejByloPomin;
 
     public Gra(Socket s1, Socket s2) //konstruktor
     {
@@ -33,6 +33,7 @@ public class Gra implements IGra,IGra2,Runnable
         this.obliczanieTerytorium = new Terytorium();
         this.gracz1=s1;
         this.gracz2=s2;
+        this.wczesniejByloPomin=false;
         try
         {
             this.odbieranieOdGracza1 = new DataInputStream(gracz1.getInputStream());
@@ -77,19 +78,15 @@ public class Gra implements IGra,IGra2,Runnable
         ArrayList <Integer> pionki = usuwaniePionkow.pionkiDoUsuniecia(plansza, aktywnyKolor);
         try{      
             wysylanieDoGracza1.writeInt(4);
+            wysylanieDoGracza2.writeInt(4);
 
-            for(int i = 0; i< pionki.size();i++){
+            for(int i = 0; i< pionki.size();i++)
+            {
                 wysylanieDoGracza1.writeInt(pionki.get(i));
+                wysylanieDoGracza2.writeInt(pionki.get(i));
             }
 
             wysylanieDoGracza1.writeInt(-1);
-            
-            wysylanieDoGracza2.writeInt(4);
-
-            for(int i = 0; i< pionki.size();i++){
-                wysylanieDoGracza2.writeInt(pionki.get(i));
-            }
-                    
             wysylanieDoGracza2.writeInt(-1);
 
             usuwaniePionkow.usunPionki(plansza, aktywnyKolor);
@@ -137,13 +134,15 @@ public class Gra implements IGra,IGra2,Runnable
         {
             try
             {
-                if(wczesniejByloPomin == 1){
+                if(wczesniejByloPomin)
+                {
                     dwaRazyPominietoTure();
-                    wczesniejByloPomin = 0;
+                    wczesniejByloPomin = false;
                 }
-                else{
+                else
+                {
                     wysylanieDoGracza2.writeInt(2);
-                    wczesniejByloPomin = 1;
+                    wczesniejByloPomin = true;
                 }
             }
             catch(IOException e)
@@ -155,13 +154,15 @@ public class Gra implements IGra,IGra2,Runnable
         {
             try
             {
-                if(wczesniejByloPomin == 1){
+                if(wczesniejByloPomin)
+                {
                     dwaRazyPominietoTure();
-                    wczesniejByloPomin = 0;
+                    wczesniejByloPomin = false;
                 }
-                else{
+                else
+                {
                     wysylanieDoGracza1.writeInt(2);
-                    wczesniejByloPomin = 1;
+                    wczesniejByloPomin = true;
                 }
             }
             catch(IOException e)
@@ -193,8 +194,6 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza1.writeInt(jency);
 
                     usunPionki();
-
-                    wczesniejByloPomin = 0;
                 }
                 else
                 {
@@ -224,8 +223,6 @@ public class Gra implements IGra,IGra2,Runnable
                     wysylanieDoGracza2.writeInt(jency);
 
                     usunPionki();
-
-                    wczesniejByloPomin = 0;
                 }
                 else
                 {
@@ -237,6 +234,7 @@ public class Gra implements IGra,IGra2,Runnable
                 e.printStackTrace();
             }
         }
+        wczesniejByloPomin=false;
     }
 
     @Override
