@@ -27,7 +27,7 @@ public class GUI {
         b2.setStyle("-fx-background-color: aquamarine");
         b2.setFont(Font.font(20));
 
-        //Dodanie przycisku, który po naciśnięciu wybiera się gre do odtworzenie
+        //Dodanie przycisku, który po naciśnięciu wybiera się gre do odtworzenia
         Button b3 = new PrzyciskOdtworzGre(stage);
         b3.setPrefWidth(400);
         b3.setPrefHeight(200);

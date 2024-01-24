@@ -18,13 +18,8 @@ public class Gra implements IGra,IGra2,Runnable
     private DataOutputStream wysylanieDoGracza1;
     private DataInputStream odbieranieOdGracza2;
     private DataOutputStream wysylanieDoGracza2;
-    private ListenerBazy dodawanie;
-    /*
-     * zmienna która zapamiętuje czy wcześniej wykonano pomnin ruch
-     * jeśli wcześniej pominięto ruch to zmienna wczesniejByloPomin =1
-     * a jeśli wcześniej wykonano ruch to zmienna wczesniejByloPomin =0
-     */
-    private boolean wczesniejByloPomin;
+    private IListenerBazy dodawanie;
+    private boolean wczesniejByloPomin; //zmienna która zapamiętuje czy w ostatniej turze pomninięto ruch
 
     public Gra(Socket s1, Socket s2) //konstruktor
     {

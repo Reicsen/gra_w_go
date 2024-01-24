@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListenerBazy
+public class ListenerBazy implements IListenerBazy
 {
     private List<Integer> gracze;
     private List<Integer> pola;
@@ -25,7 +25,7 @@ public class ListenerBazy
         }
     }
 
-    private void koniec(int gracz)
+    public void koniec(int gracz)
     {
         try (Connection polaczenie = DriverManager.getConnection("jdbc:mariadb://localhost:3306/karty", "user", "");
             Statement kwerenda = polaczenie.createStatement();)
