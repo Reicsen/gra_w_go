@@ -1,0 +1,43 @@
+CREATE DATABASE gra_w_go;
+
+CONNECT gra_w_go;
+
+CREATE TABLE Gry(
+id int NOT NULL AUTO_INCREMENT,
+PRIMARY KEY(id),
+wygrany ENUM('czarny','bialy') NOT NULL
+);
+ALTER TABLE Gry AUTO_INCREMENT=1;
+
+CREATE TABLE Ruchy(
+id int NOT NULL AUTO_INCREMENT,
+PRIMARY KEY(id),
+id_gry int NOT NULL,
+FOREIGN KEY (id_gry)
+ REFERENCES Gry(id)
+ ON DELETE CASCADE ON UPDATE CASCADE,
+gracz int NOT NULL,
+pole int NOT NULL
+);
+ALTER TABLE Ruchy AUTO_INCREMENT=1;
+
+DELIMITER #
+CREATE PROCEDURE start()
+BEGIN
+ SET @str="INSERT INTO Gry(wygrany) VALUES(?);";
+ PREPARE dodaj_gre FROM @str;
+
+ SET @str="INSERT INTO Ruch(id_gry,gracz,pole) VALUES(?,?,?);";
+ PREPARE dodaj_ruch FROM @str;
+
+ SET @str="SELECT MAX(id) FROM Gry;";
+ PREPARE wez_id_gry FROM @str;
+
+ SET @str="SELECT id, pole FROM Ruchy WHERE id_gry=? AND gracz=?;";
+ PREPARE lista_ruchow FROM @str;
+END#
+DELIMITER ;
+
+CREATE USER 'user'@'localhost';
+GRANT Select, Insert, Execute ON *.* TO 'user'@'localhost';
+FLUSH PRIVILEGES;

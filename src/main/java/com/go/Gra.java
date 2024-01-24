@@ -18,6 +18,7 @@ public class Gra implements IGra,IGra2,Runnable
     private DataOutputStream wysylanieDoGracza1;
     private DataInputStream odbieranieOdGracza2;
     private DataOutputStream wysylanieDoGracza2;
+    private ListenerBazy dodawanie;
     /*
      * zmienna która zapamiętuje czy wcześniej wykonano pomnin ruch
      * jeśli wcześniej pominięto ruch to zmienna wczesniejByloPomin =1
@@ -29,6 +30,7 @@ public class Gra implements IGra,IGra2,Runnable
     {
         this.aktywnyKolor="czarny";
         this.plansza=new Plansza();
+        this.dodawanie = new ListenerBazy();
         this.usuwaniePionkow = new UsuwaniePionkow();
         this.obliczanieTerytorium = new Terytorium();
         this.gracz1=s1;
@@ -47,8 +49,21 @@ public class Gra implements IGra,IGra2,Runnable
         }
     }
 
-    public void dwaRazyPominietoTure(){
+    private void dwaRazyPominietoTure()
+    {
         //TODO
+    }
+
+    private void ruchDoBazy(int pole)
+    {
+        if ("czarny".equals(this.aktywnyKolor))
+        {
+            dodawanie.dodaj(1,pole);
+        }
+        else
+        {
+            dodawanie.dodaj(2,pole);
+        }
     }
 
     private void zmienKolor() //metoda zmieniająca aktywny kolor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
@@ -71,6 +86,7 @@ public class Gra implements IGra,IGra2,Runnable
     public void dodajPionek(int nrpola)
     {
         plansza.dodajPionek(this.aktywnyKolor, nrpola%19, nrpola/19);
+        this.ruchDoBazy(nrpola);
         this.zmienKolor();
     }
 
@@ -98,6 +114,7 @@ public class Gra implements IGra,IGra2,Runnable
 
     public void koniecGry()
     {
+        ruchDoBazy(-1);
         if ("czarny".equals(aktywnyKolor))
         {
             try
