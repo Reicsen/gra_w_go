@@ -35,6 +35,9 @@ BEGIN
 
  SET @str="SELECT pole FROM Ruchy WHERE id_gry=? AND gracz=?;";
  PREPARE lista_ruchow FROM @str;
+
+ SET @str="SELECT * FROM Gry;";
+ PREPARE lista_gier FROM @str;
 END#
 DELIMITER ;
 

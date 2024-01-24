@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Gra implements IGra,IGra2,Runnable
+import javafx.scene.paint.Color;
+
+public class Gra implements IGra,IGra2,IGra3,Runnable
 {
     private String aktywnyKolor;
     private IPlansza plansza;
@@ -44,7 +46,49 @@ public class Gra implements IGra,IGra2,Runnable
         }
     }
 
-    private void dwaRazyPominietoTure()
+    public void terytorium(int nrGracza)
+    {
+        if("czarny".equals(aktywnyKolor))
+        {
+            try
+            {
+                wysylanieDoGracza1.writeInt(100);
+                if(nrGracza==1)
+                {
+                    wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
+                }
+                else
+                {
+                    wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            try
+            {
+                wysylanieDoGracza2.writeInt(100);
+                if(nrGracza==1)
+                {
+                    wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
+                }
+                else
+                {
+                    wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void dwaRazyPominietoTure()
     {
         //TODO
     }
@@ -281,6 +325,14 @@ public class Gra implements IGra,IGra2,Runnable
                 if (sygnal==1)
                 {
                     probaRuchu();
+                }
+                if (sygnal==11)
+                {
+                    terytorium(1);
+                }
+                if (sygnal==12)
+                {
+                    terytorium(2);
                 }
             }
         }

@@ -4,6 +4,7 @@ Komunikat od aktywnego gracza do serwera:
 -1 = ,,poddaj się"; automatycznie wyłącza swoją aktywność 
 0 = ,,pomiń ruch"; automatycznie wyłącza swoją aktywność 
 1; n = wysyłanie ruchu (n=x+19*y -> 0<=n<=360); klient nie wyłącza aktywności, tylko czeka na odpowiedź serwera dotyczącą poprawności ruchu
+11/12 = zapytanie (od bota) o obecne własne/przeciwne terytorium 
 
 Komunikaty po ruchu:
 0; n = ruch poprawny - gracz wyłącza aktywność i dodaje do planszy swój pionek na polu n; serwer wysyła sygnał ,,przekazania tury" do drugiego gracza
@@ -17,3 +18,4 @@ Pozostałe komunikaty:
 5; -1 - przegrana - gracz wyświetla informację ,,Przegrałeś!"
 5; 1 - wygrana - gracz wyświetla informację ,,Wygrałeś!"
 10 - start gry
+100; n - wielkość terytorium, o które zapytał się bot

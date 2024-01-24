@@ -83,14 +83,36 @@ public class Bot implements Klient, IBot, Runnable
 
     public void losujRuch()
     {
-        int x=this.generator.nextInt(19);
-        int y=this.generator.nextInt(19);
-        wykonajRuch(x, y);
+        czyPoddacGre();
+        if (aktywny)
+        {
+            int x=this.generator.nextInt(19);
+            int y=this.generator.nextInt(19);
+            wykonajRuch(x, y);
+        }
     }
 
     public void czyPoddacGre()
     {
-        //tu będzie obsługa, kiedy bot ma się poddać
+        try
+        {
+            wysylanieDoSerwera.writeInt(11);
+            int wlasneTerytorium = odbieranieOdSerwera.readInt(); 
+            wysylanieDoSerwera.writeInt(12);
+            int wrogieTerytorium = odbieranieOdSerwera.readInt();
+            if (wrogieTerytorium>wlasneTerytorium+10)
+            {
+                int los = this.generator.nextInt(100);
+                if (wrogieTerytorium-wlasneTerytorium>los)
+                {
+                    poddajSie();
+                }
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
@@ -146,7 +168,11 @@ public class Bot implements Klient, IBot, Runnable
                 if (sygnal==5)
                 {
                     break;
-                }                            
+                }
+                if(sygnal==100) //żeby otrzymanie następnego sygnału (wartości terytorium) czegoś nie aktywowało
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                }                     
             }
 
             catch (IOException e)
