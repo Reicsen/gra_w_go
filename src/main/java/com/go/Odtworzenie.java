@@ -4,22 +4,25 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import com.go.GUI.GuiPlansza;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import com.go.GUI.GuiPlanszaOdtworzenia;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
-public class Gracz implements Klient, ObslugaPlanszy, Runnable
+public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnable
 {
+    private List<Integer> ruchy;
     private boolean aktywny=false;
-    private int iloscJencow=0;
     private Color kolor=null;
     private Color kolorPrzeciwnika=null;
     private DataInputStream odbieranieOdSerwera;
     private DataOutputStream wysylanieDoSerwera;
     private Socket polaczenieZSerwerem;
-    private GuiPlansza plansza;
+    private GuiPlanszaOdtworzenia plansza;
 
-    public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
+    public Odtworzenie(GuiPlanszaOdtworzenia plansza, int nrGry) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
         try
         {
@@ -28,7 +31,9 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
             int nrGracza = odbieranieOdSerwera.readInt();
             this.plansza=plansza;
+            this.ruchy = new ArrayList<Integer>();
             ustawKolor(nrGracza);
+            sczytajRuchy(nrGry,nrGracza);
         }
         catch (IOException e)
         {
@@ -38,6 +43,26 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         watek.start();
     }
 
+    public void sczytajRuchy(int nrGry, int nrGracza)
+    {
+        try (Connection polaczenie = DriverManager.getConnection("jdbc:mariadb://localhost:3306/gra_w_go", "user", "");
+            Statement kwerenda = polaczenie.createStatement();)
+        {
+            kwerenda.executeQuery("CALL start();");
+            String temp="EXECUTE lista_ruchow USING "+nrGry+", "+nrGracza+";";
+            ResultSet wynik = kwerenda.executeQuery(temp);
+            while(wynik.next())
+            {
+                int n = wynik.getInt(1);
+                this.ruchy.add(n);
+            }
+            wynik.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     public void poddajSie()
     {
@@ -88,9 +113,23 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         }
     }
 
-    public void ustawKolor(int nrGracza)
+    public void odtworzRuch(int nrPola)
     {
-        if (nrGracza==1)
+        if(nrPola==-1)
+        {
+            poddajSie();
+        }
+        else
+        {
+            int x=nrPola%19;
+            int y=nrPola/19;
+            wykonajRuch(x, y);
+        }
+    }
+
+    public void ustawKolor(int nrgracza)
+    {
+        if (nrgracza==1)
         {
             this.kolor=Color.BLACK;
             this.kolorPrzeciwnika=Color.WHITE;
@@ -144,18 +183,6 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         Platform.runLater(() -> {
             plansza.wyskakujaceOkienko(komunikat);
         });
-        Platform.runLater(() -> {
-            plansza.oknoZTerenem(iloscJencow, iloscJencow, iloscJencow, iloscJencow, iloscJencow, iloscJencow);
-        });
-    }
-
-    public void kliknietoTak(){
-        System.out.println("Naciśnięto przycisk 'Tak'");
-        //TODO
-    }
-    public void kliknietoNie(){
-        System.out.println("Naciśnięto przycisk 'Nie'");
-        //TODO
     }
 
     @Override
@@ -163,9 +190,11 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
     {
         int sygnal;
         int ruch;
+        int licznik=0;
 
         while (true)
         {
+            int pole=this.ruchy.get(licznik);
             try
             {
                 sygnal=odbieranieOdSerwera.readInt();
@@ -174,11 +203,11 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                     ruch=odbieranieOdSerwera.readInt();
                     dodaniePionka(ruch, kolor);
                     zmienAktywnosc();
-                    wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                    licznik=licznik+1;
                 }
-                if (sygnal == -1)
+                if (sygnal==-1)
                 {
-                    okienko("Niepoprawny ruch, spróbuj ponownie");
+                    odtworzRuch(pole); 
                 }
 
                 if (sygnal==1)
@@ -186,19 +215,14 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                     ruch=odbieranieOdSerwera.readInt();
                     dodaniePionka(ruch, kolorPrzeciwnika);
                     zmienAktywnosc();
-                    wypiszKomunikatNaPlanszy("Twoja tura");
+                    odtworzRuch(pole);                    
                 }
                 if (sygnal==2)
                 {
                     zmienAktywnosc();
-                    wypiszKomunikatNaPlanszy("Twoja tura");
+                    odtworzRuch(pole);
                 }
 
-                if(sygnal==3)
-                {
-                    ruch=odbieranieOdSerwera.readInt();
-                    this.iloscJencow=this.iloscJencow+ruch;
-                }
                 if (sygnal==4)
                 {
                     ruch=odbieranieOdSerwera.readInt();
@@ -222,12 +246,7 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
                         okienko("Wygrałeś!");
                         break;
                     }
-                }                
-                if(sygnal==10)
-                {
-                    plansza.rozpoczecieGry();
-                    wypiszKomunikatNaPlanszy("Tura przeciwnika");
-                }               
+                }                              
             }
 
             catch (IOException e)

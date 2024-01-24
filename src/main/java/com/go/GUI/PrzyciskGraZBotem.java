@@ -23,7 +23,7 @@ public class PrzyciskGraZBotem extends Button{
             public void handle(ActionEvent e) 
             {
                 //tworzymy bota 
-                bot = new Bot(null);
+                bot = new Bot();
 
                 //Tworzymy nowy Pane (który wyświetla plansze do gry) i zastępujemy stary nowym
                 GridPane gridPane = new GuiPlansza();

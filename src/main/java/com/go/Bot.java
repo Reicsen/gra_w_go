@@ -4,34 +4,25 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import com.go.GUI.GuiPlansza;
 import com.go.GUI.IBot;
-import javafx.application.Platform;
-import javafx.scene.paint.Color;
 import org.apache.commons.math3.random.MersenneTwister;
 
 public class Bot implements Klient, IBot, Runnable
 {
     private boolean aktywny=false;
     private int iloscJencow=0;
-    private Color kolor=null;
-    private Color kolorPrzeciwnika=null;
     private DataInputStream odbieranieOdSerwera;
     private DataOutputStream wysylanieDoSerwera;
     private Socket polaczenieZSerwerem;
-    //private GuiPlansza plansza;
     MersenneTwister generator = new MersenneTwister();
 
-    public Bot(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
+    public Bot() //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
         try
         {
             this.polaczenieZSerwerem = new Socket("localhost", 8000);
             this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
-            int nrGracza = odbieranieOdSerwera.readInt();
-            ustawKolor(nrGracza);
-            //this.plansza=plansza;
         }
         catch (IOException e)
         {
@@ -66,7 +57,6 @@ public class Bot implements Klient, IBot, Runnable
             {
                 zmienAktywnosc();
                 wysylanieDoSerwera.writeInt(0);
-                //wypiszKomunikatNaPlanszy("Tura przeciwnika");
             }
             catch (IOException e)
             {
@@ -103,21 +93,6 @@ public class Bot implements Klient, IBot, Runnable
         //tu będzie obsługa, kiedy bot ma się poddać
     }
 
-    public void ustawKolor(int nrGracza)
-    {
-        if (nrGracza==1)
-        {
-            this.kolor=Color.BLACK;
-            this.kolorPrzeciwnika=Color.WHITE;
-            System.out.println("Ustawiony kolor");
-        }
-        else
-        {
-            this.kolor=Color.WHITE;
-            this.kolorPrzeciwnika=Color.BLACK;
-            System.out.println("Ustawiony kolor");
-        }
-    }
 
     public void zmienAktywnosc()
     {
@@ -131,30 +106,9 @@ public class Bot implements Klient, IBot, Runnable
         }
     }
 
-/* 
-    public void dodaniePionka(int nrpola, Color kolor)
-    {
-        //Platform.runLater(() -> {
-        //plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
-        //});
-    }
-
-    public void usunieciePionka(int nrpola)
-    {
-        //do implementacji
-    }
-
-    public void wypiszKomunikatNaPlanszy(String komunikat)
-    {
-        //Platform.runLater(() -> {
-        //    plansza.lbl.setText(komunikat);
-        //});
-    }*/
-
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
-        System.out.println("in run");
         int sygnal;
         int ruch;
 
@@ -165,10 +119,7 @@ public class Bot implements Klient, IBot, Runnable
                 sygnal=odbieranieOdSerwera.readInt();
                 if (sygnal==0)
                 {
-                    ruch=odbieranieOdSerwera.readInt();
-                    //dodaniePionka(ruch, kolor);
                     zmienAktywnosc();
-                    //wypiszKomunikatNaPlanszy("Tura przeciwnika");
                 }
                 if (sygnal==-1)
                 {
@@ -177,10 +128,7 @@ public class Bot implements Klient, IBot, Runnable
 
                 if (sygnal==1)
                 {
-                    ruch=odbieranieOdSerwera.readInt();
-                    //dodaniePionka(ruch, kolorPrzeciwnika);
                     zmienAktywnosc();
-                    //wypiszKomunikatNaPlanszy("Twoja tura");
                     losujRuch();
                 }
                 if (sygnal==2)
@@ -194,36 +142,11 @@ public class Bot implements Klient, IBot, Runnable
                     ruch=odbieranieOdSerwera.readInt();
                     this.iloscJencow=this.iloscJencow+ruch;
                 }
-                if (sygnal==4)
-                {
-                    ruch=odbieranieOdSerwera.readInt();
-                    while (ruch!=-1)
-                    {
-                        //usunieciePionka(ruch);
-                        ruch=odbieranieOdSerwera.readInt();
-                    }
-                } 
                                
                 if (sygnal==5)
                 {
-                    ruch=odbieranieOdSerwera.readInt();   
-                    if (ruch==-1)
-                    {
-                        //wypiszKomunikatNaPlanszy("Przegrana!");
-                        break;
-                    }
-                    else
-                    {
-                        //wypiszKomunikatNaPlanszy("Wygrana!");
-                        break;
-                    }
-                }                
-                if(sygnal==10)
-                {
-                    //plansza.rozpoczecieGry();
-                    //wypiszKomunikatNaPlanszy("Tura przeciwnika");
-                    System.out.println("sygnal 10");
-                }              
+                    break;
+                }                            
             }
 
             catch (IOException e)

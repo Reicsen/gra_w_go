@@ -8,11 +8,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-public class PrzyciskPionek extends Button{
+public class PrzyciskPionek extends Button
+{
 
     PrzyciskPionek(Klient gracz, int x, int y){
 
-        //Stworzenie przycisku który ma na sobie grafike (krzyż)
+        //Stworzenie przycisku który ma na sobie grafike (krzyż); reszta metod opisana w interfejsie
         super();
         setMaxSize(30, 30);
 
@@ -35,9 +36,6 @@ public class PrzyciskPionek extends Button{
         });
     }
 
-    //Funkcja która zmienia grafike na przycisku
-    //krzyż zmieniany jest na koło
-    //Ta funkcja jest potrzebna aby po udanym postawieniu pionka w dane miejsce dało się "zobaczyć" na planszy, że jest tam pionek
     public void zmienPrzyciskNaKolo(Button button, Color kolor) {
         Circle circle = new Circle(15, kolor);
         circle.setStroke(Color.BLACK);

@@ -16,12 +16,6 @@ public interface Klient
      * Funkcja powoduje poddanie się jednego z graczy
      */
     void poddajSie();
-    /*
-     * Funkcja ustawia prawidłowy kolor dla danego gracza i jego przeciwnika
-     * Biały dla gracza jeśli doszedł do gry jako drugi
-     * Czarny jeśli był pierwszy
-     */
-    void ustawKolor(int nrGracza);
 
     /*
      * Funkcja zmienia aktywność gracza na przeciwną

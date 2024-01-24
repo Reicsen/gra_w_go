@@ -27,7 +27,7 @@ public class ListenerBazy implements IListenerBazy
 
     public void koniec(int gracz)
     {
-        try (Connection polaczenie = DriverManager.getConnection("jdbc:mariadb://localhost:3306/karty", "user", "");
+        try (Connection polaczenie = DriverManager.getConnection("jdbc:mariadb://localhost:3306/gra_w_go", "user", "");
             Statement kwerenda = polaczenie.createStatement();)
         {
             kwerenda.executeQuery("CALL start();");
