@@ -8,7 +8,7 @@ import com.go.GUI.GuiPlansza;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
-public class Gracz implements Klient, ObslugaPlanszy, Runnable
+public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
 {
     private boolean aktywny=false;
     private int iloscJencow=0;
@@ -144,19 +144,54 @@ public class Gracz implements Klient, ObslugaPlanszy, Runnable
         Platform.runLater(() -> {
             plansza.wyskakujaceOkienko(komunikat);
         });
-        Platform.runLater(() -> {
-            plansza.oknoZTerenem(iloscJencow, iloscJencow, iloscJencow, iloscJencow, iloscJencow, iloscJencow);
-        });
     }
 
-    public void kliknietoTak(){
-        System.out.println("Naciśnięto przycisk 'Tak'");
-        //TODO
+    public void dane()
+    {
+        try
+        {
+            int wlasneTerytorium = odbieranieOdSerwera.readInt();
+            int przeciwneTerytorium = odbieranieOdSerwera.readInt();
+            int przeciwnePionkiNaWlasnymTerytorium = odbieranieOdSerwera.readInt();
+            int wlasnePionkiNaPrzeciwnymTerytorium = odbieranieOdSerwera.readInt();            
+            
+            Platform.runLater(() -> {
+                plansza.oknoZTerenem(wlasneTerytorium, przeciwneTerytorium, iloscJencow, iloscJencow, przeciwnePionkiNaWlasnymTerytorium, wlasnePionkiNaPrzeciwnymTerytorium);
+            });
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
-    public void kliknietoNie(){
-        System.out.println("Naciśnięto przycisk 'Nie'");
-        //TODO
+
+    public void wybranoTak()
+    {
+        try
+        {
+            wysylanieDoSerwera.writeInt(3);
+            wysylanieDoSerwera.writeInt(1);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
+
+    public void wybranoNie()
+    {
+        try
+        {
+            wysylanieDoSerwera.writeInt(3);
+            wysylanieDoSerwera.writeInt(-1);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    
 
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów

@@ -129,7 +129,7 @@ public class GuiPlansza extends GridPane
             dialog.showAndWait();
         });
     }
-    public void oknoZTerenem(int terenBialych, int terenCzarnych, int jencyCzarni, int jencyBiali, int bialiNaTerytoriumCzarnych, int czarniNaTerytoriumBialych){
+    public void oknoZTerenem(int twojeTerytorium, int wrogieTerytorium, int twoiJency, int przeciwniJency, int przeciwnePionyNaTwoimTerytorium, int twojePionyNaPrzeciwnymTerytorium){
         Dialog<String> dialog = new Dialog<String>();
         dialog.setTitle("Gra w go");
 
@@ -137,7 +137,7 @@ public class GuiPlansza extends GridPane
         DialogPane dialogPane = dialog.getDialogPane();
 
         // Tworzymy etykietę do dodania do panelu dialogowego
-        Label label = new Label("Teren białych: " + terenBialych + "\nTeren czarnych: "+ terenCzarnych+ "\nJeńcy należący do białych: "+ jencyBiali+ "\nJeńcy należący do czarnych: "+ jencyCzarni+ "\nIlosc bialych pionków na terytorium czarnych: "+ bialiNaTerytoriumCzarnych+ "\nIlosc czarnych pionkow na terytorium bialych: "+ czarniNaTerytoriumBialych + "\nCzy chcesz skończyć gre?" );
+        Label label = new Label("Twoje terytorium: " + twojeTerytorium + "\nPrzeciwne terytorium: "+ wrogieTerytorium+ "\nJeńcy należący do ciebie: "+ twoiJency+ "\nJeńcy należący do przeciwnika: "+ przeciwniJency+ "\nIlosc przeciwnych pionków na twoim terytorium: "+ przeciwnePionyNaTwoimTerytorium+ "\nIlosc twoich pionkow na przeciwwny terytorium: "+ twojePionyNaPrzeciwnymTerytorium + "\nCzy chcesz skończyć gre?" );
 
         // Dostosujemy styl etykiety 
         label.setFont(new Font(23));
@@ -160,7 +160,7 @@ public class GuiPlansza extends GridPane
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == buttonTypeYes) {
                 // Obsługa zdarzenia po naciśnięciu przycisku "Tak"
-                gracz.kliknietoTak();
+                gracz.wybranoTak();
                 Platform.runLater(() -> {
                     dialog.setResult("Tak");
                     dialog.close();
@@ -168,9 +168,9 @@ public class GuiPlansza extends GridPane
             }
             else{
                 // Obsługa zdarzenia po naciśnięciu przycisku "Nie"
-                gracz.kliknietoNie();
+                gracz.wybranoNie();
                 Platform.runLater(() -> {
-                    dialog.setResult("Tak");
+                    dialog.setResult("Nie");
                     dialog.close();
                 });
             }

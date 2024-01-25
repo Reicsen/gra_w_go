@@ -29,7 +29,7 @@ public class TestTerytorium {
         plansza.dodajPionek("czarny", 1, 1);
         plansza.dodajPionek("czarny", 0, 1);
 
-        assertSame(0, obliczenia.PionyNaTerytoriumPrzeciwnika(plansza, "bialy").size());
+        assertSame(0, obliczenia.pionyNaTerytoriumPrzeciwnika(plansza, "bialy").size());
     }
     
 }

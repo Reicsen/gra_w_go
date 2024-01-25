@@ -52,7 +52,6 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         {
             try
             {
-                wysylanieDoGracza1.writeInt(100);
                 if(nrGracza==1)
                 {
                     wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
@@ -71,7 +70,6 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         {
             try
             {
-                wysylanieDoGracza2.writeInt(100);
                 if(nrGracza==1)
                 {
                     wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
@@ -88,9 +86,67 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         }
     }
 
+    public void pionyUPrzeciwnika(int nrGracza)
+    {
+        if("czarny".equals(aktywnyKolor))
+        {
+            try
+            {
+                if(nrGracza==1)
+                {
+                    wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
+                }
+                else
+                {
+                    wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            try
+            {
+                if(nrGracza==1)
+                {
+                    wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
+                }
+                else
+                {
+                    wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void dwaRazyPominietoTure()
     {
-        //TODO
+        try
+        {
+            wysylanieDoGracza1.writeInt(101);
+            wysylanieDoGracza2.writeInt(101);
+            terytorium(1);
+            terytorium(2);
+            pionyUPrzeciwnika(1);
+            pionyUPrzeciwnika(2);
+            zmienKolor();
+            terytorium(1);
+            terytorium(2);
+            pionyUPrzeciwnika(1);
+            pionyUPrzeciwnika(2);
+            zmienKolor();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void ruchDoBazy(int pole)

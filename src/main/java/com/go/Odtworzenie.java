@@ -99,17 +99,25 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
 
     public void wykonajRuch(int x, int y)
     {
-        if (aktywny)
+        try
         {
-            try
+            Thread.sleep(1);
+            if (aktywny)
             {
-                wysylanieDoSerwera.writeInt(1);
-                wysylanieDoSerwera.writeInt(x+19*y);
+                try
+                {
+                    wysylanieDoSerwera.writeInt(1);
+                    wysylanieDoSerwera.writeInt(x+19*y);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
         }
     }
 

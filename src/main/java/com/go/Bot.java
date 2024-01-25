@@ -83,12 +83,28 @@ public class Bot implements Klient, IBot, Runnable
 
     public void losujRuch()
     {
-        czyPoddacGre();
-        if (aktywny)
+        try
         {
-            int x=this.generator.nextInt(19);
-            int y=this.generator.nextInt(19);
-            wykonajRuch(x, y);
+            Thread.sleep(1);
+            czyPoddacGre();
+            if (aktywny)
+            {
+                int n=this.generator.nextInt(10);
+                if(n==0)
+                {
+                    pominRuch();
+                }
+                else
+                {
+                    int x=this.generator.nextInt(19);
+                    int y=this.generator.nextInt(19);
+                    wykonajRuch(x, y);
+                }
+            }
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
         }
     }
 
