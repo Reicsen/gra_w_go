@@ -5,9 +5,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import com.go.GUI.IBot;
+
+import javafx.application.Platform;
+
 import org.apache.commons.math3.random.MersenneTwister;
 
-public class Bot implements Klient, IBot, Runnable
+public class Bot implements Klient, IBot, INegocjacje, Runnable
 {
     private boolean aktywny=false;
     private int iloscJencow=0;
@@ -143,6 +146,58 @@ public class Bot implements Klient, IBot, Runnable
         }
     }
 
+    public void dane()
+    {
+        try
+        {
+            int wlasneTerytorium = odbieranieOdSerwera.readInt();
+            int przeciwneTerytorium = odbieranieOdSerwera.readInt();
+            int przeciwnePionkiNaWlasnymTerytorium = odbieranieOdSerwera.readInt();
+            int wlasnePionkiNaPrzeciwnymTerytorium = odbieranieOdSerwera.readInt();  
+            int jencyRywala = odbieranieOdSerwera.readInt();          
+
+            if(this.generator.nextInt(2)==0)
+            {
+                wybranoNie();
+            }
+            else
+            {
+                wybranoTak(wlasneTerytorium, jencyRywala, wlasnePionkiNaPrzeciwnymTerytorium);
+            }                
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void wybranoTak(int twojeTerytorium, int jencyPrzeciwnika, int twojePionkiNaTereniePrzeciwnika)
+    {
+        try
+        {
+            wysylanieDoSerwera.writeInt(3);
+            wysylanieDoSerwera.writeInt(1);
+            wysylanieDoSerwera.writeInt(Math.max(0, twojeTerytorium-(jencyPrzeciwnika+twojePionkiNaTereniePrzeciwnika)));
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void wybranoNie()
+    {
+        try
+        {
+            wysylanieDoSerwera.writeInt(3);
+            wysylanieDoSerwera.writeInt(-1);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
@@ -183,7 +238,16 @@ public class Bot implements Klient, IBot, Runnable
                 if (sygnal==5)
                 {
                     break;
-                }                    
+                }
+                
+                if(sygnal==6)
+                {
+                    wysylanieDoSerwera.writeInt(iloscJencow);
+                }
+                if (sygnal==101)
+                {
+                    dane();
+                }
             }
 
             catch (IOException e)
