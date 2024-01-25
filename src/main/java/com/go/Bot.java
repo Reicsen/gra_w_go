@@ -114,7 +114,6 @@ public class Bot implements Klient, IBot, Runnable
         {
             wysylanieDoSerwera.writeInt(11);
             int wlasneTerytorium = odbieranieOdSerwera.readInt(); 
-            wysylanieDoSerwera.writeInt(12);
             int wrogieTerytorium = odbieranieOdSerwera.readInt();
             if (wrogieTerytorium>wlasneTerytorium+10)
             {
@@ -184,11 +183,7 @@ public class Bot implements Klient, IBot, Runnable
                 if (sygnal==5)
                 {
                     break;
-                }
-                if(sygnal==100) //żeby otrzymanie następnego sygnału (wartości terytorium) czegoś nie aktywowało
-                {
-                    ruch=odbieranieOdSerwera.readInt();
-                }                     
+                }                    
             }
 
             catch (IOException e)

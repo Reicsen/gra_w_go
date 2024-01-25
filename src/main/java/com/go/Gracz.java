@@ -153,10 +153,11 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
             int wlasneTerytorium = odbieranieOdSerwera.readInt();
             int przeciwneTerytorium = odbieranieOdSerwera.readInt();
             int przeciwnePionkiNaWlasnymTerytorium = odbieranieOdSerwera.readInt();
-            int wlasnePionkiNaPrzeciwnymTerytorium = odbieranieOdSerwera.readInt();            
+            int wlasnePionkiNaPrzeciwnymTerytorium = odbieranieOdSerwera.readInt();  
+            int jencyRywala = odbieranieOdSerwera.readInt();          
             
             Platform.runLater(() -> {
-                plansza.oknoZTerenem(wlasneTerytorium, przeciwneTerytorium, iloscJencow, iloscJencow, przeciwnePionkiNaWlasnymTerytorium, wlasnePionkiNaPrzeciwnymTerytorium);
+                plansza.oknoZTerenem(wlasneTerytorium, przeciwneTerytorium, iloscJencow, jencyRywala, przeciwnePionkiNaWlasnymTerytorium, wlasnePionkiNaPrzeciwnymTerytorium);
             });
         }
         catch(IOException e)
@@ -165,12 +166,13 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
         }
     }
 
-    public void wybranoTak()
+    public void wybranoTak(int twojeTerytorium, int jencyPrzeciwnika, int twojePionkiNaTereniePrzeciwnika)
     {
         try
         {
             wysylanieDoSerwera.writeInt(3);
             wysylanieDoSerwera.writeInt(1);
+            wysylanieDoSerwera.writeInt(Math.max(0, twojeTerytorium-(jencyPrzeciwnika+twojePionkiNaTereniePrzeciwnika)));
         }
         catch(IOException e)
         {
@@ -262,7 +264,16 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
                 {
                     plansza.rozpoczecieGry();
                     wypiszKomunikatNaPlanszy("Tura przeciwnika");
-                }               
+                }
+
+                if(sygnal==6)
+                {
+                    wysylanieDoSerwera.writeInt(iloscJencow);
+                }
+                if (sygnal==101)
+                {
+                    dane();
+                }             
             }
 
             catch (IOException e)

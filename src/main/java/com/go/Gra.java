@@ -46,20 +46,14 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         }
     }
 
-    public void terytorium(int nrGracza)
+    public void terytorium()
     {
         if("czarny".equals(aktywnyKolor))
         {
             try
             {
-                if(nrGracza==1)
-                {
-                    wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
-                }
-                else
-                {
-                    wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
-                }
+                wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
+                wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
             }
             catch(IOException e)
             {
@@ -70,14 +64,8 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         {
             try
             {
-                if(nrGracza==1)
-                {
-                    wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
-                }
-                else
-                {
-                    wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
-                }
+                wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
+                wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
             }
             catch(IOException e)
             {
@@ -86,20 +74,14 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         }
     }
 
-    public void pionyUPrzeciwnika(int nrGracza)
+    public void pionyUPrzeciwnika()
     {
         if("czarny".equals(aktywnyKolor))
         {
             try
             {
-                if(nrGracza==1)
-                {
-                    wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
-                }
-                else
-                {
-                    wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
-                }
+                wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
+                wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
             }
             catch(IOException e)
             {
@@ -110,14 +92,8 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         {
             try
             {
-                if(nrGracza==1)
-                {
-                    wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
-                }
-                else
-                {
-                    wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
-                }
+                wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
+                wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
             }
             catch(IOException e)
             {
@@ -130,18 +106,20 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
     {
         try
         {
+            wysylanieDoGracza1.writeInt(6);
+            int jency1 = odbieranieOdGracza1.readInt();
+            wysylanieDoGracza2.writeInt(6);
+            int jency2 = odbieranieOdGracza2.readInt();
             wysylanieDoGracza1.writeInt(101);
             wysylanieDoGracza2.writeInt(101);
-            terytorium(1);
-            terytorium(2);
-            pionyUPrzeciwnika(1);
-            pionyUPrzeciwnika(2);
+            terytorium();
+            pionyUPrzeciwnika();
             zmienKolor();
-            terytorium(1);
-            terytorium(2);
-            pionyUPrzeciwnika(1);
-            pionyUPrzeciwnika(2);
+            terytorium();
+            pionyUPrzeciwnika();
             zmienKolor();
+            wysylanieDoGracza1.writeInt(jency2);
+            wysylanieDoGracza2.writeInt(jency1);
         }
         catch(IOException e)
         {
@@ -384,11 +362,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
                 }
                 if (sygnal==11)
                 {
-                    terytorium(1);
-                }
-                if (sygnal==12)
-                {
-                    terytorium(2);
+                    terytorium();
                 }
             }
         }

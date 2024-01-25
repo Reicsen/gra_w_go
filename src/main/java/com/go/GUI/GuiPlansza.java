@@ -160,7 +160,7 @@ public class GuiPlansza extends GridPane
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == buttonTypeYes) {
                 // Obsługa zdarzenia po naciśnięciu przycisku "Tak"
-                gracz.wybranoTak();
+                gracz.wybranoTak(twojeTerytorium,przeciwniJency,twojePionyNaPrzeciwnymTerytorium);
                 Platform.runLater(() -> {
                     dialog.setResult("Tak");
                     dialog.close();
