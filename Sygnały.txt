@@ -7,6 +7,7 @@ Komunikat od aktywnego gracza do serwera:
 10 = zapytanie (od bota) o obecne własne i przeciwne terytorium 
 3; -1 = odpowiedź „nie" na sytuację podwójnego pominięcia tury
 3; 1; n = odpowiedź „tak" na sytuację podwójnego pominięcia tury i wysłanie swojego wyniku
+2 = jeszcze nie wybrano opcji w okienku
 
 Komunikaty po ruchu:
 0; n = ruch poprawny - gracz wyłącza aktywność i dodaje do planszy swój pionek na polu n; serwer wysyła sygnał ,,przekazania tury" do drugiego gracza

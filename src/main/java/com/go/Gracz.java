@@ -18,6 +18,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
     private DataOutputStream wysylanieDoSerwera;
     private Socket polaczenieZSerwerem;
     private GuiPlansza plansza;
+    private boolean kontrolkaOkienka;
 
     public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
@@ -27,6 +28,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
             this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
             int nrGracza = odbieranieOdSerwera.readInt();
+            this.kontrolkaOkienka=false;
             this.plansza=plansza;
             ustawKolor(nrGracza);
         }
@@ -150,6 +152,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
     {
         try
         {
+            this.aktywny=false;
             int wlasneTerytorium = odbieranieOdSerwera.readInt();
             int przeciwneTerytorium = odbieranieOdSerwera.readInt();
             int przeciwnePionkiNaWlasnymTerytorium = odbieranieOdSerwera.readInt();
@@ -159,6 +162,10 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
             Platform.runLater(() -> {
                 plansza.oknoZTerenem(wlasneTerytorium, przeciwneTerytorium, iloscJencow, jencyRywala, przeciwnePionkiNaWlasnymTerytorium, wlasnePionkiNaPrzeciwnymTerytorium);
             });
+            while (!this.kontrolkaOkienka)
+            {
+                wysylanieDoSerwera.writeInt(2);
+            }
         }
         catch(IOException e)
         {
@@ -170,9 +177,11 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
     {
         try
         {
+            this.kontrolkaOkienka=true;
             wysylanieDoSerwera.writeInt(3);
             wysylanieDoSerwera.writeInt(1);
             wysylanieDoSerwera.writeInt(Math.max(0, twojeTerytorium-(jencyPrzeciwnika+twojePionkiNaTereniePrzeciwnika)));
+            this.kontrolkaOkienka=false;
         }
         catch(IOException e)
         {
@@ -184,8 +193,10 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
     {
         try
         {
+            this.kontrolkaOkienka=true;
             wysylanieDoSerwera.writeInt(3);
             wysylanieDoSerwera.writeInt(-1);
+            this.kontrolkaOkienka=false;
         }
         catch(IOException e)
         {

@@ -120,10 +120,92 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
             zmienKolor();
             wysylanieDoGracza1.writeInt(jency2);
             wysylanieDoGracza2.writeInt(jency1);
+            czekajNaOdpowiedz();
         }
         catch(IOException e)
         {
             e.printStackTrace();
+        }
+    }
+
+    public void czekajNaOdpowiedz()
+    {
+        int czarneTerytorium=0;
+        int bialeTerytorium=0;
+        int temp;
+        while (czarneTerytorium==0 || bialeTerytorium==0)
+        {
+            try
+            {
+                if ("czarny".equals(aktywnyKolor))
+                {
+                    temp=odbieranieOdGracza1.readInt();
+                    if (temp==3)
+                    {
+                        temp=odbieranieOdGracza1.readInt();
+                        if (temp==1)
+                        {
+                            czarneTerytorium=odbieranieOdGracza1.readInt();
+                            break;
+                        }
+                        else
+                        {
+                            wysylanieDoGracza2.writeInt(2);
+                        }
+                    }
+                    else
+                    {
+                        if(bialeTerytorium!=0)
+                        {
+                            zmienKolor();
+                        }
+                    }
+                }
+                else
+                {
+                    temp=odbieranieOdGracza2.readInt();
+                    if (temp==3)
+                    {
+                        temp=odbieranieOdGracza2.readInt();
+                        if (temp==1)
+                        {
+                            bialeTerytorium=odbieranieOdGracza2.readInt();
+                            break;
+                        }
+                        else
+                        {
+                            wysylanieDoGracza1.writeInt(2);
+                        }
+                    }
+                    else
+                    {
+                        if(czarneTerytorium!=0)
+                        {
+                            zmienKolor();
+                        }
+                    }
+                }
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        if (czarneTerytorium!=0 && bialeTerytorium!=0)
+        {
+            if (!"bialy".equals(aktywnyKolor))
+            {
+                zmienKolor();
+            }
+            if (czarneTerytorium>bialeTerytorium)
+            {
+                koniecGry();
+            }
+            else
+            {
+                zmienKolor();
+                koniecGry();
+            }
         }
     }
 
