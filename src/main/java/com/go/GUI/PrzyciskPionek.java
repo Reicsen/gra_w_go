@@ -13,12 +13,12 @@ public class PrzyciskPionek extends Button
 
     PrzyciskPionek(Klient gracz, int x, int y){
 
-        //Stworzenie przycisku który ma na sobie grafike (krzyż); reszta metod opisana w interfejsie
+        //Stworzenie przycisku który ma na sobie grafike (krzyż)
         super();
-        setMaxSize(30, 30);
+        setMaxSize(26, 26);
 
-        Line cross1 = new Line(15, 0, 15, 30);
-        Line cross2 = new Line(0, 15, 30, 15);
+        Line cross1 = new Line(13, 0, 13, 26);
+        Line cross2 = new Line(0, 13, 26, 13);
         cross1.setStroke(Color.BLACK);
         cross2.setStroke(Color.BLACK);
         
@@ -36,17 +36,23 @@ public class PrzyciskPionek extends Button
         });
     }
 
+    //Funkcja która zmienia grafike na przycisku
+    //krzyż zmieniany jest na koło
+    //Ta funkcja jest potrzebna aby po udanym postawieniu pionka w dane miejsce dało się "zobaczyć" na planszy, że jest tam pionek
     public void zmienPrzyciskNaKolo(Button button, Color kolor) {
-        Circle circle = new Circle(15, kolor);
+        Circle circle = new Circle(13, kolor);
         circle.setStroke(Color.BLACK);
         circle.setStrokeWidth(3);
 
         button.setGraphic(circle);
     }
 
+    //Funkcja która zmienia grafike na przycisku
+    //koło zmieniane jest na krzyż
+    //Ta funkcja jest potrzebna aby po usunięciu pionka dało się "zobaczyć" na planszy, że go tam nie ma
     public void zmienPrzyciskNaKrzyzyk(Button button){
-        Line cross1 = new Line(15, 0, 15, 30);
-        Line cross2 = new Line(0, 15, 30, 15);
+        Line cross1 = new Line(13, 0, 13, 26);
+        Line cross2 = new Line(0, 13, 26, 13);
         cross1.setStroke(Color.BLACK);
         cross2.setStroke(Color.BLACK);
         

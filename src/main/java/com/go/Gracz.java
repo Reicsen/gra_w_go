@@ -146,6 +146,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
         Platform.runLater(() -> {
             plansza.wyskakujaceOkienko(komunikat);
         });
+        wypiszKomunikatNaPlanszy(komunikat);
     }
 
     public void dane()
