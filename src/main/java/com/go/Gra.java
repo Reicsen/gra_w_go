@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import javafx.scene.paint.Color;
-
 public class Gra implements IGra,IGra2,IGra3,Runnable
 {
     private String aktywnyKolor;

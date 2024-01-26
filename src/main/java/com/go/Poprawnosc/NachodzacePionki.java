@@ -9,6 +9,7 @@ public class NachodzacePionki implements IPoprawnosc{
         {
             return false;
         }
-        return true;
+        IPoprawnosc p = new PoprawnaLiczbaOddechow();
+        return p.sprawdzPoprawnosc(plansza, x, y, kolor);
     }
 }
