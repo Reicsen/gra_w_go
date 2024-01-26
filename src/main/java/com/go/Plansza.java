@@ -55,6 +55,7 @@ public class Plansza implements IPlansza
     {
         return warunki.sprawdzPoprawnosc(this, x, y, kolor);
     }
+    
     public List<IPole> podajPola(){
         return pola;
     }

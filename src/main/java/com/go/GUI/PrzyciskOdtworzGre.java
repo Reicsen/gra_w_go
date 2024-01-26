@@ -1,29 +1,28 @@
 package com.go.GUI;
 
-import java.sql.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class PrzyciskOdtworzGre extends Button
 {
-    private int kontrolka;
     //konsturktor przycisku
     PrzyciskOdtworzGre(Stage stage)
     {
         //Stworzenie przycisku z tekstem w środku
         super("Odtwarzanie gry");
-        this.kontrolka=0;
 
         //Ustawienie co sie zdarzy po naciśnięciu przycisku
         setOnAction(new EventHandler<ActionEvent>() 
@@ -31,7 +30,19 @@ public class PrzyciskOdtworzGre extends Button
             @Override
             public void handle(ActionEvent e) 
             {
-                wybierzGre();
+                IBazyDanychAdapter bazy = new BazyDanychAdapter();
+                if(!bazy.start()){
+                    wyskakujaceOkienko("Błąd: nie udane połączenie z bazą danych");
+                }
+                else{
+                    GridPane wybor = new WyborGry(stage, bazy);
+                    stage.setTitle("Odtwarzanie gry");
+
+                    Scene scene = new Scene(wybor, 1300, 1000);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+                /*wybierzGre();
                 while (true)
                 {
                     if (kontrolka!=0)
@@ -48,11 +59,12 @@ public class PrzyciskOdtworzGre extends Button
                 Scene scene = new Scene(gridPane1, 1300, 1000);
                 stage.setScene(scene);
                 stage.show();
+                */
             }
         });
     }
 
-    private void wybierzGre()
+    /*private void wybierzGre()
     {
         try (Connection polaczenie = DriverManager.getConnection("jdbc:mariadb://localhost:3306/gra_w_go", "user", "");
             Statement kwerenda = polaczenie.createStatement();)
@@ -145,5 +157,35 @@ public class PrzyciskOdtworzGre extends Button
         {
             e.printStackTrace();
         }
+    }*/
+    private void wyskakujaceOkienko(String kontekst){
+
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Gra w go");
+        ButtonType type = new ButtonType("Ok", ButtonData.CANCEL_CLOSE);
+        //dialog.setContentText(kontekst);
+
+        // Panel dialogowy
+        DialogPane dialogPane = dialog.getDialogPane();
+
+        // Tworzymy etykietę do dodania do panelu dialogowego
+        Label label = new Label(kontekst);
+
+        // Dostosujemy styl etykiety 
+        label.setFont(new Font(23));
+        label.setTextAlignment(TextAlignment.CENTER);
+
+        // Utwórz kontener na etykietę
+        VBox vBox = new VBox(label);
+
+        // Ustaw kontener jako zawartość panelu dialogowego
+        dialogPane.setContent(vBox);
+
+        // Dodaj przycisk "Ok"
+        dialog.getDialogPane().getButtonTypes().add(type);
+
+        Platform.runLater(() -> {
+            dialog.showAndWait();
+        });
     }
 }
