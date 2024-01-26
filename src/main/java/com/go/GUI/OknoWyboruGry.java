@@ -2,7 +2,6 @@ package com.go.GUI;
 
 
 import java.util.List;
-import com.go.OkienkoBledu;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
