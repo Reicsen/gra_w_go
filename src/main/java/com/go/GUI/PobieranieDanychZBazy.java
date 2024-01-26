@@ -26,20 +26,8 @@ public class PobieranieDanychZBazy implements IBazyDanychAdapter
 
             else
             {
-                List<Integer> id = new ArrayList<Integer>();
-                List<String> zwyciezcy = new ArrayList<String>();
-
-                while(wyniki.next())
-                {
-                    int idGry = wyniki.getInt("id");
-                    String wygrany = wyniki.getString("wygrany");
-
-                    id.add(idGry);
-                    zwyciezcy.add(wygrany);
-                }
-                
-                IBazyDanychAdapter wyborGry = new OknoWyboruGry(id, zwyciezcy);
-                wyborGry.obsluz();
+                IBazyDanychAdapter adapter = new AdapterSQL(wyniki);
+                adapter.obsluz();
             }
             wyniki.close();
                 ile.close();
