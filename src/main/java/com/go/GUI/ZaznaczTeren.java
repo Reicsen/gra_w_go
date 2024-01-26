@@ -19,7 +19,8 @@ public class ZaznaczTeren extends Button{
 
     public int nrpola;
     public int zaznaczone;
-    public List <Integer> terenZaznaczony = new ArrayList<>();
+    public List <Integer> terenZaznaczony = new ArrayList<>(); 
+    public Paint paint = Paint.valueOf("violet");
 
     public ZaznaczTeren(String wygląd, int nrpola, Teren teren){
         super();
@@ -65,7 +66,7 @@ public class ZaznaczTeren extends Button{
             {
                 if(zaznaczone == 0){
                     terenZaznaczony.add(nrpola);
-                    Rectangle rec = new Rectangle(26, 26, Paint.valueOf("violet"));    
+                    Rectangle rec = new Rectangle(26, 26, paint);    
 
                     setGraphic(rec);
                     zaznaczone = 1;
@@ -98,5 +99,8 @@ public class ZaznaczTeren extends Button{
     }
     public void ustawTeren(List <Integer> teren){
         this.terenZaznaczony = teren;
+    }
+    public void ustawPaint(Paint paint){
+        this.paint = paint;
     }
 }

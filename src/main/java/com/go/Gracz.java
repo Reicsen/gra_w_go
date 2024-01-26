@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.go.GUI.GuiPlansza;
 import javafx.application.Platform;
@@ -215,6 +216,9 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
         }
     }
 
+    public void wyslijTeren(List <Integer> twojTeren, List <Integer> przeciwnikaTeren){
+        
+    }
     
 
     @Override

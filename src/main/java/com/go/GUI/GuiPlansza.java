@@ -132,12 +132,13 @@ public class GuiPlansza extends GridPane
         });
     }
     public void zaznaczTeren(List<String> lista){
-        GridPane pane = new Teren(lista);
         Stage stage = new Stage();
+        GridPane pane = new Teren(lista, gracz, stage);
         stage.setTitle("Zaznacz teren");
         Scene scene = new Scene(pane, 900, 1000);
         stage.setScene(scene);
         stage.show(); 
         stage.show();
     }
+    
 }
