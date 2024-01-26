@@ -143,6 +143,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
         Platform.runLater(() -> {
             plansza.pionki.get(nrpola).zmienPrzyciskNaKrzyzyk( plansza.pionki.get(nrpola));
         });
+        usun(nrpola);
     }
 
     public void wypiszKomunikatNaPlanszy(String komunikat)
@@ -321,10 +322,16 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
     }
     private void zmien(int nrpola, Color kolor){
         if(kolor == Color.WHITE){
+            lista.remove(nrpola);
             lista.add(nrpola, "biały");
         }
         else{
+            lista.remove(nrpola);
             lista.add(nrpola, "czarny");
         }
+    }
+    private void usun(int nrpola){
+        lista.remove(nrpola);
+        lista.add(nrpola, "null");
     }
 }

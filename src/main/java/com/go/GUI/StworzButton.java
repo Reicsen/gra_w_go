@@ -11,7 +11,10 @@ import javafx.scene.shape.Rectangle;
 public class StworzButton implements FactoryButton{
 
     public Button przycisk(String cecha){
+
         Button btn = new Button();
+        btn.setMaxSize(26, 26);
+
         if(cecha.equals("null")){
             Line cross1 = new Line(13, 0, 13, 26);
             Line cross2 = new Line(0, 13, 26, 13);
@@ -52,6 +55,8 @@ public class StworzButton implements FactoryButton{
 
             btn.setGraphic(rec);
         }
+        
+        btn.setStyle("-fx-background-color: white;");
         return btn;
     }
 }

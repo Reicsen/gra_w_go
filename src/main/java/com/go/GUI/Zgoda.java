@@ -18,8 +18,8 @@ public class Zgoda extends GridPane{
         super();
         System.out.println("Weszlo");
         setAlignment(Pos.CENTER);
-        //setHgap(0);
-        //setVgap(0);
+        setHgap(0);
+        setVgap(0);
         setStyle("-fx-background-color: black;");
 
         //tworzymy plansze
@@ -59,7 +59,7 @@ public class Zgoda extends GridPane{
         b2.setStyle("-fx-background-color: aquamarine");
         b2.setFont(Font.font(20));
         setColumnSpan(b2, 5); 
-        add(b2, 6, 20);
+        add(b2, 7, 20);
         b2.setOnAction(event -> {
             
             //TODO - gracz.powrótDoGry
@@ -75,7 +75,7 @@ public class Zgoda extends GridPane{
         b3.setStyle("-fx-background-color: aquamarine");
         b3.setFont(Font.font(20));
         setColumnSpan(b3, 5); 
-        add(b3, 12, 20);
+        add(b3, 14, 20);
         b3.setOnAction(event -> {
 
             plansza.zaznaczTeren(gracz.podajListe());
