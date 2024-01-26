@@ -134,8 +134,8 @@ public class GuiPlansza extends GridPane
     public void zaznaczTeren(List<String> lista){
         Stage stage = new Stage();
         GridPane pane = new Teren(lista, gracz, stage);
-        stage.setTitle("Zaznacz teren");
-        Scene scene = new Scene(pane, 900, 1000);
+        stage.setTitle("Zaznacz teren "+ kolor());
+        Scene scene = new Scene(pane, 895, 1000);
         stage.setScene(scene);
         stage.show(); 
     }
@@ -146,9 +146,19 @@ public class GuiPlansza extends GridPane
         System.out.println("stage");
         GridPane pane = new Zgoda(lista, gracz, stage, this);
         System.out.println("zgoda");
-        stage.setTitle("Negocjacje");
-        Scene scene = new Scene(pane, 900, 1000);
+        stage.setTitle("Negocjacje "+ kolor());
+        Scene scene = new Scene(pane, 890, 1000);
         stage.setScene(scene);
         stage.show(); 
+    }
+    private String kolor(){
+        String s;
+        if(kolor == Color.WHITE){
+            s = "biały";
+        }
+        else{
+            s = "czarny";
+        }
+        return s;
     }
 }

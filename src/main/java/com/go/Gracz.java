@@ -218,8 +218,10 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
         }
     }
 
+    //Po tym jak gracz uzgodni terytorium wywoływana jest ta funkcja
     public void wyslijTeren(List <Integer> twojTeren, List <Integer> przeciwnikaTeren){
-        
+        //TODO
+       
     }
     
 
