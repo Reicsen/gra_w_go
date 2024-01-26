@@ -171,7 +171,8 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
             int jencyRywala = odbieranieOdSerwera.readInt();          
             
             Platform.runLater(() -> {
-                plansza.zaznaczTeren(lista);
+                plansza.zgoda(lista);
+                //plansza.zaznaczTeren(lista);
                 //plansza.oknoZTerenem(wlasneTerytorium, przeciwneTerytorium, iloscJencow, jencyRywala, przeciwnePionkiNaWlasnymTerytorium, wlasnePionkiNaPrzeciwnymTerytorium);
             });
             while (!this.kontrolkaOkienka)
@@ -314,6 +315,9 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
         for(int i = 0; i < 361; i++){
             lista.add("null");
         }
+    }
+    public List<String> podajListe(){
+        return lista;
     }
     private void zmien(int nrpola, Color kolor){
         if(kolor == Color.WHITE){
