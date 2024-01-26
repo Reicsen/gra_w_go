@@ -27,7 +27,7 @@ BEGIN
  SET @str="INSERT INTO Gry(wygrany) VALUES(?);";
  PREPARE dodaj_gre FROM @str;
 
- SET @str="INSERT INTO Ruch(id_gry,gracz,pole) VALUES(?,?,?);";
+ SET @str="INSERT INTO Ruchy(id_gry,gracz,pole) VALUES(?,?,?);";
  PREPARE dodaj_ruch FROM @str;
 
  SET @str="SELECT MAX(id) FROM Gry;";
