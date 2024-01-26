@@ -132,6 +132,9 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
         plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
         });
         zmien(nrpola, kolor);
+        System.out.println(nrpola);
+        System.out.println(nrpola/19);
+        System.out.println(nrpola%19);
     }
 
     public void usunieciePionka(int nrpola)
