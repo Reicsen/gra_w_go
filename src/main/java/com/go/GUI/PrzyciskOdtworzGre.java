@@ -38,7 +38,7 @@ public class PrzyciskOdtworzGre extends Button
                     GridPane wybor = new WyborGry(stage, bazy);
                     stage.setTitle("Odtwarzanie gry");
 
-                    Scene scene = new Scene(wybor, 1300, 1000);
+                    Scene scene = new Scene(wybor, 600, 1000);
                     stage.setScene(scene);
                     stage.show();
                 }

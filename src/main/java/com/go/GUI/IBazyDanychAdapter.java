@@ -7,6 +7,7 @@ public interface IBazyDanychAdapter {
      * Uruchamiamy połączenie z bazą
      */
     boolean start();
+    
     /*
      * Zwracamy liste gier które można odtworzyć 
      * Dodajemy id i zwycięzcę
