@@ -80,7 +80,7 @@ public class OknoWyboruGry implements IBazyDanychAdapter
             String wygrany = zwyciezcyGier.get(i);
             
             IDButton temp1 = new IDButton(id,Integer.toString(id));
-            temp1.setFont(Font.font("Callibri",FontWeight.BOLD,20));
+            temp1.setFont(Font.font("Callibri",FontWeight.BOLD,15));
             temp1.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE,null,null)));
             temp1.setWrapText(true);
             temp1.setTextAlignment(TextAlignment.CENTER);
@@ -90,7 +90,7 @@ public class OknoWyboruGry implements IBazyDanychAdapter
             temp1.setMaxHeight(30);
 
             IDButton temp2 = new IDButton(id,wygrany);
-            temp2.setFont(Font.font("Callibri",FontWeight.BOLD,20));
+            temp2.setFont(Font.font("Callibri",FontWeight.BOLD,15));
             temp2.setBackground(new Background(new BackgroundFill(Color.MISTYROSE,null,null)));
             temp2.setWrapText(true);
             temp2.setTextAlignment(TextAlignment.CENTER);
