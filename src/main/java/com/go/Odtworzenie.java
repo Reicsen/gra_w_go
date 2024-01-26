@@ -21,6 +21,8 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
     private DataOutputStream wysylanieDoSerwera;
     private Socket polaczenieZSerwerem;
     private GuiPlanszaOdtworzenia plansza;
+    private int licznik;
+    private int nr;
 
     public Odtworzenie(GuiPlanszaOdtworzenia plansza, int nrGry) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
@@ -34,6 +36,8 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
             this.ruchy = new ArrayList<Integer>();
             ustawKolor(nrGracza);
             sczytajRuchy(nrGry,nrGracza);
+            licznik=0;
+            this.nr=nrGracza;
         }
         catch (IOException e)
         {
@@ -56,6 +60,7 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
                 int n = wynik.getInt(1);
                 this.ruchy.add(n);
             }
+
             wynik.close();
         }
         catch(SQLException e)
@@ -99,30 +104,24 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
 
     public void wykonajRuch(int x, int y)
     {
-        try
+        if (aktywny)
         {
-            Thread.sleep(1);
-            if (aktywny)
+            try
             {
-                try
-                {
-                    wysylanieDoSerwera.writeInt(1);
-                    wysylanieDoSerwera.writeInt(x+19*y);
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
+                wysylanieDoSerwera.writeInt(1);
+                wysylanieDoSerwera.writeInt(x+19*y);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
             }
         }
-        catch(InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+        licznik=licznik+1;
     }
 
     public void odtworzRuch(int nrPola)
     {
+
         if(nrPola==-1)
         {
             poddajSie();
@@ -198,66 +197,72 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
     {
         int sygnal;
         int ruch;
-        int licznik=0;
 
         while (true)
         {
-            int pole=this.ruchy.get(licznik);
             try
-            {
-                sygnal=odbieranieOdSerwera.readInt();
-                if (sygnal==0)
+            {                
+                Thread.sleep(1000);
+                int pole=this.ruchy.get(licznik);
+                try
                 {
-                    ruch=odbieranieOdSerwera.readInt();
-                    dodaniePionka(ruch, kolor);
-                    zmienAktywnosc();
-                    licznik=licznik+1;
-                }
-                if (sygnal==-1)
-                {
-                    odtworzRuch(pole); 
-                }
-
-                if (sygnal==1)
-                {
-                    ruch=odbieranieOdSerwera.readInt();
-                    dodaniePionka(ruch, kolorPrzeciwnika);
-                    zmienAktywnosc();
-                    odtworzRuch(pole);                    
-                }
-                if (sygnal==2)
-                {
-                    zmienAktywnosc();
-                    odtworzRuch(pole);
-                }
-
-                if (sygnal==4)
-                {
-                    ruch=odbieranieOdSerwera.readInt();
-                    while (ruch!=-1)
+                    sygnal=odbieranieOdSerwera.readInt();
+                    if (sygnal==0)
                     {
-                        usunieciePionka(ruch);
                         ruch=odbieranieOdSerwera.readInt();
+                        dodaniePionka(ruch, kolor);
+                        zmienAktywnosc();
                     }
-                }  
-                       
-                if (sygnal==5)
-                {
-                    ruch=odbieranieOdSerwera.readInt();                    
-                    if (ruch==-1)
+                    if (sygnal==-1)
                     {
-                        okienko("Przegrałeś :C");
-                        break;
+                        odtworzRuch(pole); 
                     }
-                    else
-                    {
-                        okienko("Wygrałeś!");
-                        break;
-                    }
-                }                              
-            }
 
-            catch (IOException e)
+                    if (sygnal==1)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                        dodaniePionka(ruch, kolorPrzeciwnika);
+                        zmienAktywnosc();
+                        odtworzRuch(pole);                    
+                    }
+                    if (sygnal==2)
+                    {
+                        zmienAktywnosc();
+                        odtworzRuch(pole);
+                    }
+
+                    if (sygnal==4)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                        while (ruch!=-1)
+                        {
+                            usunieciePionka(ruch);
+                            ruch=odbieranieOdSerwera.readInt();
+                        }
+                    }  
+                        
+                    if (sygnal==5)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();                    
+                        if (ruch==-1)
+                        {
+                            okienko("Przegrałeś :C");
+                            break;
+                        }
+                        else
+                        {
+                            okienko("Wygrałeś!");
+                            break;
+                        }
+                    }                              
+                }
+
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            catch(InterruptedException e)
             {
                 e.printStackTrace();
             }
