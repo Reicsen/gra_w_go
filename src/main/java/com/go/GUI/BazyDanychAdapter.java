@@ -31,11 +31,16 @@ public class BazyDanychAdapter implements IBazyDanychAdapter{
             ResultSet wyniki = kwerenda.executeQuery("EXECUTE lista_gier;");
             int id = wyniki.getInt("id");
             String wygrany = wyniki.getString("wygrany");
+            //TODO
         }
         catch(SQLException e)
         {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    public void sczytajRuchy(int nrGry, int nrGracza){
+        //TODO
     }
 }

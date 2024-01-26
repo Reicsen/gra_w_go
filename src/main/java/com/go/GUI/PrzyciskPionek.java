@@ -10,7 +10,6 @@ import javafx.scene.shape.Line;
 
 public class PrzyciskPionek extends Button
 {
-
     PrzyciskPionek(Klient gracz, int x, int y){
 
         //Stworzenie przycisku który ma na sobie grafike (krzyż)

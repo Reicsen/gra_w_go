@@ -27,7 +27,6 @@ public class IDButton extends Button
                 Scene scene = new Scene(gridPane1, 1300, 1000);
                 stage.setScene(scene);
                 stage.show(); 
-               
             }
         });
     }

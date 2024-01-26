@@ -31,6 +31,7 @@ public class PrzyciskOdtworzGre extends Button
             public void handle(ActionEvent e) 
             {
                 IBazyDanychAdapter bazy = new BazyDanychAdapter();
+                
                 if(!bazy.start()){
                     wyskakujaceOkienko("Błąd: nie udane połączenie z bazą danych");
                 }
