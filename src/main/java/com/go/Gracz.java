@@ -4,6 +4,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+
 import com.go.GUI.GuiPlansza;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
@@ -19,6 +21,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
     private Socket polaczenieZSerwerem;
     private GuiPlansza plansza;
     private boolean kontrolkaOkienka;
+    public ArrayList<String> lista;
 
     public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
@@ -30,6 +33,8 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
             int nrGracza = odbieranieOdSerwera.readInt();
             this.kontrolkaOkienka=false;
             this.plansza=plansza;
+            ustawListe();
+            
             ustawKolor(nrGracza);
         }
         catch (IOException e)
@@ -126,6 +131,10 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
         Platform.runLater(() -> {
         plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
         });
+        zmien(nrpola, kolor);
+        System.out.println(nrpola);
+        System.out.println(nrpola/19);
+        System.out.println(nrpola%19);
     }
 
     public void usunieciePionka(int nrpola)
@@ -161,7 +170,8 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
             int jencyRywala = odbieranieOdSerwera.readInt();          
             
             Platform.runLater(() -> {
-                plansza.oknoZTerenem(wlasneTerytorium, przeciwneTerytorium, iloscJencow, jencyRywala, przeciwnePionkiNaWlasnymTerytorium, wlasnePionkiNaPrzeciwnymTerytorium);
+                plansza.zaznaczTeren(lista);
+                //plansza.oknoZTerenem(wlasneTerytorium, przeciwneTerytorium, iloscJencow, jencyRywala, przeciwnePionkiNaWlasnymTerytorium, wlasnePionkiNaPrzeciwnymTerytorium);
             });
             while (!this.kontrolkaOkienka)
             {
@@ -292,6 +302,21 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
             {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void ustawListe(){
+        this.lista = new ArrayList<>();
+        for(int i = 0; i < 361; i++){
+            lista.add("null");
+        }
+    }
+    private void zmien(int nrpola, Color kolor){
+        if(kolor == Color.WHITE){
+            lista.add(nrpola, "biały");
+        }
+        else{
+            lista.add(nrpola, "czarny");
         }
     }
 }
