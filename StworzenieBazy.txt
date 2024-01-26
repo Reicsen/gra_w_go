@@ -38,6 +38,9 @@ BEGIN
 
  SET @str="SELECT * FROM Gry;";
  PREPARE lista_gier FROM @str;
+
+ SET @str="SELECT COUNT(id) FROM Gry;";
+ PREPARE ilosc_gier FROM @str;
 END#
 DELIMITER ;
 
