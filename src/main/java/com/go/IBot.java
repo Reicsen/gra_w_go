@@ -1,4 +1,4 @@
-package com.go.GUI;
+package com.go;
 
 public interface IBot
 {

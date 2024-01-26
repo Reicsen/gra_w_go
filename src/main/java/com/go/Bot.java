@@ -4,9 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import com.go.GUI.IBot;
-
-import javafx.application.Platform;
 
 import org.apache.commons.math3.random.MersenneTwister;
 
