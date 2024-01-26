@@ -1,8 +1,8 @@
 package com.go;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.go.GUI.IBazyDanychAdapter;
 
 public class ListenerBazy implements IListenerBazy
 {
@@ -27,37 +27,15 @@ public class ListenerBazy implements IListenerBazy
 
     public void koniec(int gracz)
     {
-        try (Connection polaczenie = DriverManager.getConnection("jdbc:mariadb://localhost:3306/gra_w_go", "user", "");
-            Statement kwerenda = polaczenie.createStatement();)
+        IBazyDanychAdapter zapis;
+        if (gracz==1)
         {
-            kwerenda.executeQuery("CALL start();");
-            String temp;
-            ResultSet wyniki;
-
-            if(gracz==1)
-            {
-                temp="EXECUTE dodaj_gre USING 'bialy';";
-            }
-            else
-            {
-                temp="EXECUTE dodaj_gre USING 'czarny';";
-            }
-            kwerenda.executeQuery(temp);
-
-            wyniki=kwerenda.executeQuery("EXECUTE wez_id_gry;");
-            wyniki.first();
-            int idGry=wyniki.getInt(1);
-
-            for (int i=0; i<pola.size(); i++)
-            {
-                temp="EXECUTE dodaj_ruch USING "+idGry+", "+gracze.get(i)+", "+pola.get(i)+";";
-                kwerenda.executeQuery(temp);
-            }
-            wyniki.close();
+            zapis = new ZapisDoBazy(gracze,pola ,"bialy");
         }
-        catch(SQLException e)
+        else
         {
-            e.printStackTrace();
+            zapis = new ZapisDoBazy(gracze,pola ,"czarny");
         }
+        zapis.obsluz();
     }
 }
