@@ -48,7 +48,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
     {
         if("czarny".equals(aktywnyKolor))
         {
-            try
+            /*try
             {
                 wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
                 wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
@@ -56,11 +56,11 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
             catch(IOException e)
             {
                 e.printStackTrace();
-            }
+            }*/
         }
         else
         {
-            try
+            /*try
             {
                 wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
                 wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
@@ -68,7 +68,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
             catch(IOException e)
             {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
@@ -76,7 +76,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
     {
         if("czarny".equals(aktywnyKolor))
         {
-            try
+            /*try
             {
                 wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
                 wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
@@ -84,11 +84,11 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
             catch(IOException e)
             {
                 e.printStackTrace();
-            }
+            }*/
         }
         else
         {
-            try
+           /*try
             {
                 wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
                 wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
@@ -96,7 +96,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
             catch(IOException e)
             {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
