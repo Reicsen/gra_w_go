@@ -12,10 +12,14 @@ public class PobieranieDanychZBazy implements IBazyDanychAdapter
         {
             kwerenda.executeQuery("CALL start();");
             ResultSet wyniki = kwerenda.executeQuery("EXECUTE lista_gier;");
-            int ilosc=1;
-
+            ResultSet ile = kwerenda.executeQuery("EXECUTE ilosc_gier");
+            ile.first();
+            int ilosc = ile.getInt(1);
+            
             IBazyDanychAdapter wyborGry = new OknoWyboruGry(ilosc, wyniki);
             wyborGry.obsluz();
+            wyniki.close();
+            ile.close();
         }
         catch(SQLException e)
         {
