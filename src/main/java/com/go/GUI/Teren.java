@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Teren extends GridPane{
@@ -14,10 +15,15 @@ public class Teren extends GridPane{
     public Label lbl;
     public List <Integer> twojTeren;
     public List <Integer> przeciwnikaTeren;
+    public List<ZaznaczTeren> pionki= new ArrayList<>();
 
     Teren (List<String> lista){
 
         super();
+
+        twojTeren = new ArrayList<>();
+        przeciwnikaTeren = new ArrayList<>();
+
         setAlignment(Pos.CENTER);
         setHgap(0);
         setVgap(0);
@@ -37,14 +43,17 @@ public class Teren extends GridPane{
         for (int row = 1; row < 20; row++) {
             for (int col = 0; col < 19; col++) {
 
-                Button button = new ZaznaczTeren(lista.get( (row-1) * 19 + col ));
+                ZaznaczTeren button = new ZaznaczTeren(lista.get( ((row-1) * 19) + col ), ((row-1) * 19) + col , this);
                 button.setStyle("-fx-background-color: white;");
 
                 add(button, col, row);
+                pionki.add(button);
 
                 setHalignment(button, HPos.CENTER);
             }
         }
+
+        ustawTeren(twojTeren);
 
         //tworzymy przycisk zaznacz
         Button b1 = new Button("Skończ zaznaczanie");
@@ -55,8 +64,16 @@ public class Teren extends GridPane{
         setColumnSpan(b1, 10); 
         add(b1, 0, 20);
         b1.setOnAction(event -> {
-            //TODO
+            //TODO 
+            //zmieniamy ustawiony teren za pierwszym razem
+            //wysylamy za drugim
         });
         
+    }
+
+    public void ustawTeren(List <Integer> teren){
+        for(ZaznaczTeren button : pionki){
+            button.ustawTeren(teren);
+        }
     }
 }
