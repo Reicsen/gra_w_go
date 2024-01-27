@@ -22,6 +22,9 @@ Pozostałe komunikaty:
 5; -1 = przegrana - gracz wyświetla informację „Przegrałeś!"
 5; 1 = wygrana - gracz wyświetla informację „Wygrałeś!"
 6 = rozpoczęcie negocjacji
+7 = zapytanie o ilość jeńców
+8; n = gracz dodaje do planszy swój pionek przeciwnika na pole n bez włączania swojej tury ruchu
+9; n = gracz dodaje do planszy przeciwny pionek przeciwnika na pole n bez włączania swojej tury ruchu
 10 = start gry
 100; n0, n1, ..., -1; m0, m1, ..., -1 = przesłanie stanu list terytorium obu graczy do drugiego gracza
 

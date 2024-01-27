@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,IWysylanieRuchuDoBazy,Runnable
+public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,IWysylanieRuchuDoBazy,IObslugaKoncaGry,Runnable
 {
     private String aktywnyKolor;
     private IPlansza plansza;
@@ -437,6 +437,112 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,IWysylanieRuchuDoBaz
             }
         }
         wczesniejByloPomin=false;
+    }
+
+    public int iloscJencow(String kolor)
+    {
+        int ilosc=0;
+        try
+        {
+            if("czarny".equals(kolor))
+            {
+                wysylanieDoGracza1.writeInt(7);
+                ilosc=odbieranieOdGracza1.readInt();
+            }
+            else
+            {
+                wysylanieDoGracza2.writeInt(7);
+                ilosc=odbieranieOdGracza2.readInt();
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        return ilosc;
+    }
+
+    public void usunPionyZeZlychTerytoriow(List<Integer> czarnePionyNaBialym, List<Integer> bialePionyNaCzarnym)
+    {
+        try
+        {
+            wysylanieDoGracza1.writeInt(4);
+            wysylanieDoGracza2.writeInt(4);
+            for(int i=0; i<czarnePionyNaBialym.size(); i++)
+            {
+                int temp=czarnePionyNaBialym.get(i);
+                wysylanieDoGracza1.writeInt(temp);
+                wysylanieDoGracza2.writeInt(temp);
+            }
+            for(int i=0; i<bialePionyNaCzarnym.size(); i++)
+            {
+                int temp=bialePionyNaCzarnym.get(i);
+                wysylanieDoGracza1.writeInt(temp);
+                wysylanieDoGracza2.writeInt(temp);
+            }
+            wysylanieDoGracza1.writeInt(-1);
+            wysylanieDoGracza2.writeInt(-1);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void wstawJencow(List<Integer> czarneTerytorium, List<Integer> bialeTerytorium, int jencyCzarnego, int jencyBialego)
+    {
+        try
+        {
+            for (int i=0; i<Math.min(czarneTerytorium.size(), jencyBialego);i++)
+            {
+                int temp=czarneTerytorium.get(i);
+                wysylanieDoGracza1.writeInt(8);
+                wysylanieDoGracza1.writeInt(temp);
+                wysylanieDoGracza2.writeInt(9);
+                wysylanieDoGracza2.writeInt(temp);
+            }
+            for (int i=0; i<Math.min(bialeTerytorium.size(), jencyCzarnego);i++)
+            {
+                int temp=bialeTerytorium.get(i);
+                wysylanieDoGracza2.writeInt(8);
+                wysylanieDoGracza2.writeInt(temp);
+                wysylanieDoGracza1.writeInt(9);
+                wysylanieDoGracza1.writeInt(temp);
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void proceduraKoncowa(List<Integer> czarneTerytorium, List<Integer> bialeTerytorium, List<Integer> czarnePionyNaBialym, List<Integer> bialePionyNaCzarnym)
+    {
+        int jencyCzarnego=iloscJencow("czarny")+bialePionyNaCzarnym.size();
+        int jencyBialego=iloscJencow("biały")+czarnePionyNaBialym.size();
+        for (int i=0; i<czarnePionyNaBialym.size(); i++)
+        {
+            int temp=czarnePionyNaBialym.get(i);
+            bialeTerytorium.add(temp);
+        }
+        for (int i=0; i<bialePionyNaCzarnym.size(); i++)
+        {
+            int temp=bialePionyNaCzarnym.get(i);
+            czarneTerytorium.add(temp);
+        }
+        usunPionyZeZlychTerytoriow(czarnePionyNaBialym, bialePionyNaCzarnym);
+        wstawJencow(czarneTerytorium, bialeTerytorium, jencyCzarnego, jencyBialego);
+        int wynikCzarnego=Math.max(0, czarneTerytorium.size()-jencyBialego);
+        int wynikBialego=Math.max(0, bialeTerytorium.size()-jencyCzarnego);
+        if(wynikCzarnego>wynikBialego)
+        {
+            this.aktywnyKolor="biały";
+        }
+        else
+        {
+            this.aktywnyKolor="czarny";
+        }
+        koniecGry();
     }
 
     @Override
