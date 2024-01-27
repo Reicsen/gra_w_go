@@ -3,7 +3,8 @@ package com.go;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Terytorium implements ITerytorium {
+public class ObslugaObszaru implements IObslugaObszaru
+{
     public List <Integer> pionyDoUsuniecia(List <Integer> terytorium, IPlansza plansza, String kolor ){
         
         List<Integer> piony = new ArrayList<>();
@@ -45,5 +46,20 @@ public class Terytorium implements ITerytorium {
 
         }
         return piony;
+    }
+
+    public int iloscPionkowKoloru(IPlansza plansza, String kolor)
+    {
+        int licznik=0;
+        List<IPole> wszystkiePola = plansza.podajPola();
+        for (int i=0; i<wszystkiePola.size(); i++)
+        {
+            IPole pole = wszystkiePola.get(i);
+            if (pole.podajPionek()==kolor)
+            {
+                licznik=licznik+1;
+            }
+        }
+        return licznik;
     }
 }

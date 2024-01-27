@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class TestTerytorium {
+public class TestObslugiObszaru {
 
-    ITerytorium obliczenia = new Terytorium();
+    IObslugaObszaru obliczenia = new ObslugaObszaru();
 
     @Test
     public void testPionyDoUsuniecia(){

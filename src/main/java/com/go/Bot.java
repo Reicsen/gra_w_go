@@ -109,15 +109,13 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         try
         {
             wysylanieDoSerwera.writeInt(11);
-            System.out.println("Prośba o terytorium");
-            int wlasneTerytorium = odbieranieOdSerwera.readInt(); 
-            int wrogieTerytorium = odbieranieOdSerwera.readInt();
-            System.out.println("Otrzymano: "+wlasneTerytorium+" "+wrogieTerytorium);
-            if (wrogieTerytorium>wlasneTerytorium+10)
+            int iloscPionkow = odbieranieOdSerwera.readInt(); 
+            int iloscPionkowPrzeciwnika = odbieranieOdSerwera.readInt();
+            int wspolczynnik = iloscPionkowPrzeciwnika-iloscPionkow-10;
+            if (wspolczynnik>0)
             {
                 int los = this.generator.nextInt(100);
-                System.out.println("Los: "+los);
-                if (wrogieTerytorium-wlasneTerytorium-10>los)
+                if (wspolczynnik>los)
                 {
                     return true;
                 }
@@ -206,7 +204,6 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
             try
             {                
                 sygnal=odbieranieOdSerwera.readInt();
-                System.out.println("Otrzymano: "+sygnal);
                 if (sygnal==0)
                 {
                     ruch=odbieranieOdSerwera.readInt();

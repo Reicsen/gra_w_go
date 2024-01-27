@@ -11,7 +11,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
     private String aktywnyKolor;
     private IPlansza plansza;
     private IUsuwaniePionkow usuwaniePionkow;
-    private ITerytorium obliczanieTerytorium;
+    private IObslugaObszaru obslugaObszaru;
     private Socket gracz1;
     private Socket gracz2;
     private DataInputStream odbieranieOdGracza1;
@@ -28,7 +28,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         this.plansza=new Plansza();
         this.dodawanie = new ListenerBazy();
         this.usuwaniePionkow = new UsuwaniePionkow();
-        this.obliczanieTerytorium = new Terytorium();
+        this.obslugaObszaru = new ObslugaObszaru();
         this.gracz1=s1;
         this.gracz2=s2;
         this.wczesniejByloPomin=false;
@@ -46,14 +46,14 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         }
     }
 
-    public void terytorium()
+    public void iloscPol()
     {
         if("czarny".equals(aktywnyKolor))
         {
             try
             {
-                wysylanieDoGracza1.writeInt(0);
-                wysylanieDoGracza1.writeInt(11);
+                wysylanieDoGracza1.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"czarny"));
+                wysylanieDoGracza1.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"biały"));
             }
             catch(IOException e)
             {
@@ -64,8 +64,8 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         {
             try
             {
-                wysylanieDoGracza2.writeInt(0);
-                wysylanieDoGracza2.writeInt(11);
+                wysylanieDoGracza2.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"biały"));
+                wysylanieDoGracza2.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"czarny"));
             }
             catch(IOException e)
             {
@@ -414,7 +414,6 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
                 {
                     sygnal=odbieranieOdGracza2.readInt();
                 }
-                System.out.println("Aktywny: "+aktywnyKolor+" sygnał: "+sygnal);
                 if (sygnal==-1)
                 {
                     koniecGry();
@@ -430,7 +429,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
                 }
                 if (sygnal==11)
                 {
-                    terytorium();
+                    iloscPol();
                 }
             }
         }
