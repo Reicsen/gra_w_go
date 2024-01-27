@@ -131,7 +131,7 @@ public class GuiPlansza extends GridPane
             dialog.showAndWait();
         });
     }
-    public void zaznaczTeren(List<String> lista){
+    public void zaznaczTeren(List<Integer> lista){
         Stage stage = new Stage();
         GridPane pane = new Teren(lista, gracz, stage);
         stage.setTitle("Zaznacz teren "+ kolor());
@@ -140,7 +140,7 @@ public class GuiPlansza extends GridPane
         stage.show(); 
     }
     
-    public void  zgoda(List<String> lista){
+    public void  zgoda(List<Integer> lista){
         System.out.println("funkcja");
         Stage stage = new Stage();
         System.out.println("stage");

@@ -22,7 +22,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
     private Socket polaczenieZSerwerem;
     private GuiPlansza plansza;
     private boolean kontrolkaOkienka;
-    public List<String> lista;
+    public List<Integer> lista;
 
     public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
@@ -316,26 +316,26 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
     }
 
     private void ustawListe(){
-        this.lista = new ArrayList<>();
+        this.lista = new ArrayList<Integer>();
         for(int i = 0; i < 361; i++){
-            lista.add("null");
+            lista.add(0);
         }
     }
-    public List<String> podajListe(){
+    public List<Integer> podajListe(){
         return lista;
     }
     private void zmien(int nrpola, Color kolor){
         if(kolor == Color.WHITE){
             lista.remove(nrpola);
-            lista.add(nrpola, "biały");
+            lista.add(nrpola, 2);
         }
         else{
             lista.remove(nrpola);
-            lista.add(nrpola, "czarny");
+            lista.add(nrpola, 1);
         }
     }
     private void usun(int nrpola){
         lista.remove(nrpola);
-        lista.add(nrpola, "null");
+        lista.add(nrpola, 0);
     }
 }

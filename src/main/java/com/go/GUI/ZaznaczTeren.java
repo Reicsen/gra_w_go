@@ -22,13 +22,13 @@ public class ZaznaczTeren extends Button{
     public List <Integer> terenZaznaczony = new ArrayList<>(); 
     public Paint paint = Paint.valueOf("violet");
 
-    public ZaznaczTeren(String wygląd, int nrpola, Teren teren){
+    public ZaznaczTeren(Integer wyglad, int nrpola, Teren teren){
         super();
         setMaxSize(26, 26);
         this.nrpola = nrpola;
         zaznaczone = 0;
 
-        if(wygląd.equals("null")){
+        if(wyglad==0){
             Line cross1 = new Line(13, 0, 13, 26);
             Line cross2 = new Line(0, 13, 26, 13);
             cross1.setStroke(Color.BLACK);
@@ -45,7 +45,7 @@ public class ZaznaczTeren extends Button{
         else{
             Circle circle;
 
-            if(wygląd.equals("biały")){
+            if(wyglad==2){
                 circle = new Circle(13, Color.WHITE);
             }
             else{

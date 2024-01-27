@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class Zgoda extends GridPane{
     
-    Zgoda(List<String> lista, Gracz gracz, Stage stage, GuiPlansza plansza){
+    Zgoda(List<Integer> lista, Gracz gracz, Stage stage, GuiPlansza plansza){
 
         super();
         setAlignment(Pos.CENTER);
