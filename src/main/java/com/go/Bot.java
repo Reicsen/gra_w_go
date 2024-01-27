@@ -4,12 +4,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-
 import org.apache.commons.math3.random.MersenneTwister;
 
 public class Bot implements Klient, IBot, INegocjacje, Runnable
 {
     private boolean aktywny=false;
+    private int nrGracza;
     private int iloscJencow=0;
     private DataInputStream odbieranieOdSerwera;
     private DataOutputStream wysylanieDoSerwera;
@@ -23,6 +23,7 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
             this.polaczenieZSerwerem = new Socket("localhost", 8000);
             this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
+            this.nrGracza = odbieranieOdSerwera.readInt();
         }
         catch (IOException e)
         {
@@ -85,7 +86,7 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
     {
         try
         {
-            Thread.sleep(1);
+            Thread.sleep(1000);
             czyPoddacGre();
             if (aktywny)
             {
@@ -236,6 +237,15 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
                 {
                     break;
                 }
+
+                if (sygnal==4)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    while (ruch!=-1)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                    }
+                } 
                 
                 if(sygnal==6)
                 {
@@ -244,6 +254,13 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
                 if (sygnal==101)
                 {
                     dane();
+                }
+                if (sygnal==10)
+                {
+                    if(this.nrGracza==1)
+                    {
+                        wysylanieDoSerwera.writeInt(0); //to nie odczyt z bazy
+                    }
                 }
             }
 

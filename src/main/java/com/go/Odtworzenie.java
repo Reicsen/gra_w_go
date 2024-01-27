@@ -69,7 +69,6 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
             {
                 zmienAktywnosc();
                 wysylanieDoSerwera.writeInt(0);
-                wypiszKomunikatNaPlanszy("Tura przeciwnika");
             }
             catch (IOException e)
             {
@@ -94,11 +93,11 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         }
     }
 
-    public void odtworzRuch()
+    public synchronized void odtworzRuch()
     {
         try
         {
-            Thread.sleep(1500);
+            Thread.sleep(1000);
             if(gracze.get(indeks)==this.nrGracza)
             {
                 int nastepnyRuch=ruchy.get(indeks);
@@ -130,14 +129,12 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
             this.kolor=Color.BLACK;
             this.kolorPrzeciwnika=Color.WHITE;
             plansza.kolor=Color.BLACK;
-            System.out.println("Ustawiony kolor");
         }
         else
         {
             this.kolor=Color.WHITE;
             this.kolorPrzeciwnika=Color.BLACK;
             plansza.kolor=Color.WHITE;
-            System.out.println("Ustawiony kolor");
         }
     }
 
@@ -168,12 +165,7 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         });
     }
 
-    public void wypiszKomunikatNaPlanszy(String komunikat)
-    {
-        Platform.runLater(() -> {
-            plansza.lbl.setText(komunikat);
-        });
-    }
+    public void wypiszKomunikatNaPlanszy(String komunikat){}
 
     public void okienko(String komunikat){
         Platform.runLater(() -> {
@@ -208,6 +200,7 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
                     ruch=odbieranieOdSerwera.readInt();
                     dodaniePionka(ruch, kolorPrzeciwnika);
                     zmienAktywnosc();
+                    indeks=indeks+1;
                     odtworzRuch();                    
                 }
                 if (sygnal==2)
@@ -228,18 +221,32 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
                         
                 if (sygnal==5)
                 {
-                    ruch=odbieranieOdSerwera.readInt();                    
-                    if (ruch==-1)
-                    {
-                        okienko("Przegrałeś :C");
-                        break;
+                    ruch=odbieranieOdSerwera.readInt();
+                    if (nrGracza==1)
+                    {                  
+                        if (ruch==-1)
+                        {
+                            okienko("Wygrał biały");
+                        }
+                        else
+                        {
+                            okienko("Wygrał czarny");
+                        }
                     }
-                    else
+                    break;
+                }
+                
+                if(sygnal==3)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                }
+                if(sygnal==10)
+                {
+                    if (this.nrGracza==1)
                     {
-                        okienko("Wygrałeś!");
-                        break;
+                        wysylanieDoSerwera.writeInt(1); //to jest odczyt z bazy
                     }
-                }                              
+                }
             }
 
             catch (IOException e)

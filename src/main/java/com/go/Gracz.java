@@ -22,7 +22,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
     private Socket polaczenieZSerwerem;
     private GuiPlansza plansza;
     private boolean kontrolkaOkienka;
-    public ArrayList<String> lista;
+    public List<String> lista;
 
     public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
@@ -294,6 +294,10 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
                 {
                     plansza.rozpoczecieGry();
                     wypiszKomunikatNaPlanszy("Tura przeciwnika");
+                    if(Color.BLACK.equals(this.kolor))
+                    {
+                        wysylanieDoSerwera.writeInt(0); //to nie odczyt z bazy
+                    }
                 }
 
                 if(sygnal==6)

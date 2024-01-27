@@ -20,6 +20,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
     private DataOutputStream wysylanieDoGracza2;
     private IListenerBazy dodawanie;
     private boolean wczesniejByloPomin; //zmienna która zapamiętuje czy w ostatniej turze pomninięto ruch
+    private boolean czyOdczytZBazy;
 
     public Gra(Socket s1, Socket s2) //konstruktor
     {
@@ -31,6 +32,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         this.gracz1=s1;
         this.gracz2=s2;
         this.wczesniejByloPomin=false;
+        this.czyOdczytZBazy=false;
         try
         {
             this.odbieranieOdGracza1 = new DataInputStream(gracz1.getInputStream());
@@ -102,28 +104,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
 
     public void dwaRazyPominietoTure()
     {
-        try
-        {
-            wysylanieDoGracza1.writeInt(6);
-            int jency1 = odbieranieOdGracza1.readInt();
-            wysylanieDoGracza2.writeInt(6);
-            int jency2 = odbieranieOdGracza2.readInt();
-            wysylanieDoGracza1.writeInt(101);
-            wysylanieDoGracza2.writeInt(101);
-            terytorium();
-            pionyUPrzeciwnika();
-            zmienKolor();
-            terytorium();
-            pionyUPrzeciwnika();
-            zmienKolor();
-            wysylanieDoGracza1.writeInt(jency2);
-            wysylanieDoGracza2.writeInt(jency1);
-            czekajNaOdpowiedz();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+
     }
 
     public void czekajNaOdpowiedz()
@@ -209,13 +190,16 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
 
     private void ruchDoBazy(int pole)
     {
-        if ("czarny".equals(this.aktywnyKolor))
+        if(!czyOdczytZBazy)
         {
-            dodawanie.dodaj(1,pole);
-        }
-        else
-        {
-            dodawanie.dodaj(2,pole);
+            if ("czarny".equals(this.aktywnyKolor))
+            {
+                dodawanie.dodaj(1,pole);
+            }
+            else
+            {
+                dodawanie.dodaj(2,pole);
+            }
         }
     }
 
@@ -413,6 +397,11 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         try
         {
             wysylanieDoGracza1.writeInt(10);
+            int odp = odbieranieOdGracza1.readInt();
+            if(odp==1)
+            {
+                this.czyOdczytZBazy=true;
+            }
             wysylanieDoGracza2.writeInt(10);
             wysylanieDoGracza1.writeInt(2); //poinformowanie graczy o starcie gry, a gracza 1. o początku jego tury
             int sygnal;
@@ -427,6 +416,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
                 {
                     sygnal=odbieranieOdGracza2.readInt();
                 }
+                System.out.println("Aktywny: "+aktywnyKolor+" sygnał: "+sygnal);
                 if (sygnal==-1)
                 {
                     koniecGry();
