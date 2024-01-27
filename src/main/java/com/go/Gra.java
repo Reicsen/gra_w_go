@@ -50,27 +50,27 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
     {
         if("czarny".equals(aktywnyKolor))
         {
-            /*try
+            try
             {
-                wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
-                wysylanieDoGracza1.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
+                wysylanieDoGracza1.writeInt(0);
+                wysylanieDoGracza1.writeInt(11);
             }
             catch(IOException e)
             {
                 e.printStackTrace();
-            }*/
+            }
         }
         else
         {
-            /*try
+            try
             {
-                wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "biały"));
-                wysylanieDoGracza2.writeInt(obliczanieTerytorium.obliczTerytorium(this.plansza, "czarny"));
+                wysylanieDoGracza2.writeInt(0);
+                wysylanieDoGracza2.writeInt(11);
             }
             catch(IOException e)
             {
                 e.printStackTrace();
-            }*/
+            }
         }
     }
 
@@ -337,17 +337,16 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
                 ruch=odbieranieOdGracza1.readInt();
                 if (sprawdzPoprawnosc(ruch))
                 {
+                    int jency = usuwaniePionkow.obliczanieJencow(plansza, aktywnyKolor);
+                    wysylanieDoGracza1.writeInt(3);
+                    wysylanieDoGracza1.writeInt(jency);
+                    usunPionki();
+
                     wysylanieDoGracza1.writeInt(0);
                     wysylanieDoGracza1.writeInt(ruch);
                     wysylanieDoGracza2.writeInt(1);
                     wysylanieDoGracza2.writeInt(ruch);
                     dodajPionek(ruch);
-
-                    int jency = usuwaniePionkow.obliczanieJencow(plansza, aktywnyKolor);
-                    wysylanieDoGracza1.writeInt(3);
-                    wysylanieDoGracza1.writeInt(jency);
-
-                    usunPionki();
                 }
                 else
                 {
@@ -366,17 +365,16 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
                 ruch=odbieranieOdGracza2.readInt();
                 if (sprawdzPoprawnosc(ruch))
                 {
+                    int jency = usuwaniePionkow.obliczanieJencow(plansza, aktywnyKolor);
+                    wysylanieDoGracza2.writeInt(3);
+                    wysylanieDoGracza2.writeInt(jency);
+                    usunPionki();
+
                     wysylanieDoGracza2.writeInt(0);
                     wysylanieDoGracza2.writeInt(ruch);
                     wysylanieDoGracza1.writeInt(1);
                     wysylanieDoGracza1.writeInt(ruch);
                     dodajPionek(ruch);
-
-                    int jency = usuwaniePionkow.obliczanieJencow(plansza, aktywnyKolor);
-                    wysylanieDoGracza2.writeInt(3);
-                    wysylanieDoGracza2.writeInt(jency);
-
-                    usunPionki();
                 }
                 else
                 {

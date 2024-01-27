@@ -103,14 +103,12 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, Runnable
             this.kolor=Color.BLACK;
             this.kolorPrzeciwnika=Color.WHITE;
             plansza.kolor=Color.BLACK;
-            System.out.println("Ustawiony kolor");
         }
         else
         {
             this.kolor=Color.WHITE;
             this.kolorPrzeciwnika=Color.BLACK;
             plansza.kolor=Color.WHITE;
-            System.out.println("Ustawiony kolor");
         }
     }
 

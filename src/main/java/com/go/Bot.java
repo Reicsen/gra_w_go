@@ -87,20 +87,15 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         try
         {
             Thread.sleep(1000);
-            czyPoddacGre();
-            if (aktywny)
+            if (czyPoddacGre())
             {
-                int n=this.generator.nextInt(10);
-                if(n==0)
-                {
-                    pominRuch();
-                }
-                else
-                {
-                    int x=this.generator.nextInt(19);
-                    int y=this.generator.nextInt(19);
-                    wykonajRuch(x, y);
-                }
+                poddajSie();
+            }
+            else
+            {
+                int x=this.generator.nextInt(19);
+                int y=this.generator.nextInt(19);
+                wykonajRuch(x, y);
             }
         }
         catch(InterruptedException e)
@@ -109,19 +104,22 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         }
     }
 
-    public void czyPoddacGre()
+    public boolean czyPoddacGre()
     {
         try
         {
             wysylanieDoSerwera.writeInt(11);
+            System.out.println("Prośba o terytorium");
             int wlasneTerytorium = odbieranieOdSerwera.readInt(); 
             int wrogieTerytorium = odbieranieOdSerwera.readInt();
+            System.out.println("Otrzymano: "+wlasneTerytorium+" "+wrogieTerytorium);
             if (wrogieTerytorium>wlasneTerytorium+10)
             {
                 int los = this.generator.nextInt(100);
-                if (wrogieTerytorium-wlasneTerytorium>los)
+                System.out.println("Los: "+los);
+                if (wrogieTerytorium-wlasneTerytorium-10>los)
                 {
-                    poddajSie();
+                    return true;
                 }
             }
         }
@@ -129,6 +127,7 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         {
             e.printStackTrace();
         }
+        return false;
     }
 
 
@@ -205,10 +204,12 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         while (true)
         {
             try
-            {
+            {                
                 sygnal=odbieranieOdSerwera.readInt();
+                System.out.println("Otrzymano: "+sygnal);
                 if (sygnal==0)
                 {
+                    ruch=odbieranieOdSerwera.readInt();
                     zmienAktywnosc();
                 }
                 if (sygnal==-1)
@@ -218,6 +219,7 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
 
                 if (sygnal==1)
                 {
+                    ruch=odbieranieOdSerwera.readInt();
                     zmienAktywnosc();
                     losujRuch();
                 }
