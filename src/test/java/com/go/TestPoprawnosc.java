@@ -66,7 +66,7 @@ public class TestPoprawnosc {
 
     @Test
     public void TestOddechy(){
-        IPoprawnosc warunek = new PoprawnaLiczbaOddechow();
+        IPoprawnosc warunek = new PoprawnaLiczbaOddechow(new Ko());
         IPlansza plansza = new Plansza();
         
         //kiedy są puste pola wokól  to można tam wstawić pionek
