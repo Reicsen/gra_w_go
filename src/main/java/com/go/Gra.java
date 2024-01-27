@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Gra implements IGra,IGra2,IGra3,Runnable
+public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
 {
     private String aktywnyKolor;
     private IPlansza plansza;
@@ -74,118 +74,98 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
         }
     }
 
-    public void pionyUPrzeciwnika()
+    public void dwaRazyPominietoTure(int nrGracza)
     {
-        if("czarny".equals(aktywnyKolor))
+        try
         {
-            /*try
+            zmienKolor();
+            if (nrGracza==1)
             {
-                wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
-                wysylanieDoGracza1.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }*/
-        }
-        else
-        {
-           /*try
-            {
-                wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "biały"));
-                wysylanieDoGracza2.writeInt(obliczanieTerytorium.iloscPionowNaTerytoriumPrzeciwnika(this.plansza, "czarny"));
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }*/
-        }
-    }
-
-    public void dwaRazyPominietoTure()
-    {
-
-    }
-
-    public void czekajNaOdpowiedz()
-    {
-        int czarneTerytorium=0;
-        int bialeTerytorium=0;
-        int temp;
-        while (czarneTerytorium==0 || bialeTerytorium==0)
-        {
-            try
-            {
-                if ("czarny".equals(aktywnyKolor))
-                {
-                    temp=odbieranieOdGracza1.readInt();
-                    if (temp==3)
-                    {
-                        temp=odbieranieOdGracza1.readInt();
-                        if (temp==1)
-                        {
-                            czarneTerytorium=odbieranieOdGracza1.readInt();
-                            break;
-                        }
-                        else
-                        {
-                            wysylanieDoGracza2.writeInt(2);
-                        }
-                    }
-                    else
-                    {
-                        if(bialeTerytorium!=0)
-                        {
-                            zmienKolor();
-                        }
-                    }
-                }
-                else
-                {
-                    temp=odbieranieOdGracza2.readInt();
-                    if (temp==3)
-                    {
-                        temp=odbieranieOdGracza2.readInt();
-                        if (temp==1)
-                        {
-                            bialeTerytorium=odbieranieOdGracza2.readInt();
-                            break;
-                        }
-                        else
-                        {
-                            wysylanieDoGracza1.writeInt(2);
-                        }
-                    }
-                    else
-                    {
-                        if(czarneTerytorium!=0)
-                        {
-                            zmienKolor();
-                        }
-                    }
-                }
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        if (czarneTerytorium!=0 && bialeTerytorium!=0)
-        {
-            if (!"bialy".equals(aktywnyKolor))
-            {
-                zmienKolor();
-            }
-            if (czarneTerytorium>bialeTerytorium)
-            {
-                koniecGry();
+                wysylanieDoGracza1.writeInt(6);
             }
             else
             {
-                zmienKolor();
-                koniecGry();
+                wysylanieDoGracza2.writeInt(6);
             }
         }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void zerwanoNegocjacje(int nrGracza)
+    {
+        try
+        {
+            if (nrGracza==1)
+            {
+                wysylanieDoGracza2.writeInt(2);
+            }
+            else
+            {
+                wysylanieDoGracza1.writeInt(2);
+            }
+            zmienKolor();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void przekazanieTerenow()
+    {
+        int temp;
+        try
+        {
+            if ("czarny".equals(aktywnyKolor))
+            {
+                wysylanieDoGracza2.writeInt(100);
+                temp=odbieranieOdGracza1.readInt();
+                while(temp!=-1)
+                {
+                    wysylanieDoGracza2.writeInt(temp);
+                    temp=odbieranieOdGracza1.readInt();
+                }
+                wysylanieDoGracza2.writeInt(temp);
+                temp=odbieranieOdGracza1.readInt();
+                while(temp!=-1)
+                {
+                    wysylanieDoGracza2.writeInt(temp);
+                    temp=odbieranieOdGracza1.readInt();
+                }
+                wysylanieDoGracza2.writeInt(temp);
+            }
+            else
+            {
+                wysylanieDoGracza1.writeInt(100);
+                temp=odbieranieOdGracza2.readInt();
+                while(temp!=-1)
+                {
+                    wysylanieDoGracza1.writeInt(temp);
+                    temp=odbieranieOdGracza2.readInt();
+                }
+                wysylanieDoGracza1.writeInt(temp);
+                temp=odbieranieOdGracza2.readInt();
+                while(temp!=-1)
+                {
+                    wysylanieDoGracza1.writeInt(temp);
+                    temp=odbieranieOdGracza2.readInt();
+                }
+                wysylanieDoGracza1.writeInt(temp);
+            }
+            zmienKolor();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void zaakceptowanoTerytoria()
+    {
+
     }
 
     private void ruchDoBazy(int pole)
@@ -290,7 +270,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
             {
                 if(wczesniejByloPomin)
                 {
-                    dwaRazyPominietoTure();
+                    dwaRazyPominietoTure(2);
                     wczesniejByloPomin = false;
                 }
                 else
@@ -310,7 +290,7 @@ public class Gra implements IGra,IGra2,IGra3,Runnable
             {
                 if(wczesniejByloPomin)
                 {
-                    dwaRazyPominietoTure();
+                    dwaRazyPominietoTure(1);
                     wczesniejByloPomin = false;
                 }
                 else

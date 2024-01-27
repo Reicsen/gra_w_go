@@ -381,16 +381,13 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
     }
     private void zmien(int nrpola, Color kolor){
         if(kolor == Color.WHITE){
-            lista.remove(nrpola);
-            lista.add(nrpola, 2);
+            lista.set(nrpola, 2);
         }
         else{
-            lista.remove(nrpola);
-            lista.add(nrpola, 1);
+            lista.set(nrpola, 1);
         }
     }
     private void usun(int nrpola){
-        lista.remove(nrpola);
-        lista.add(nrpola, 0);
+        lista.set(nrpola, 0);
     }
 }
