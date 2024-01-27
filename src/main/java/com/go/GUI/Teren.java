@@ -22,7 +22,7 @@ public class Teren extends GridPane{
     public List<ZaznaczTeren> pionki= new ArrayList<>();
     private int ileRazy; 
 
-    Teren (List<String> lista, Gracz gracz, Stage stage){
+    Teren (List<Integer> lista, Gracz gracz, Stage stage){
 
         super();
 
@@ -72,7 +72,6 @@ public class Teren extends GridPane{
         b1.setOnAction(event -> {
             if(ileRazy == 0){
                 for(Integer nrpola : twojTeren){
-                    System.out.println(nrpola);
                     pionki.get(nrpola).setDisable(true);
                 }
                 ustawTeren(przeciwnikaTeren);
@@ -83,9 +82,6 @@ public class Teren extends GridPane{
             }
         
             else{
-                for(Integer nrpola : przeciwnikaTeren){
-                    System.out.println(nrpola);
-                }
                 gracz.wyslijTeren(twojTeren, przeciwnikaTeren);
                 stage.close();
             }

@@ -1,25 +1,33 @@
 Najpierw, po połączeniu, serwer zwraca 1 lub 2 (numer gracza).
 
 Komunikat od aktywnego gracza do serwera:
--1 = ,,poddaj się"; automatycznie wyłącza swoją aktywność 
-0 = ,,pomiń ruch"; automatycznie wyłącza swoją aktywność 
+-1 = „poddaj się"; automatycznie wyłącza swoją aktywność 
+0 = „pomiń ruch"; automatycznie wyłącza swoją aktywność 
 1; n = wysyłanie ruchu (n=x+19*y -> 0<=n<=360); klient nie wyłącza aktywności, tylko czeka na odpowiedź serwera dotyczącą poprawności ruchu
 10 = zapytanie (od bota) o obecne własne i przeciwne terytorium 
-3; -1 = odpowiedź „nie" na sytuację podwójnego pominięcia tury
-3; 1; n = odpowiedź „tak" na sytuację podwójnego pominięcia tury i wysłanie swojego wyniku
-2 = jeszcze nie wybrano opcji w okienku
+3; -1 = odpowiedź „nie" na sytuację podwójnego pominięcia tury - przeciwnik wznawia grę
+3; 1; n0, n1, ..., -1; m0, m1, ..., -1 = odpowiedź „tak" na sytuację podwójnego pominięcia tury i wysłanie ostatecznej listy swojego i wrogiego terytorium
+100; n0, n1, ..., -1; m0, m1, ..., -1 = przesłanie stanu listy swojego i wrogiego terytorium
+
 
 Komunikaty po ruchu:
-0; n = ruch poprawny - gracz wyłącza aktywność i dodaje do planszy swój pionek na polu n; serwer wysyła sygnał ,,przekazania tury" do drugiego gracza
--1 = ruch niepoprawny - gracz wyświetla na dole komunikat o niepoprawności ruchu i ma ,,ponowioną turę"
+0; n = ruch poprawny - gracz wyłącza aktywność i dodaje do planszy swój pionek na polu n; serwer wysyła sygnał „przekazania tury" do drugiego gracza
+-1 = ruch niepoprawny - gracz wyświetla na dole komunikat o niepoprawności ruchu i ma „ponowioną turę"
 
 Pozostałe komunikaty:
 1; n = gracz dodaje do planszy pionek przeciwnika na pole n i włącza swoją turę ruchu
 2 = gracz włącza swoją turę ruchu bez dodawania pionka do planszy (na starcie lub po pominięciu ruchu)
 3; m = gracz dodaje do swojego licznika jeńców m
 4; n1, n2, ..., nk; -1 = usunięcie z wizualnej planszy pionków z pól n1, ..., nk
-5; -1 = przegrana - gracz wyświetla informację ,,Przegrałeś!"
-5; 1 = wygrana - gracz wyświetla informację ,,Wygrałeś!"
-6 = zapytanie o ilość jeńców
+5; -1 = przegrana - gracz wyświetla informację „Przegrałeś!"
+5; 1 = wygrana - gracz wyświetla informację „Wygrałeś!"
+6 = rozpoczęcie negocjacji
 10 = start gry
-101; n1, n2, n3, n4, n5 = dane do okna po podwójnym pominięciu tury (własne terytorium, przeciwne terytorium, pionki przeciwnika na własnym terytorium, własne pionki na przeciwnym terytorium, ilość jeńców rywala)
+100; n0, n1, ..., -1; m0, m1, ..., -1 = przesłanie stanu list terytorium obu graczy do drugiego gracza
+
+Kolory na planszy podwójnego pominięcia:
+0=brak
+1=czarny
+2=biały
+3=fioletowy (terytorium obecnie negocjującego gracza)
+4=niebieski (terytorium obecnie nienegocjującego gracza)

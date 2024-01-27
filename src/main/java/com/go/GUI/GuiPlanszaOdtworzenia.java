@@ -22,7 +22,6 @@ import javafx.scene.text.TextAlignment;
 public class GuiPlanszaOdtworzenia extends GridPane 
 {
     private Odtworzenie gracz;
-    public Label lbl;
     public List<PrzyciskPionek> pionki= new ArrayList<>();
     public Color kolor;
 

@@ -4,12 +4,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-
 import org.apache.commons.math3.random.MersenneTwister;
 
-public class Bot implements Klient, IBot, INegocjacje, Runnable
+public class Bot implements Klient, IBot, Runnable
 {
     private boolean aktywny=false;
+    private int nrGracza;
     private int iloscJencow=0;
     private DataInputStream odbieranieOdSerwera;
     private DataOutputStream wysylanieDoSerwera;
@@ -23,6 +23,7 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
             this.polaczenieZSerwerem = new Socket("localhost", 8000);
             this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
+            this.nrGracza = odbieranieOdSerwera.readInt();
         }
         catch (IOException e)
         {
@@ -85,21 +86,16 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
     {
         try
         {
-            Thread.sleep(1);
-            czyPoddacGre();
-            if (aktywny)
+            Thread.sleep(1000);
+            if (czyPoddacGre())
             {
-                int n=this.generator.nextInt(10);
-                if(n==0)
-                {
-                    pominRuch();
-                }
-                else
-                {
-                    int x=this.generator.nextInt(19);
-                    int y=this.generator.nextInt(19);
-                    wykonajRuch(x, y);
-                }
+                poddajSie();
+            }
+            else
+            {
+                int x=this.generator.nextInt(19);
+                int y=this.generator.nextInt(19);
+                wykonajRuch(x, y);
             }
         }
         catch(InterruptedException e)
@@ -108,19 +104,20 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         }
     }
 
-    public void czyPoddacGre()
+    public boolean czyPoddacGre()
     {
         try
         {
             wysylanieDoSerwera.writeInt(11);
-            int wlasneTerytorium = odbieranieOdSerwera.readInt(); 
-            int wrogieTerytorium = odbieranieOdSerwera.readInt();
-            if (wrogieTerytorium>wlasneTerytorium+10)
+            int iloscPionkow = odbieranieOdSerwera.readInt(); 
+            int iloscPionkowPrzeciwnika = odbieranieOdSerwera.readInt();
+            int wspolczynnik = iloscPionkowPrzeciwnika-iloscPionkow-10;
+            if (wspolczynnik>0)
             {
                 int los = this.generator.nextInt(100);
-                if (wrogieTerytorium-wlasneTerytorium>los)
+                if (wspolczynnik>los)
                 {
-                    poddajSie();
+                    return true;
                 }
             }
         }
@@ -128,6 +125,7 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         {
             e.printStackTrace();
         }
+        return false;
     }
 
 
@@ -143,58 +141,6 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         }
     }
 
-    public void dane()
-    {
-        try
-        {
-            int wlasneTerytorium = odbieranieOdSerwera.readInt();
-            int przeciwneTerytorium = odbieranieOdSerwera.readInt();
-            int przeciwnePionkiNaWlasnymTerytorium = odbieranieOdSerwera.readInt();
-            int wlasnePionkiNaPrzeciwnymTerytorium = odbieranieOdSerwera.readInt();  
-            int jencyRywala = odbieranieOdSerwera.readInt();          
-
-            if(this.generator.nextInt(2)==0)
-            {
-                wybranoNie();
-            }
-            else
-            {
-                wybranoTak(wlasneTerytorium, jencyRywala, wlasnePionkiNaPrzeciwnymTerytorium);
-            }                
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void wybranoTak(int twojeTerytorium, int jencyPrzeciwnika, int twojePionkiNaTereniePrzeciwnika)
-    {
-        try
-        {
-            wysylanieDoSerwera.writeInt(3);
-            wysylanieDoSerwera.writeInt(1);
-            wysylanieDoSerwera.writeInt(Math.max(0, twojeTerytorium-(jencyPrzeciwnika+twojePionkiNaTereniePrzeciwnika)));
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void wybranoNie()
-    {
-        try
-        {
-            wysylanieDoSerwera.writeInt(3);
-            wysylanieDoSerwera.writeInt(-1);
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
@@ -204,10 +150,11 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         while (true)
         {
             try
-            {
+            {                
                 sygnal=odbieranieOdSerwera.readInt();
                 if (sygnal==0)
                 {
+                    ruch=odbieranieOdSerwera.readInt();
                     zmienAktywnosc();
                 }
                 if (sygnal==-1)
@@ -217,6 +164,7 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
 
                 if (sygnal==1)
                 {
+                    ruch=odbieranieOdSerwera.readInt();
                     zmienAktywnosc();
                     losujRuch();
                 }
@@ -236,14 +184,27 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
                 {
                     break;
                 }
+
+                if (sygnal==4)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    while (ruch!=-1)
+                    {
+                        ruch=odbieranieOdSerwera.readInt();
+                    }
+                } 
                 
-                if(sygnal==6)
+                if(sygnal==6 || sygnal==100)
                 {
-                    wysylanieDoSerwera.writeInt(iloscJencow);
+                    poddajSie();
                 }
-                if (sygnal==101)
+
+                if (sygnal==10)
                 {
-                    dane();
+                    if(this.nrGracza==1)
+                    {
+                        wysylanieDoSerwera.writeInt(0); //to nie odczyt z bazy
+                    }
                 }
             }
 

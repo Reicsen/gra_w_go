@@ -10,12 +10,12 @@ import javafx.scene.shape.Rectangle;
 
 public class StworzButton implements FactoryButton{
 
-    public Button przycisk(String cecha){
+    public Button przycisk(Integer cecha){
 
         Button btn = new Button();
         btn.setMaxSize(26, 26);
 
-        if(cecha.equals("null")){
+        if(cecha==0){
             Line cross1 = new Line(13, 0, 13, 26);
             Line cross2 = new Line(0, 13, 26, 13);
             cross1.setStroke(Color.BLACK);
@@ -29,7 +29,7 @@ public class StworzButton implements FactoryButton{
 
             btn.setGraphic(stackPane);
         }
-        else if(cecha.equals("biały")){
+        else if(cecha==2){
             Circle circle = new Circle(13, Color.WHITE);
             
             circle.setStroke(Color.BLACK);
@@ -37,7 +37,7 @@ public class StworzButton implements FactoryButton{
 
             btn.setGraphic(circle);
         }
-        else if(cecha.equals("czarny")){
+        else if(cecha==1){
             Circle circle = new Circle(13, Color.BLACK);
             
             circle.setStroke(Color.BLACK);
@@ -45,12 +45,12 @@ public class StworzButton implements FactoryButton{
 
             btn.setGraphic(circle);
         }
-        else if(cecha.equals("fioletowy")){
+        else if(cecha==3){
             Rectangle rec = new Rectangle(26, 26, Paint.valueOf("violet"));    
 
             btn.setGraphic(rec);
         }
-        else if(cecha.equals("niebieski")){
+        else if(cecha==4){
             Rectangle rec = new Rectangle(26, 26, Paint.valueOf("blue"));    
 
             btn.setGraphic(rec);
