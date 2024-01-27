@@ -81,11 +81,11 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
         {
             if ("czarny".equals(aktywnyKolor))
             {
-                wysylanieDoGracza2.writeInt(6);
+                wysylanieDoGracza1.writeInt(6);
             }
             else
             {
-                wysylanieDoGracza1.writeInt(6);
+                wysylanieDoGracza2.writeInt(6);
             }
             zmienKolor();
         }
@@ -194,7 +194,6 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
 
     public void zaakceptowanoTerytoria()
     {
-        System.out.println("Zaakceptowano terytoria.\n");
         int temp;
         List<Integer> czarneTerytorium = new ArrayList<Integer>();
         List<Integer> bialeTerytorium = new ArrayList<Integer>();
@@ -229,16 +228,6 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
                     czarneTerytorium.add(temp);
                     temp=odbieranieOdGracza2.readInt();
                 }
-            }
-            System.out.println("Czarne terytorium:");
-            for(int i=0;i<czarneTerytorium.size();i++)
-            {
-                System.out.println(czarneTerytorium.get(i));
-            }
-            System.out.println("Białe terytorium:");
-            for(int i=0;i<bialeTerytorium.size();i++)
-            {
-                System.out.println(bialeTerytorium.get(i));
             }
         }
         catch (IOException e)
@@ -345,6 +334,7 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
     {
         if ("czarny".equals(aktywnyKolor))
         {
+            zmienKolor();
             try
             {
                 if(wczesniejByloPomin)
@@ -365,6 +355,7 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
         }
         else
         {
+            zmienKolor();
             try
             {
                 if(wczesniejByloPomin)
@@ -383,7 +374,6 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
                 e.printStackTrace();
             }
         }
-        zmienKolor();
     }
 
     public void probaRuchu()

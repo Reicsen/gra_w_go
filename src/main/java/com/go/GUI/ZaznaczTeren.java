@@ -16,7 +16,7 @@ import javafx.scene.shape.Rectangle;
 public class ZaznaczTeren extends Button{
 
     public int nrpola;
-    public int zaznaczone;
+    public boolean zaznaczone;
     public List <Integer> terenZaznaczony = new ArrayList<>(); 
     public Paint paint = Paint.valueOf("violet");
 
@@ -24,7 +24,7 @@ public class ZaznaczTeren extends Button{
         super();
         setMaxSize(26, 26);
         this.nrpola = nrpola;
-        zaznaczone = 0;
+        zaznaczone = false;
 
         if(wyglad==0){
             Line cross1 = new Line(13, 0, 13, 26);
@@ -62,13 +62,12 @@ public class ZaznaczTeren extends Button{
             @Override
             public void handle(ActionEvent e) 
             {
-                if(zaznaczone == 0){
+                if(!zaznaczone){
                     terenZaznaczony.add(nrpola);
                     Rectangle rec = new Rectangle(26, 26, paint);    
 
                     setGraphic(rec);
-                    zaznaczone = 1;
-                    System.out.println("zaznaczono");
+                    zaznaczone = true;
                 }
                 else{
                     if(terenZaznaczony.contains(nrpola)){
@@ -85,12 +84,9 @@ public class ZaznaczTeren extends Button{
                         stackPane.getChildren().addAll(cross1, cross2);
 
                         setGraphic(stackPane);
-                        System.out.println("grafika");
                         
-                        zaznaczone = 0;
+                       zaznaczone = false;
                     }
-                    
-                    System.out.println("po grafice");
                 }
             }
         });

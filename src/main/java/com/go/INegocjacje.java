@@ -1,7 +1,5 @@
 package com.go;
 
-import java.util.List;
-
 public interface INegocjacje 
 {
     void dane ();

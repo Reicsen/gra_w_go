@@ -141,11 +141,8 @@ public class GuiPlansza extends GridPane
     }
     
     public void  zgoda(List<Integer> lista){
-        System.out.println("funkcja");
         Stage stage = new Stage();
-        System.out.println("stage");
         GridPane pane = new Zgoda(lista, gracz, stage, this);
-        System.out.println("zgoda");
         stage.setTitle("Negocjacje "+ kolor());
         Scene scene = new Scene(pane, 890, 1000);
         stage.setScene(scene);
