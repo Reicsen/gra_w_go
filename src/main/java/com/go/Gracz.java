@@ -256,6 +256,20 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
                 negocjacyjneWlasneTerytorium.add(pole);
                 pole=odbieranieOdSerwera.readInt();
             }
+            List<Integer> listaNegocjacyjna = lista;
+            for (int i=0; i< negocjacyjneWlasneTerytorium.size(); i++)
+            {
+                int temp=negocjacyjneWlasneTerytorium.get(i);
+                listaNegocjacyjna.set(temp,3);
+            }
+            for (int i=0; i< negocjacyjneWrogieTerytorium.size(); i++)
+            {
+                int temp=negocjacyjneWrogieTerytorium.get(i);
+                listaNegocjacyjna.set(temp,4);
+            }
+            Platform.runLater(() -> {
+                plansza.zgoda(listaNegocjacyjna);
+            });
         }
         catch (IOException e)
         {

@@ -29,5 +29,5 @@ Kolory na planszy podwójnego pominięcia:
 0=brak
 1=czarny
 2=biały
-3=fioletowy
-4=niebieski
+3=fioletowy (terytorium obecnie negocjującego gracza)
+4=niebieski (terytorium obecnie nienegocjującego gracza)
