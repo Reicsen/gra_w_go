@@ -2,6 +2,9 @@ package com.go;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 public class TestTerytorium {
@@ -9,7 +12,8 @@ public class TestTerytorium {
     ITerytorium obliczenia = new Terytorium();
 
     @Test
-    public void testObliczTerytorium(){
+    public void testPionyDoUsuniecia(){
+
         IPlansza plansza = new Plansza();
         plansza.dodajPionek("biały", 0, 0);
         plansza.dodajPionek("czarny", 2, 0);
@@ -17,19 +21,11 @@ public class TestTerytorium {
         plansza.dodajPionek("czarny", 1, 1);
         plansza.dodajPionek("czarny", 0, 1);
 
-        assertSame(0, obliczenia.obliczTerytorium(plansza, "biały"));
+        List <Integer> lista = new ArrayList<>();
+        lista.add(1);
 
-    }
-    @Test
-    public void testPionyNaTerytoriumPrzeciwnika(){
-        IPlansza plansza = new Plansza();
-        plansza.dodajPionek("biały", 0, 0);
-        plansza.dodajPionek("czarny", 2, 0);
-        plansza.dodajPionek("czarny", 2, 1);
-        plansza.dodajPionek("czarny", 1, 1);
-        plansza.dodajPionek("czarny", 0, 1);
-
-        assertSame(0, obliczenia.pionyNaTerytoriumPrzeciwnika(plansza, "bialy").size());
+        assertSame(1, obliczenia.pionyDoUsuniecia(lista, plansza, "czarny").size());
+        assertSame(0, obliczenia.pionyDoUsuniecia(lista, plansza, "czarny").get(0));
     }
     
 }
