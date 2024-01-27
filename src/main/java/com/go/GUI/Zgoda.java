@@ -55,8 +55,7 @@ public class Zgoda extends GridPane{
         add(b1, 0, 20);
         b1.setOnAction(event -> {
 
-            //TODO - gracz.zgoda
-
+            gracz.wybranoTak();
             stage.close();
         });
 
@@ -70,8 +69,7 @@ public class Zgoda extends GridPane{
         add(b2, 7, 20);
         b2.setOnAction(event -> {
             
-            //TODO - gracz.powrótDoGry
-
+            gracz.wybranoNie();
             stage.close();
         });
 

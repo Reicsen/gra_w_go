@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
 {
@@ -74,18 +75,46 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
         }
     }
 
-    public void dwaRazyPominietoTure(int nrGracza)
+    public void dwaRazyPominietoTure()
     {
         try
         {
-            zmienKolor();
-            if (nrGracza==1)
+            if ("czarny".equals(aktywnyKolor))
             {
-                wysylanieDoGracza1.writeInt(6);
+                wysylanieDoGracza2.writeInt(6);
             }
             else
             {
-                wysylanieDoGracza2.writeInt(6);
+                wysylanieDoGracza1.writeInt(6);
+            }
+            zmienKolor();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void koniecNegocjacji()
+    {
+        int status;
+        try
+        {
+            if ("czarny".equals(aktywnyKolor))
+            {
+                status=odbieranieOdGracza1.readInt();
+            }
+            else
+            {
+                status=odbieranieOdGracza2.readInt();
+            }
+            if (status==-1)
+            {
+                zerwanoNegocjacje();
+            }
+            else
+            {
+                zaakceptowanoTerytoria();
             }
         }
         catch(IOException e)
@@ -94,11 +123,11 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
         }
     }
 
-    public void zerwanoNegocjacje(int nrGracza)
+    public void zerwanoNegocjacje()
     {
         try
         {
-            if (nrGracza==1)
+            if ("czarny".equals(aktywnyKolor))
             {
                 wysylanieDoGracza2.writeInt(2);
             }
@@ -165,7 +194,57 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
 
     public void zaakceptowanoTerytoria()
     {
-
+        System.out.println("Zaakceptowano terytoria.\n");
+        int temp;
+        List<Integer> czarneTerytorium = new ArrayList<Integer>();
+        List<Integer> bialeTerytorium = new ArrayList<Integer>();
+        try
+        {
+            if("czarny".equals(aktywnyKolor))
+            {
+                temp=odbieranieOdGracza1.readInt();
+                while(temp!=-1)
+                {
+                    czarneTerytorium.add(temp);
+                    temp=odbieranieOdGracza1.readInt();
+                }
+                temp=odbieranieOdGracza1.readInt();
+                while(temp!=-1)
+                {
+                    bialeTerytorium.add(temp);
+                    temp=odbieranieOdGracza1.readInt();
+                }
+            }
+            else
+            {
+                temp=odbieranieOdGracza2.readInt();
+                while(temp!=-1)
+                {
+                    bialeTerytorium.add(temp);
+                    temp=odbieranieOdGracza2.readInt();
+                }
+                temp=odbieranieOdGracza2.readInt();
+                while(temp!=-1)
+                {
+                    czarneTerytorium.add(temp);
+                    temp=odbieranieOdGracza2.readInt();
+                }
+            }
+            System.out.println("Czarne terytorium:");
+            for(int i=0;i<czarneTerytorium.size();i++)
+            {
+                System.out.println(czarneTerytorium.get(i));
+            }
+            System.out.println("Białe terytorium:");
+            for(int i=0;i<bialeTerytorium.size();i++)
+            {
+                System.out.println(bialeTerytorium.get(i));
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void ruchDoBazy(int pole)
@@ -270,7 +349,7 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
             {
                 if(wczesniejByloPomin)
                 {
-                    dwaRazyPominietoTure(2);
+                    dwaRazyPominietoTure();
                     wczesniejByloPomin = false;
                 }
                 else
@@ -290,7 +369,7 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
             {
                 if(wczesniejByloPomin)
                 {
-                    dwaRazyPominietoTure(1);
+                    dwaRazyPominietoTure();
                     wczesniejByloPomin = false;
                 }
                 else
@@ -410,6 +489,14 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
                 if (sygnal==11)
                 {
                     iloscPol();
+                }
+                if (sygnal==3)
+                {
+                    koniecNegocjacji();
+                }
+                if (sygnal==100)
+                {
+                    przekazanieTerenow();
                 }
             }
         }
