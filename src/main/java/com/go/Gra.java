@@ -228,8 +228,9 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,IWysylanieRuchuDoBaz
                     temp=odbieranieOdGracza2.readInt();
                 }
             }
-            List<Integer> czarnePionyDoUsuniecia = obslugaObszaru.pionyDoUsuniecia(bialeTerytorium, plansza, "biały");
-            List<Integer> bialePionyDoUsuniecia = obslugaObszaru.pionyDoUsuniecia(czarneTerytorium, plansza, "czarny");
+            List<Integer> czarnePionyNaBialym = obslugaObszaru.pionyDoUsuniecia(bialeTerytorium, plansza, "biały");
+            List<Integer> bialePionyNaCzarnym = obslugaObszaru.pionyDoUsuniecia(czarneTerytorium, plansza, "czarny");
+            proceduraKoncowa(czarneTerytorium, bialeTerytorium, czarnePionyNaBialym, bialePionyNaCzarnym);
         }
         catch (IOException e)
         {
