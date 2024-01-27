@@ -5,23 +5,24 @@ import com.go.IPole;
 
 public class PoprawnaLiczbaOddechow implements IPoprawnosc {
     IPoprawnosc ko;
+
+    public PoprawnaLiczbaOddechow(IPoprawnosc ko){
+        this.ko = ko;
+    }
+
     public boolean sprawdzPoprawnosc(IPlansza plansza, int x, int y, String kolor){
 
         //jeżeli któryś z pól otaczających pole (x,y) istnieje i jest puste to pole(x,y) ma wystarczającą liczbe oddechów
         if(y > 0 && plansza.podajPola().get(19 * (y-1) + x).podajPionek() == null){
-            ko = new Ko();
             return ko.sprawdzPoprawnosc(plansza, x, y, kolor);
         }
         else if(y < 18 && plansza.podajPola().get(19 * (y+1) + x).podajPionek() == null){
-            ko = new Ko();
             return ko.sprawdzPoprawnosc(plansza, x, y, kolor);
         }
         else if(x > 0 && plansza.podajPola().get(19 * y + (x-1)).podajPionek() == null){
-            ko = new Ko();
             return ko.sprawdzPoprawnosc(plansza, x, y, kolor);
         }
         else if(x < 18 && plansza.podajPola().get(19* y + (x + 1)).podajPionek() == null){
-            ko = new Ko();
             return ko.sprawdzPoprawnosc(plansza, x, y, kolor);
         }
 
@@ -115,7 +116,6 @@ public class PoprawnaLiczbaOddechow implements IPoprawnosc {
         }
 
         if(n == true){
-            ko = new Ko();
             return ko.sprawdzPoprawnosc(plansza, x, y, kolor);
         }
         return n;
