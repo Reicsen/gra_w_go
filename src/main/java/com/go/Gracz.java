@@ -133,9 +133,6 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
         plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
         });
         zmien(nrpola, kolor);
-        System.out.println(nrpola);
-        System.out.println(nrpola/19);
-        System.out.println(nrpola%19);
     }
 
     public void usunieciePionka(int nrpola)
@@ -256,7 +253,12 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
                 negocjacyjneWlasneTerytorium.add(pole);
                 pole=odbieranieOdSerwera.readInt();
             }
-            List<Integer> listaNegocjacyjna = lista;
+            List<Integer> listaNegocjacyjna = new ArrayList<Integer>();
+            for (int i=0; i<lista.size(); i++)
+            {
+                int temp=lista.get(i);
+                listaNegocjacyjna.add(temp);
+            }
             for (int i=0; i< negocjacyjneWlasneTerytorium.size(); i++)
             {
                 int temp=negocjacyjneWlasneTerytorium.get(i);

@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
+public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,IWysylanieRuchuDoBazy,Runnable
 {
     private String aktywnyKolor;
     private IPlansza plansza;
@@ -87,7 +87,6 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
             {
                 wysylanieDoGracza2.writeInt(6);
             }
-            zmienKolor();
         }
         catch(IOException e)
         {
@@ -236,7 +235,7 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
         }
     }
 
-    private void ruchDoBazy(int pole)
+    public void ruchDoBazySQL(int pole)
     {
         if(!czyOdczytZBazy)
         {
@@ -271,7 +270,7 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
     public void dodajPionek(int nrpola)
     {
         plansza.dodajPionek(this.aktywnyKolor, nrpola%19, nrpola/19);
-        this.ruchDoBazy(nrpola);
+        this.ruchDoBazySQL(nrpola);
         this.zmienKolor();
     }
 
@@ -299,7 +298,7 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,Runnable
 
     public void koniecGry()
     {
-        ruchDoBazy(-1);
+        ruchDoBazySQL(-1);
         if ("czarny".equals(aktywnyKolor))
         {
             try
