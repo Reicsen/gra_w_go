@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import org.apache.commons.math3.random.MersenneTwister;
 
-public class Bot implements Klient, IBot, INegocjacje, Runnable
+public class Bot implements Klient, IBot, Runnable
 {
     private boolean aktywny=false;
     private int nrGracza;
@@ -141,58 +141,6 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
         }
     }
 
-    public void dane()
-    {
-        try
-        {
-            int wlasneTerytorium = odbieranieOdSerwera.readInt();
-            int przeciwneTerytorium = odbieranieOdSerwera.readInt();
-            int przeciwnePionkiNaWlasnymTerytorium = odbieranieOdSerwera.readInt();
-            int wlasnePionkiNaPrzeciwnymTerytorium = odbieranieOdSerwera.readInt();  
-            int jencyRywala = odbieranieOdSerwera.readInt();          
-
-            if(this.generator.nextInt(2)==0)
-            {
-                wybranoNie();
-            }
-            else
-            {
-                wybranoTak(wlasneTerytorium, jencyRywala, wlasnePionkiNaPrzeciwnymTerytorium);
-            }                
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void wybranoTak(int twojeTerytorium, int jencyPrzeciwnika, int twojePionkiNaTereniePrzeciwnika)
-    {
-        try
-        {
-            wysylanieDoSerwera.writeInt(3);
-            wysylanieDoSerwera.writeInt(1);
-            wysylanieDoSerwera.writeInt(Math.max(0, twojeTerytorium-(jencyPrzeciwnika+twojePionkiNaTereniePrzeciwnika)));
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void wybranoNie()
-    {
-        try
-        {
-            wysylanieDoSerwera.writeInt(3);
-            wysylanieDoSerwera.writeInt(-1);
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
@@ -246,14 +194,11 @@ public class Bot implements Klient, IBot, INegocjacje, Runnable
                     }
                 } 
                 
-                if(sygnal==6)
+                if(sygnal==6 || sygnal==100)
                 {
-                    wysylanieDoSerwera.writeInt(iloscJencow);
+                    poddajSie();
                 }
-                if (sygnal==101)
-                {
-                    dane();
-                }
+
                 if (sygnal==10)
                 {
                     if(this.nrGracza==1)

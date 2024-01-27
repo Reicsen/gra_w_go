@@ -5,8 +5,9 @@ Komunikat od aktywnego gracza do serwera:
 0 = ,,pomiń ruch"; automatycznie wyłącza swoją aktywność 
 1; n = wysyłanie ruchu (n=x+19*y -> 0<=n<=360); klient nie wyłącza aktywności, tylko czeka na odpowiedź serwera dotyczącą poprawności ruchu
 10 = zapytanie (od bota) o obecne własne i przeciwne terytorium 
-3; -1 = odpowiedź „nie" na sytuację podwójnego pominięcia tury
-3; 1; n = odpowiedź „tak" na sytuację podwójnego pominięcia tury i wysłanie swojego wyniku
+3; -1 = odpowiedź „nie" na sytuację podwójnego pominięcia tury - przeciwnik wznawia grę
+3; 1; n0, n1, ..., -1; m0, m1, ..., -1 = odpowiedź „tak" na sytuację podwójnego pominięcia tury i wysłanie ostatecznej listy swojego i wrogiego terytorium
+100; n0, n1, ..., -1; m0, m1, ..., -1 = przesłanie stanu listy swojego i wrogiego terytorium
 
 
 Komunikaty po ruchu:
@@ -20,7 +21,9 @@ Pozostałe komunikaty:
 4; n1, n2, ..., nk; -1 = usunięcie z wizualnej planszy pionków z pól n1, ..., nk
 5; -1 = przegrana - gracz wyświetla informację ,,Przegrałeś!"
 5; 1 = wygrana - gracz wyświetla informację ,,Wygrałeś!"
+6 = rozpoczęcie negocjacji
 10 = start gry
+100; n0, n1, ..., -1; m0, m1, ..., -1 = przesłanie stanu list terytorium obu graczy do drugiego gracza
 
 Kolory na planszy podwójnego pominięcia:
 0=brak

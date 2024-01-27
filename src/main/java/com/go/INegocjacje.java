@@ -1,8 +1,10 @@
 package com.go;
 
+import java.util.List;
+
 public interface INegocjacje 
 {
     void dane ();
-    void wybranoTak(int twojeTerytorium, int jencyPrzeciwnika, int twojePionkiNaTereniePrzeciwnika);
+    void wybranoTak();
     void wybranoNie();
 }
