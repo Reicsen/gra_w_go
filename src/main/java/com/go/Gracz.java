@@ -24,6 +24,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
     private List<Integer> negocjacyjneWlasneTerytorium;
     private List<Integer> negocjacyjneWrogieTerytorium;
     public List<Integer> lista;
+    private boolean czyPoczatekNegocjacji;
 
     public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
@@ -36,6 +37,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
             this.negocjacyjneWlasneTerytorium = new ArrayList<Integer>();
             this.negocjacyjneWrogieTerytorium = new ArrayList<Integer>();
             this.plansza=plansza;
+            czyPoczatekNegocjacji=true;
             ustawListe();
             
             ustawKolor(nrGracza);
@@ -159,6 +161,9 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
 
     public void dane()
     {
+        this.negocjacyjneWlasneTerytorium=new ArrayList<Integer>();
+        this.negocjacyjneWrogieTerytorium=new ArrayList<Integer>();
+        this.czyPoczatekNegocjacji=true;
         Platform.runLater(() -> {
             plansza.zgoda(lista);
         });
@@ -168,22 +173,29 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
     {
         try
         {
-            wysylanieDoSerwera.writeInt(3);
-            wysylanieDoSerwera.writeInt(1); //zaakceptowanie planszy negocjacyjnej
-            for (int i=0; i<negocjacyjneWlasneTerytorium.size(); i++)
+            if(czyPoczatekNegocjacji)
             {
-                int temp=negocjacyjneWlasneTerytorium.get(i);
-                wysylanieDoSerwera.writeInt(temp);
+                wyslijTeren(this.negocjacyjneWlasneTerytorium,this.negocjacyjneWrogieTerytorium); //to jest tuż po sygnale 6, więc są puste
             }
-            wysylanieDoSerwera.writeInt(-1);
-            for (int i=0; i<negocjacyjneWrogieTerytorium.size(); i++)
+            else
             {
-                int temp=negocjacyjneWrogieTerytorium.get(i);
-                wysylanieDoSerwera.writeInt(temp);
+                wysylanieDoSerwera.writeInt(3);
+                wysylanieDoSerwera.writeInt(1); //zaakceptowanie planszy negocjacyjnej
+                for (int i=0; i<negocjacyjneWlasneTerytorium.size(); i++)
+                {
+                    int temp=negocjacyjneWlasneTerytorium.get(i);
+                    wysylanieDoSerwera.writeInt(temp);
+                }
+                wysylanieDoSerwera.writeInt(-1);
+                for (int i=0; i<negocjacyjneWrogieTerytorium.size(); i++)
+                {
+                    int temp=negocjacyjneWrogieTerytorium.get(i);
+                    wysylanieDoSerwera.writeInt(temp);
+                }
+                wysylanieDoSerwera.writeInt(-1);
+                negocjacyjneWlasneTerytorium = new ArrayList<Integer>();
+                negocjacyjneWrogieTerytorium = new ArrayList<Integer>();
             }
-            wysylanieDoSerwera.writeInt(-1);
-            negocjacyjneWlasneTerytorium = new ArrayList<Integer>();
-            negocjacyjneWrogieTerytorium = new ArrayList<Integer>();
         }
         catch(IOException e)
         {
@@ -235,6 +247,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
 
     public void odbierzTeren()
     {
+        this.czyPoczatekNegocjacji=false;
         negocjacyjneWlasneTerytorium = new ArrayList<Integer>();
         negocjacyjneWrogieTerytorium = new ArrayList<Integer>();
         int pole;
