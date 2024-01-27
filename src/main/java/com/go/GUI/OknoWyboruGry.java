@@ -62,13 +62,8 @@ public class OknoWyboruGry implements IBazyDanychAdapter
             {
                 IDButton zrodlo = (IDButton) event.getSource();
                 int id = zrodlo.zwrocId();
-                GridPane gridPane1 = new GuiPlanszaOdtworzenia(id);
-                GridPane gridPane2 = new GuiPlanszaOdtworzenia(id);
-                Scene scenaGry = new Scene(gridPane1,900,1000);
-                Stage bazaGry = new Stage();
-                bazaGry.setTitle("Gra w go: replay");
-                bazaGry.setScene(scenaGry);
-                bazaGry.show();
+                IBazyDanychAdapter odczyt = new OdczytRuchow(id);
+                odczyt.obsluz();
 
                 baza.close();
             }

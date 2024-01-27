@@ -26,7 +26,7 @@ public class GuiPlanszaOdtworzenia extends GridPane
     public List<PrzyciskPionek> pionki= new ArrayList<>();
     public Color kolor;
 
-    public GuiPlanszaOdtworzenia(int nrGry)
+    public GuiPlanszaOdtworzenia(List<Integer> ruchy, List<Integer> gracze)
     {
         //Tworzymy nowy GridPane
         super();
@@ -36,7 +36,7 @@ public class GuiPlanszaOdtworzenia extends GridPane
         setStyle("-fx-background-color: black;");
 
         //Tworzymy nowego gracza
-        gracz = new Odtworzenie(this,nrGry);
+        gracz = new Odtworzenie(this,ruchy,gracze);
 
         //Tworzymy przyciski, które będą reprezentować pionki lub przecięcia linii
         //Przycisków jest tyle ile przecięć linii w planszy

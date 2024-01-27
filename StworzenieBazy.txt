@@ -33,7 +33,7 @@ BEGIN
  SET @str="SELECT MAX(id) FROM Gry;";
  PREPARE wez_id_gry FROM @str;
 
- SET @str="SELECT pole FROM Ruchy WHERE id_gry=? AND gracz=?;";
+ SET @str="SELECT pole FROM Ruchy WHERE id_gry=?;";
  PREPARE lista_ruchow FROM @str;
 
  SET @str="SELECT * FROM Gry;";

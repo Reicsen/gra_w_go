@@ -4,8 +4,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import com.go.GUI.GuiPlanszaOdtworzenia;
 import javafx.application.Platform;
@@ -14,6 +12,7 @@ import javafx.scene.paint.Color;
 public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnable
 {
     private List<Integer> ruchy;
+    private List<Integer> gracze;
     private boolean aktywny=false;
     private Color kolor=null;
     private Color kolorPrzeciwnika=null;
@@ -21,23 +20,22 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
     private DataOutputStream wysylanieDoSerwera;
     private Socket polaczenieZSerwerem;
     private GuiPlanszaOdtworzenia plansza;
-    private int licznik;
-    private int nr;
+    private int indeks;
+    private int nrGracza;
 
-    public Odtworzenie(GuiPlanszaOdtworzenia plansza, int nrGry) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
+    public Odtworzenie(GuiPlanszaOdtworzenia plansza, List<Integer> listaRuchow, List<Integer> listaGraczy) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
         try
         {
             this.polaczenieZSerwerem = new Socket("localhost", 8000);
             this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
-            int nrGracza = odbieranieOdSerwera.readInt();
+            this.nrGracza = odbieranieOdSerwera.readInt();
             this.plansza=plansza;
-            this.ruchy = new ArrayList<Integer>();
+            this.ruchy=listaRuchow;
+            this.gracze=listaGraczy;
             ustawKolor(nrGracza);
-            sczytajRuchy(nrGry,nrGracza);
-            licznik=0;
-            this.nr=nrGracza;
+            indeks=0;
         }
         catch (IOException e)
         {
@@ -45,28 +43,6 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         }
         Thread watek = new Thread(this); //stworzenie wątku
         watek.start();
-    }
-
-    public void sczytajRuchy(int nrGry, int nrGracza)
-    {
-        try (Connection polaczenie = DriverManager.getConnection("jdbc:mariadb://localhost:3306/gra_w_go", "user", "");
-            Statement kwerenda = polaczenie.createStatement();)
-        {
-            kwerenda.executeQuery("CALL start();");
-            String temp="EXECUTE lista_ruchow USING "+nrGry+", "+nrGracza+";";
-            ResultSet wynik = kwerenda.executeQuery(temp);
-            while(wynik.next())
-            {
-                int n = wynik.getInt(1);
-                this.ruchy.add(n);
-            }
-
-            wynik.close();
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public void poddajSie()
@@ -116,21 +92,34 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
                 e.printStackTrace();
             }
         }
-        licznik=licznik+1;
     }
 
-    public void odtworzRuch(int nrPola)
+    public void odtworzRuch()
     {
-
-        if(nrPola==-1)
+        try
         {
-            poddajSie();
+            Thread.sleep(1500);
+            if(gracze.get(indeks)==this.nrGracza)
+            {
+                int nastepnyRuch=ruchy.get(indeks);
+                if (nastepnyRuch==-1)
+                {
+                    poddajSie();
+                }
+                else
+                {
+                    wykonajRuch(nastepnyRuch%19, nastepnyRuch/19);
+                }
+            }
+            else
+            {
+                pominRuch();
+            }
+            indeks=indeks+1;
         }
-        else
+        catch(InterruptedException e)
         {
-            int x=nrPola%19;
-            int y=nrPola/19;
-            wykonajRuch(x, y);
+            e.printStackTrace();
         }
     }
 
@@ -201,68 +190,59 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         while (true)
         {
             try
-            {                
-                Thread.sleep(1000);
-                int pole=this.ruchy.get(licznik);
-                try
+            {
+                sygnal=odbieranieOdSerwera.readInt();
+                if (sygnal==0)
                 {
-                    sygnal=odbieranieOdSerwera.readInt();
-                    if (sygnal==0)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();
-                        dodaniePionka(ruch, kolor);
-                        zmienAktywnosc();
-                    }
-                    if (sygnal==-1)
-                    {
-                        odtworzRuch(pole); 
-                    }
+                    ruch=odbieranieOdSerwera.readInt();
+                    dodaniePionka(ruch, kolor);
+                    zmienAktywnosc();
+                }
+                if (sygnal==-1)
+                {
+                    odtworzRuch(); 
+                }
 
-                    if (sygnal==1)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();
-                        dodaniePionka(ruch, kolorPrzeciwnika);
-                        zmienAktywnosc();
-                        odtworzRuch(pole);                    
-                    }
-                    if (sygnal==2)
-                    {
-                        zmienAktywnosc();
-                        odtworzRuch(pole);
-                    }
+                if (sygnal==1)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    dodaniePionka(ruch, kolorPrzeciwnika);
+                    zmienAktywnosc();
+                    odtworzRuch();                    
+                }
+                if (sygnal==2)
+                {
+                    zmienAktywnosc();
+                    odtworzRuch();
+                }
 
-                    if (sygnal==4)
+                if (sygnal==4)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    while (ruch!=-1)
                     {
+                        usunieciePionka(ruch);
                         ruch=odbieranieOdSerwera.readInt();
-                        while (ruch!=-1)
-                        {
-                            usunieciePionka(ruch);
-                            ruch=odbieranieOdSerwera.readInt();
-                        }
-                    }  
+                    }
+                }  
                         
-                    if (sygnal==5)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();                    
-                        if (ruch==-1)
-                        {
-                            okienko("Przegrałeś :C");
-                            break;
-                        }
-                        else
-                        {
-                            okienko("Wygrałeś!");
-                            break;
-                        }
-                    }                              
-                }
-
-                catch (IOException e)
+                if (sygnal==5)
                 {
-                    e.printStackTrace();
-                }
+                    ruch=odbieranieOdSerwera.readInt();                    
+                    if (ruch==-1)
+                    {
+                        okienko("Przegrałeś :C");
+                        break;
+                    }
+                    else
+                    {
+                        okienko("Wygrałeś!");
+                        break;
+                    }
+                }                              
             }
-            catch(InterruptedException e)
+
+            catch (IOException e)
             {
                 e.printStackTrace();
             }
