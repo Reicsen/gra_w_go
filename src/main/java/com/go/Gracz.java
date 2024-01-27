@@ -11,7 +11,7 @@ import com.go.GUI.GuiPlansza;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
-public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTerytoriow, Runnable
+public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieTerytoriow, Runnable
 {
     private boolean aktywny=false;
     private int iloscJencow=0;
@@ -292,6 +292,17 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
         }
     }
     
+    public void wyslijJencow()
+    {
+        try
+        {
+            wysylanieDoSerwera.writeInt(iloscJencow);
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
@@ -375,6 +386,21 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, PrzesylanieTe
                 if(sygnal==100)
                 {
                     odbierzTeren();
+                }
+
+                if (sygnal==7)
+                {
+                    wyslijJencow();
+                }
+                if (sygnal==8)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    dodaniePionka(ruch, kolor);
+                }
+                if (sygnal==9)
+                {
+                    ruch=odbieranieOdSerwera.readInt();
+                    dodaniePionka(ruch, kolorPrzeciwnika);
                 }
             }
 
