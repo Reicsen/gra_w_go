@@ -104,4 +104,4 @@ I ruch jest niepoprawny
 -dla I - system czeka na nowe działanie aktora
 --
 -ruch jest niepoprawny (przy przejściu z 2. do 3.) - serwer zwraca sygnał o
- niepowodzeniu i system czeka na nowe działanie aktora</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+ niepowodzeniu i system czeka na nowe działanie aktora</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>330</x><y>210</y><w>120</w><h>40</h></coordinates><panel_attributes>Odtworzenie gry</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>260</x><y>170</y><w>90</w><h>60</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;70;40</additional_attributes></element></diagram>
