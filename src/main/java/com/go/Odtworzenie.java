@@ -45,14 +45,14 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         watek.start();
     }
 
-    public void poddajSie()
+    public void wykonajRuch(int x, int y)
     {
         if (aktywny)
         {
             try
             {
-                zmienAktywnosc();
-                wysylanieDoSerwera.writeInt(-1);
+                wysylanieDoSerwera.writeInt(1);
+                wysylanieDoSerwera.writeInt(x+19*y);
             }
             catch (IOException e)
             {
@@ -60,7 +60,7 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
             }
         }
     }
-
+    
     public void pominRuch()
     {
         if (aktywny)
@@ -77,20 +77,70 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         }
     }
 
-    public void wykonajRuch(int x, int y)
+    public void poddajSie()
     {
         if (aktywny)
         {
             try
             {
-                wysylanieDoSerwera.writeInt(1);
-                wysylanieDoSerwera.writeInt(x+19*y);
+                zmienAktywnosc();
+                wysylanieDoSerwera.writeInt(-1);
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void zmienAktywnosc()
+    {
+        if (aktywny)
+        {
+            this.aktywny=false;
+        }
+        else
+        {
+            this.aktywny=true;
+        }
+    }
+
+    public void ustawKolor(int nrgracza)
+    {
+        if (nrgracza==1)
+        {
+            this.kolor=Color.BLACK;
+            this.kolorPrzeciwnika=Color.WHITE;
+            plansza.kolor=Color.BLACK;
+        }
+        else
+        {
+            this.kolor=Color.WHITE;
+            this.kolorPrzeciwnika=Color.BLACK;
+            plansza.kolor=Color.WHITE;
+        }
+    }
+
+    public void dodaniePionka(int nrpola, Color kolor)
+    {
+        Platform.runLater(() -> {
+        plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
+        });
+    }
+
+    public void usunieciePionka(int nrpola)
+    {
+        Platform.runLater(() -> {
+            plansza.pionki.get(nrpola).zmienPrzyciskNaKrzyzyk( plansza.pionki.get(nrpola));
+        });
+    }
+
+    public void wypiszKomunikatNaPlanszy(String komunikat){}
+
+    public void okienko(String komunikat){
+        Platform.runLater(() -> {
+            plansza.wyskakujaceOkienko(komunikat);
+        });
     }
 
     public synchronized void odtworzRuch()
@@ -120,57 +170,6 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         {
             e.printStackTrace();
         }
-    }
-
-    public void ustawKolor(int nrgracza)
-    {
-        if (nrgracza==1)
-        {
-            this.kolor=Color.BLACK;
-            this.kolorPrzeciwnika=Color.WHITE;
-            plansza.kolor=Color.BLACK;
-        }
-        else
-        {
-            this.kolor=Color.WHITE;
-            this.kolorPrzeciwnika=Color.BLACK;
-            plansza.kolor=Color.WHITE;
-        }
-    }
-
-    public void zmienAktywnosc()
-    {
-        if (aktywny)
-        {
-            this.aktywny=false;
-        }
-        else
-        {
-            this.aktywny=true;
-        }
-    }
-
-
-    public void dodaniePionka(int nrpola, Color kolor)
-    {
-        Platform.runLater(() -> {
-        plansza.pionki.get(nrpola).zmienPrzyciskNaKolo( plansza.pionki.get(nrpola), kolor);
-        });
-    }
-
-    public void usunieciePionka(int nrpola)
-    {
-        Platform.runLater(() -> {
-            plansza.pionki.get(nrpola).zmienPrzyciskNaKrzyzyk( plansza.pionki.get(nrpola));
-        });
-    }
-
-    public void wypiszKomunikatNaPlanszy(String komunikat){}
-
-    public void okienko(String komunikat){
-        Platform.runLater(() -> {
-            plansza.wyskakujaceOkienko(komunikat);
-        });
     }
 
     @Override

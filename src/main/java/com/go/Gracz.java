@@ -50,15 +50,14 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieT
         watek.start();
     }
 
-
-    public void poddajSie()
+    public void wykonajRuch(int x, int y)
     {
         if (aktywny)
         {
             try
             {
-                zmienAktywnosc();
-                wysylanieDoSerwera.writeInt(-1);
+                wysylanieDoSerwera.writeInt(1);
+                wysylanieDoSerwera.writeInt(x+19*y);
             }
             catch (IOException e)
             {
@@ -84,19 +83,31 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieT
         }
     }
 
-    public void wykonajRuch(int x, int y)
+    public void poddajSie()
     {
         if (aktywny)
         {
             try
             {
-                wysylanieDoSerwera.writeInt(1);
-                wysylanieDoSerwera.writeInt(x+19*y);
+                zmienAktywnosc();
+                wysylanieDoSerwera.writeInt(-1);
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void zmienAktywnosc()
+    {
+        if (aktywny)
+        {
+            this.aktywny=false;
+        }
+        else
+        {
+            this.aktywny=true;
         }
     }
 
@@ -113,18 +124,6 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieT
             this.kolor=Color.WHITE;
             this.kolorPrzeciwnika=Color.BLACK;
             plansza.kolor=Color.WHITE;
-        }
-    }
-
-    public void zmienAktywnosc()
-    {
-        if (aktywny)
-        {
-            this.aktywny=false;
-        }
-        else
-        {
-            this.aktywny=true;
         }
     }
 

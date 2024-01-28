@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,IWysylanieRuchuDoBazy,IObslugaKoncaGry,Runnable
+public class Gra implements IGra,IGra2,IGra3,IWysylanieRuchuDoBazy,INegocjacjeGra,IObslugaKoncaGry,Runnable
 {
     private String aktywnyKolor;
     private IPlansza plansza;
@@ -47,257 +47,6 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,IWysylanieRuchuDoBaz
         }
     }
 
-    public void iloscPol()
-    {
-        if("czarny".equals(aktywnyKolor))
-        {
-            try
-            {
-                wysylanieDoGracza1.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"czarny"));
-                wysylanieDoGracza1.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"biały"));
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        else
-        {
-            try
-            {
-                wysylanieDoGracza2.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"biały"));
-                wysylanieDoGracza2.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"czarny"));
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void dwaRazyPominietoTure()
-    {
-        try
-        {
-            if ("czarny".equals(aktywnyKolor))
-            {
-                wysylanieDoGracza1.writeInt(6);
-            }
-            else
-            {
-                wysylanieDoGracza2.writeInt(6);
-            }
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void koniecNegocjacji()
-    {
-        int status;
-        try
-        {
-            if ("czarny".equals(aktywnyKolor))
-            {
-                status=odbieranieOdGracza1.readInt();
-            }
-            else
-            {
-                status=odbieranieOdGracza2.readInt();
-            }
-            if (status==-1)
-            {
-                zerwanoNegocjacje();
-            }
-            else
-            {
-                zaakceptowanoTerytoria();
-            }
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void zerwanoNegocjacje()
-    {
-        try
-        {
-            if ("czarny".equals(aktywnyKolor))
-            {
-                wysylanieDoGracza2.writeInt(2);
-            }
-            else
-            {
-                wysylanieDoGracza1.writeInt(2);
-            }
-            zmienKolor();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void przekazanieTerenow()
-    {
-        int temp;
-        try
-        {
-            if ("czarny".equals(aktywnyKolor))
-            {
-                wysylanieDoGracza2.writeInt(100);
-                temp=odbieranieOdGracza1.readInt();
-                while(temp!=-1)
-                {
-                    wysylanieDoGracza2.writeInt(temp);
-                    temp=odbieranieOdGracza1.readInt();
-                }
-                wysylanieDoGracza2.writeInt(temp);
-                temp=odbieranieOdGracza1.readInt();
-                while(temp!=-1)
-                {
-                    wysylanieDoGracza2.writeInt(temp);
-                    temp=odbieranieOdGracza1.readInt();
-                }
-                wysylanieDoGracza2.writeInt(temp);
-            }
-            else
-            {
-                wysylanieDoGracza1.writeInt(100);
-                temp=odbieranieOdGracza2.readInt();
-                while(temp!=-1)
-                {
-                    wysylanieDoGracza1.writeInt(temp);
-                    temp=odbieranieOdGracza2.readInt();
-                }
-                wysylanieDoGracza1.writeInt(temp);
-                temp=odbieranieOdGracza2.readInt();
-                while(temp!=-1)
-                {
-                    wysylanieDoGracza1.writeInt(temp);
-                    temp=odbieranieOdGracza2.readInt();
-                }
-                wysylanieDoGracza1.writeInt(temp);
-            }
-            zmienKolor();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void zaakceptowanoTerytoria()
-    {
-        int temp;
-        List<Integer> czarneTerytorium = new ArrayList<Integer>();
-        List<Integer> bialeTerytorium = new ArrayList<Integer>();
-        try
-        {
-            if("czarny".equals(aktywnyKolor))
-            {
-                temp=odbieranieOdGracza1.readInt();
-                while(temp!=-1)
-                {
-                    czarneTerytorium.add(temp);
-                    temp=odbieranieOdGracza1.readInt();
-                }
-                temp=odbieranieOdGracza1.readInt();
-                while(temp!=-1)
-                {
-                    bialeTerytorium.add(temp);
-                    temp=odbieranieOdGracza1.readInt();
-                }
-            }
-            else
-            {
-                temp=odbieranieOdGracza2.readInt();
-                while(temp!=-1)
-                {
-                    bialeTerytorium.add(temp);
-                    temp=odbieranieOdGracza2.readInt();
-                }
-                temp=odbieranieOdGracza2.readInt();
-                while(temp!=-1)
-                {
-                    czarneTerytorium.add(temp);
-                    temp=odbieranieOdGracza2.readInt();
-                }
-            }
-            List<Integer> czarnePionyNaBialym = obslugaObszaru.pionyDoUsuniecia(bialeTerytorium, plansza, "biały");
-            List<Integer> bialePionyNaCzarnym = obslugaObszaru.pionyDoUsuniecia(czarneTerytorium, plansza, "czarny");
-            proceduraKoncowa(czarneTerytorium, bialeTerytorium, czarnePionyNaBialym, bialePionyNaCzarnym);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void ruchDoBazySQL(int pole)
-    {
-        if(!czyOdczytZBazy)
-        {
-            if ("czarny".equals(this.aktywnyKolor))
-            {
-                dodawanie.dodaj(1,pole);
-            }
-            else
-            {
-                dodawanie.dodaj(2,pole);
-            }
-        }
-    }
-
-    private void zmienKolor() //metoda zmieniająca aktywny kolor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
-    {
-        if ("czarny".equals(this.aktywnyKolor))
-        {
-            aktywnyKolor="biały";
-        }
-        else
-        {
-            aktywnyKolor="czarny";
-        }
-    }
-
-    public boolean sprawdzPoprawnosc(int nrpola)
-    {
-        return plansza.sprawdzPoprawnosc(this.aktywnyKolor, nrpola%19, nrpola/19);
-    }
-
-    public void dodajPionek(int nrpola)
-    {
-        plansza.dodajPionek(this.aktywnyKolor, nrpola%19, nrpola/19);
-        this.ruchDoBazySQL(nrpola);
-        this.zmienKolor();
-    }
-
-    public void usunPionki(){
-        ArrayList <Integer> pionki = usuwaniePionkow.pionkiDoUsuniecia(plansza, aktywnyKolor);
-        try{      
-            wysylanieDoGracza1.writeInt(4);
-            wysylanieDoGracza2.writeInt(4);
-
-            for(int i = 0; i< pionki.size();i++)
-            {
-                wysylanieDoGracza1.writeInt(pionki.get(i));
-                wysylanieDoGracza2.writeInt(pionki.get(i));
-            }
-
-            wysylanieDoGracza1.writeInt(-1);
-            wysylanieDoGracza2.writeInt(-1);
-
-            usuwaniePionkow.usunPionki(plansza, aktywnyKolor);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-    }
 
     public void koniecGry()
     {
@@ -438,6 +187,258 @@ public class Gra implements IGra,IGra2,IGra3,INegocjacjeGra,IWysylanieRuchuDoBaz
             }
         }
         wczesniejByloPomin=false;
+    }
+
+    public boolean sprawdzPoprawnosc(int nrpola)
+    {
+        return plansza.sprawdzPoprawnosc(this.aktywnyKolor, nrpola%19, nrpola/19);
+    }
+
+    public void dodajPionek(int nrpola)
+    {
+        plansza.dodajPionek(this.aktywnyKolor, nrpola%19, nrpola/19);
+        this.ruchDoBazySQL(nrpola);
+        this.zmienKolor();
+    }
+
+    public void iloscPol()
+    {
+        if("czarny".equals(aktywnyKolor))
+        {
+            try
+            {
+                wysylanieDoGracza1.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"czarny"));
+                wysylanieDoGracza1.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"biały"));
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+            try
+            {
+                wysylanieDoGracza2.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"biały"));
+                wysylanieDoGracza2.writeInt(obslugaObszaru.iloscPionkowKoloru(this.plansza,"czarny"));
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void zmienKolor() //metoda zmieniająca aktywny kolor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
+    {
+        if ("czarny".equals(this.aktywnyKolor))
+        {
+            aktywnyKolor="biały";
+        }
+        else
+        {
+            aktywnyKolor="czarny";
+        }
+    }
+
+    public void usunPionki(){
+        ArrayList <Integer> pionki = usuwaniePionkow.pionkiDoUsuniecia(plansza, aktywnyKolor);
+        try{      
+            wysylanieDoGracza1.writeInt(4);
+            wysylanieDoGracza2.writeInt(4);
+
+            for(int i = 0; i< pionki.size();i++)
+            {
+                wysylanieDoGracza1.writeInt(pionki.get(i));
+                wysylanieDoGracza2.writeInt(pionki.get(i));
+            }
+
+            wysylanieDoGracza1.writeInt(-1);
+            wysylanieDoGracza2.writeInt(-1);
+
+            usuwaniePionkow.usunPionki(plansza, aktywnyKolor);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void ruchDoBazySQL(int pole)
+    {
+        if(!czyOdczytZBazy)
+        {
+            if ("czarny".equals(this.aktywnyKolor))
+            {
+                dodawanie.dodaj(1,pole);
+            }
+            else
+            {
+                dodawanie.dodaj(2,pole);
+            }
+        }
+    }
+
+    public void dwaRazyPominietoTure()
+    {
+        try
+        {
+            if ("czarny".equals(aktywnyKolor))
+            {
+                wysylanieDoGracza1.writeInt(6);
+            }
+            else
+            {
+                wysylanieDoGracza2.writeInt(6);
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void przekazanieTerenow()
+    {
+        int temp;
+        try
+        {
+            if ("czarny".equals(aktywnyKolor))
+            {
+                wysylanieDoGracza2.writeInt(100);
+                temp=odbieranieOdGracza1.readInt();
+                while(temp!=-1)
+                {
+                    wysylanieDoGracza2.writeInt(temp);
+                    temp=odbieranieOdGracza1.readInt();
+                }
+                wysylanieDoGracza2.writeInt(temp);
+                temp=odbieranieOdGracza1.readInt();
+                while(temp!=-1)
+                {
+                    wysylanieDoGracza2.writeInt(temp);
+                    temp=odbieranieOdGracza1.readInt();
+                }
+                wysylanieDoGracza2.writeInt(temp);
+            }
+            else
+            {
+                wysylanieDoGracza1.writeInt(100);
+                temp=odbieranieOdGracza2.readInt();
+                while(temp!=-1)
+                {
+                    wysylanieDoGracza1.writeInt(temp);
+                    temp=odbieranieOdGracza2.readInt();
+                }
+                wysylanieDoGracza1.writeInt(temp);
+                temp=odbieranieOdGracza2.readInt();
+                while(temp!=-1)
+                {
+                    wysylanieDoGracza1.writeInt(temp);
+                    temp=odbieranieOdGracza2.readInt();
+                }
+                wysylanieDoGracza1.writeInt(temp);
+            }
+            zmienKolor();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void koniecNegocjacji()
+    {
+        int status;
+        try
+        {
+            if ("czarny".equals(aktywnyKolor))
+            {
+                status=odbieranieOdGracza1.readInt();
+            }
+            else
+            {
+                status=odbieranieOdGracza2.readInt();
+            }
+            if (status==-1)
+            {
+                zerwanoNegocjacje();
+            }
+            else
+            {
+                zaakceptowanoTerytoria();
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void zerwanoNegocjacje()
+    {
+        try
+        {
+            if ("czarny".equals(aktywnyKolor))
+            {
+                wysylanieDoGracza2.writeInt(2);
+            }
+            else
+            {
+                wysylanieDoGracza1.writeInt(2);
+            }
+            zmienKolor();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void zaakceptowanoTerytoria()
+    {
+        int temp;
+        List<Integer> czarneTerytorium = new ArrayList<Integer>();
+        List<Integer> bialeTerytorium = new ArrayList<Integer>();
+        try
+        {
+            if("czarny".equals(aktywnyKolor))
+            {
+                temp=odbieranieOdGracza1.readInt();
+                while(temp!=-1)
+                {
+                    czarneTerytorium.add(temp);
+                    temp=odbieranieOdGracza1.readInt();
+                }
+                temp=odbieranieOdGracza1.readInt();
+                while(temp!=-1)
+                {
+                    bialeTerytorium.add(temp);
+                    temp=odbieranieOdGracza1.readInt();
+                }
+            }
+            else
+            {
+                temp=odbieranieOdGracza2.readInt();
+                while(temp!=-1)
+                {
+                    bialeTerytorium.add(temp);
+                    temp=odbieranieOdGracza2.readInt();
+                }
+                temp=odbieranieOdGracza2.readInt();
+                while(temp!=-1)
+                {
+                    czarneTerytorium.add(temp);
+                    temp=odbieranieOdGracza2.readInt();
+                }
+            }
+            List<Integer> czarnePionyNaBialym = obslugaObszaru.pionyDoUsuniecia(bialeTerytorium, plansza, "biały");
+            List<Integer> bialePionyNaCzarnym = obslugaObszaru.pionyDoUsuniecia(czarneTerytorium, plansza, "czarny");
+            proceduraKoncowa(czarneTerytorium, bialeTerytorium, czarnePionyNaBialym, bialePionyNaCzarnym);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public int iloscJencow(String kolor)
