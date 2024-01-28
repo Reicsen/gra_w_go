@@ -33,13 +33,8 @@ public class AdapterSQL2 implements IBazyDanychAdapter
                 gracze.add(gracz);
             }
                 
-            GridPane gridPane1 = new GuiPlanszaOdtworzenia(ruchy,gracze);
-            GridPane gridPane2 = new GuiPlanszaOdtworzenia(ruchy,gracze);
-            Scene scenaGry = new Scene(gridPane1,900,1000);
-            Stage bazaGry = new Stage();
-            bazaGry.setTitle("Gra w go: replay");
-            bazaGry.setScene(scenaGry);
-            bazaGry.show();
+            IBazyDanychAdapter stworzPlansze = new TworzeniePlanszyOdtworzenia(ruchy, gracze);
+            stworzPlansze.obsluz();
         }
         catch(SQLException e)
         {
