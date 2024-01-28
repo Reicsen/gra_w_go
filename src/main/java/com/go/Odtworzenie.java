@@ -45,14 +45,14 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         watek.start();
     }
 
-    public void poddajSie()
+    public void wykonajRuch(int x, int y)
     {
         if (aktywny)
         {
             try
             {
-                zmienAktywnosc();
-                wysylanieDoSerwera.writeInt(-1);
+                wysylanieDoSerwera.writeInt(1);
+                wysylanieDoSerwera.writeInt(x+19*y);
             }
             catch (IOException e)
             {
@@ -60,7 +60,7 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
             }
         }
     }
-
+    
     public void pominRuch()
     {
         if (aktywny)
@@ -77,14 +77,14 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         }
     }
 
-    public void wykonajRuch(int x, int y)
+    public void poddajSie()
     {
         if (aktywny)
         {
             try
             {
-                wysylanieDoSerwera.writeInt(1);
-                wysylanieDoSerwera.writeInt(x+19*y);
+                zmienAktywnosc();
+                wysylanieDoSerwera.writeInt(-1);
             }
             catch (IOException e)
             {
@@ -93,32 +93,15 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         }
     }
 
-    public synchronized void odtworzRuch()
+    public void zmienAktywnosc()
     {
-        try
+        if (aktywny)
         {
-            Thread.sleep(1000);
-            if(gracze.get(indeks)==this.nrGracza)
-            {
-                int nastepnyRuch=ruchy.get(indeks);
-                if (nastepnyRuch==-1)
-                {
-                    poddajSie();
-                }
-                else
-                {
-                    wykonajRuch(nastepnyRuch%19, nastepnyRuch/19);
-                }
-            }
-            else
-            {
-                pominRuch();
-            }
-            indeks=indeks+1;
+            this.aktywny=false;
         }
-        catch(InterruptedException e)
+        else
         {
-            e.printStackTrace();
+            this.aktywny=true;
         }
     }
 
@@ -137,19 +120,6 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
             plansza.kolor=Color.WHITE;
         }
     }
-
-    public void zmienAktywnosc()
-    {
-        if (aktywny)
-        {
-            this.aktywny=false;
-        }
-        else
-        {
-            this.aktywny=true;
-        }
-    }
-
 
     public void dodaniePionka(int nrpola, Color kolor)
     {
@@ -171,6 +141,35 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         Platform.runLater(() -> {
             plansza.wyskakujaceOkienko(komunikat);
         });
+    }
+
+    public synchronized void odtworzRuch()
+    {
+        try
+        {
+            Thread.sleep(1000);
+            if(gracze.get(indeks)==this.nrGracza)
+            {
+                int nastepnyRuch=ruchy.get(indeks);
+                if (nastepnyRuch==-1)
+                {
+                    poddajSie();
+                }
+                else
+                {
+                    wykonajRuch(nastepnyRuch%19, nastepnyRuch/19);
+                }
+                indeks=indeks+1; //gdy wykonałem ruch przechodzę o jeden dalej
+            }
+            else
+            {
+                pominRuch(); //gdy nie wykonałem ruchu, nie przechodzę o jeden dalej (bo rywal na pewno wykona ten następny ruch, więc bym poszedł o dwa do przodu, zamiast o 1)
+            }
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -200,7 +199,7 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
                     ruch=odbieranieOdSerwera.readInt();
                     dodaniePionka(ruch, kolorPrzeciwnika);
                     zmienAktywnosc();
-                    indeks=indeks+1;
+                    indeks=indeks+1; //jeśli rywal wykonał ruch, to już nie rozpatruję tego indeksu, tylko kolejny
                     odtworzRuch();                    
                 }
                 if (sygnal==2)

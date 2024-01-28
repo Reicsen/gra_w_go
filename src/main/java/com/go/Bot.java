@@ -33,15 +33,14 @@ public class Bot implements Klient, IBot, Runnable
         watek.start();
     }
 
-
-    public void poddajSie()
+    public void wykonajRuch(int x, int y)
     {
         if (aktywny)
         {
             try
             {
-                zmienAktywnosc();
-                wysylanieDoSerwera.writeInt(-1);
+                wysylanieDoSerwera.writeInt(1);
+                wysylanieDoSerwera.writeInt(x+19*y);
             }
             catch (IOException e)
             {
@@ -66,19 +65,31 @@ public class Bot implements Klient, IBot, Runnable
         }
     }
 
-    public void wykonajRuch(int x, int y)
+    public void poddajSie()
     {
         if (aktywny)
         {
             try
             {
-                wysylanieDoSerwera.writeInt(1);
-                wysylanieDoSerwera.writeInt(x+19*y);
+                zmienAktywnosc();
+                wysylanieDoSerwera.writeInt(-1);
             }
             catch (IOException e)
             {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void zmienAktywnosc()
+    {
+        if (aktywny)
+        {
+            this.aktywny=false;
+        }
+        else
+        {
+            this.aktywny=true;
         }
     }
 
@@ -126,19 +137,6 @@ public class Bot implements Klient, IBot, Runnable
             e.printStackTrace();
         }
         return false;
-    }
-
-
-    public void zmienAktywnosc()
-    {
-        if (aktywny)
-        {
-            this.aktywny=false;
-        }
-        else
-        {
-            this.aktywny=true;
-        }
     }
 
     public void jencyISygnal4()
