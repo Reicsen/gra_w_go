@@ -111,7 +111,7 @@ public class Bot implements Klient, IBot, Runnable
             wysylanieDoSerwera.writeInt(11);
             int iloscPionkow = odbieranieOdSerwera.readInt(); 
             int iloscPionkowPrzeciwnika = odbieranieOdSerwera.readInt();
-            int wspolczynnik = iloscPionkowPrzeciwnika-iloscPionkow-10;
+            int wspolczynnik = iloscPionkowPrzeciwnika-iloscPionkow-this.iloscJencow-10;
             if (wspolczynnik>0)
             {
                 int los = this.generator.nextInt(100);
@@ -141,6 +141,33 @@ public class Bot implements Klient, IBot, Runnable
         }
     }
 
+    public void jencyISygnal4()
+    {
+        int sygnal;
+        try
+        {
+            sygnal=odbieranieOdSerwera.readInt();
+            if (sygnal==3)
+            {
+                sygnal=odbieranieOdSerwera.readInt();
+                this.iloscJencow=this.iloscJencow+sygnal;
+                sygnal=odbieranieOdSerwera.readInt();
+            }
+            if (sygnal==4)
+            {
+                sygnal=odbieranieOdSerwera.readInt();
+                while (sygnal!=-1)
+                {
+                    sygnal=odbieranieOdSerwera.readInt();
+                }
+            } 
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
@@ -155,6 +182,7 @@ public class Bot implements Klient, IBot, Runnable
                 if (sygnal==0)
                 {
                     ruch=odbieranieOdSerwera.readInt();
+                    jencyISygnal4();
                     zmienAktywnosc();
                 }
                 if (sygnal==-1)
@@ -166,6 +194,7 @@ public class Bot implements Klient, IBot, Runnable
                 {
                     ruch=odbieranieOdSerwera.readInt();
                     zmienAktywnosc();
+                    jencyISygnal4();
                     losujRuch();
                 }
                 if (sygnal==2)
@@ -173,29 +202,19 @@ public class Bot implements Klient, IBot, Runnable
                     zmienAktywnosc();
                     losujRuch();
                 }
-
-                if(sygnal==3)
-                {
-                    ruch=odbieranieOdSerwera.readInt();
-                    this.iloscJencow=this.iloscJencow+ruch;
-                }
                                
                 if (sygnal==5)
                 {
                     break;
                 }
-
-                if (sygnal==4)
-                {
-                    ruch=odbieranieOdSerwera.readInt();
-                    while (ruch!=-1)
-                    {
-                        ruch=odbieranieOdSerwera.readInt();
-                    }
-                } 
                 
-                if(sygnal==6 || sygnal==100)
+                if(sygnal==6 || sygnal==8 || sygnal==9 || sygnal==100)
                 {
+                    poddajSie();
+                }
+                if(sygnal==7)
+                {
+                    wysylanieDoSerwera.writeInt(iloscJencow);
                     poddajSie();
                 }
 

@@ -36,7 +36,7 @@ BEGIN
  SET @str="SELECT gracz, pole FROM Ruchy WHERE id_gry=?;";
  PREPARE lista_ruchow FROM @str;
 
- SET @str="SELECT * FROM Gry;";
+ SET @str="SELECT * FROM Gry ORDER BY id ASC LIMIT 50;";
  PREPARE lista_gier FROM @str;
 
  SET @str="SELECT COUNT(id) FROM Gry;";

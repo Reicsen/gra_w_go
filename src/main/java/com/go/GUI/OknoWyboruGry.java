@@ -69,7 +69,7 @@ public class OknoWyboruGry implements IBazyDanychAdapter
             }
         };
 
-        for(int i=0; i<iloscGier; i++)
+        for(int i=iloscGier-1; i>=0; i--)
         {
             int id = idGier.get(i);
             String wygrany = zwyciezcyGier.get(i);
