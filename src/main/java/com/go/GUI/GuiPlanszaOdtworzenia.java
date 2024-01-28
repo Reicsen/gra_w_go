@@ -3,9 +3,12 @@ package com.go.GUI;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.go.Bot;
 import com.go.Odtworzenie;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -48,8 +51,12 @@ public class GuiPlanszaOdtworzenia extends GridPane
 
                 setHalignment(button, HPos.CENTER);
 
+                button.setOnAction(new EventHandler<ActionEvent>() { 
+                    @Override
+                    public void handle(ActionEvent e) {}
+                });
                 pionki.add(button);
-                button.setDisable(true);
+                //button.setDisable(true);
             }
         }
     }
