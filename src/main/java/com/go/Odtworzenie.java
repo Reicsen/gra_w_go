@@ -159,12 +159,12 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
                 {
                     wykonajRuch(nastepnyRuch%19, nastepnyRuch/19);
                 }
+                indeks=indeks+1; //gdy wykonałem ruch przechodzę o jeden dalej
             }
             else
             {
-                pominRuch();
+                pominRuch(); //gdy nie wykonałem ruchu, nie przechodzę o jeden dalej (bo rywal na pewno wykona ten następny ruch, więc bym poszedł o dwa do przodu, zamiast o 1)
             }
-            indeks=indeks+1;
         }
         catch(InterruptedException e)
         {
@@ -199,7 +199,7 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
                     ruch=odbieranieOdSerwera.readInt();
                     dodaniePionka(ruch, kolorPrzeciwnika);
                     zmienAktywnosc();
-                    indeks=indeks+1;
+                    indeks=indeks+1; //jeśli rywal wykonał ruch, to już nie rozpatruję tego indeksu, tylko kolejny
                     odtworzRuch();                    
                 }
                 if (sygnal==2)
