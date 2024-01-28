@@ -26,6 +26,18 @@ public class TestObslugiObszaru {
 
         assertSame(1, obliczenia.pionyDoUsuniecia(lista, plansza, "czarny").size());
         assertSame(0, obliczenia.pionyDoUsuniecia(lista, plansza, "czarny").get(0));
+
+        plansza.usunPionek(2, 0);
+        plansza.dodajPionek("czarny", 3, 1);
+        plansza.dodajPionek("czarny", 4, 1);
+        plansza.dodajPionek("czarny", 4, 0);
+
+        plansza.dodajPionek("biały", 1, 0);
+        plansza.dodajPionek("biały", 2, 0);
+
+        lista.set(0, 3);
+
+        assertSame(3, obliczenia.pionyDoUsuniecia(lista, plansza, "czarny").size());
     }
     
 }
