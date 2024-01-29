@@ -8,8 +8,8 @@ import com.go.GUI.GuiPlanszaOdtworzenia;
 
 public class TworzeniePlanszyOdtworzenia implements IBazyDanychAdapter
 {
-    private List<Integer> ruchy;
-    private List<Integer> gracze;
+    protected List<Integer> ruchy;
+    protected List<Integer> gracze;
 
     public TworzeniePlanszyOdtworzenia(List<Integer> listaRuchow, List<Integer> listaGraczy)
     {

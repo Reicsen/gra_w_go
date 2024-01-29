@@ -5,7 +5,7 @@ import com.go.GUI.OkienkoBledu;
 
 public class OdczytRuchow implements IBazyDanychAdapter
 {
-    private int nrGry;
+    protected int nrGry;
 
     public OdczytRuchow(int nr)
     {

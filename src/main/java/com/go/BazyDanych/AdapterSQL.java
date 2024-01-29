@@ -8,7 +8,7 @@ import com.go.GUI.OkienkoBledu;
 
 public class AdapterSQL implements IBazyDanychAdapter
 {
-    private ResultSet wyniki;
+    protected ResultSet wyniki;
 
     public AdapterSQL(ResultSet wynik)
     {
