@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLPackage</id><coordinates><x>396</x><y>288</y><w>306</w><h>180</h></coordinates><panel_attributes>Gra
+<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLPackage</id><coordinates><x>180</x><y>324</y><w>306</w><h>180</h></coordinates><panel_attributes>Gra
 --
 +Serwer
 +Gra
@@ -11,7 +11,7 @@
 bg=orange
 fg=black
 halign=left
-valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>549</x><y>324</y><w>117</w><h>90</h></coordinates><panel_attributes>Klienci
+valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>333</x><y>360</y><w>117</w><h>90</h></coordinates><panel_attributes>Klienci
 --
 +Gracz
 +Bot
@@ -19,7 +19,7 @@ valign=top</panel_attributes><additional_attributes></additional_attributes></el
 bg=orange
 fg=black
 halign=left
-valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>918</x><y>306</y><w>252</w><h>162</h></coordinates><panel_attributes>BazyDanych
+valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>702</x><y>342</y><w>252</w><h>162</h></coordinates><panel_attributes>BazyDanych
 --
 +PobieranieDanychZBazy
 +AdapterSQL
@@ -32,7 +32,7 @@ valign=top</panel_attributes><additional_attributes></additional_attributes></el
 bg=orange
 fg=black
 halign=left
-valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>495</x><y>27</y><w>189</w><h>117</h></coordinates><panel_attributes>Poprawnosc
+valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>279</x><y>63</y><w>189</w><h>117</h></coordinates><panel_attributes>Poprawnosc
 --
 +Ko
 +NadchodzacePionki
@@ -40,7 +40,7 @@ valign=top</panel_attributes><additional_attributes></additional_attributes></el
 bg=orange
 fg=black
 halign=left
-valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>387</x><y>576</y><w>306</w><h>207</h></coordinates><panel_attributes>GUI
+valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>171</x><y>612</y><w>306</w><h>207</h></coordinates><panel_attributes>GUI
 --
 +Aplikacja
 +StworzButton
@@ -58,9 +58,9 @@ valign=top</panel_attributes><additional_attributes></additional_attributes></el
 bg=orange
 fg=black
 halign=left
-valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>576</x><y>135</y><w>27</w><h>189</h></coordinates><panel_attributes>lt=&lt;.
-</panel_attributes><additional_attributes>10;10;10;190</additional_attributes></element><element><id>Relation</id><coordinates><x>612</x><y>405</y><w>27</w><h>207</h></coordinates><panel_attributes>lt=&lt;.
-</panel_attributes><additional_attributes>10;210;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>693</x><y>414</y><w>243</w><h>36</h></coordinates><panel_attributes>lt=&lt;.
-</panel_attributes><additional_attributes>250;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>657</x><y>360</y><w>279</w><h>36</h></coordinates><panel_attributes>lt=&lt;.
-</panel_attributes><additional_attributes>10;20;290;20</additional_attributes></element><element><id>Relation</id><coordinates><x>558</x><y>405</y><w>27</w><h>207</h></coordinates><panel_attributes>lt=&lt;.
+valign=top</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>171</y><w>27</w><h>189</h></coordinates><panel_attributes>lt=&lt;.
+</panel_attributes><additional_attributes>10;10;10;190</additional_attributes></element><element><id>Relation</id><coordinates><x>396</x><y>441</y><w>27</w><h>207</h></coordinates><panel_attributes>lt=&lt;.
+</panel_attributes><additional_attributes>10;210;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>477</x><y>450</y><w>243</w><h>36</h></coordinates><panel_attributes>lt=&lt;.
+</panel_attributes><additional_attributes>250;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>441</x><y>396</y><w>279</w><h>36</h></coordinates><panel_attributes>lt=&lt;.
+</panel_attributes><additional_attributes>10;20;290;20</additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>441</y><w>27</w><h>207</h></coordinates><panel_attributes>lt=&lt;.
 </panel_attributes><additional_attributes>10;10;10;210</additional_attributes></element></diagram>
