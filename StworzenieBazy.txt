@@ -41,9 +41,20 @@ BEGIN
 
  SET @str="SELECT COUNT(id) FROM Gry;";
  PREPARE ilosc_gier FROM @str;
+
+ SET @str="DELETE FROM Gry WHERE id=?;";
+ PREPARE delete1 FROM @str;
+END#
+DELIMITER ;
+
+DELIMITER #
+CREATE TRIGGER aktualizacja AFTER DELETE ON Gry
+FOR EACH ROW
+BEGIN
+ DELETE FROM Ruchy WHERE Ruchy.id_gry=OLD.id;
 END#
 DELIMITER ;
 
 CREATE USER 'user'@'localhost';
-GRANT Select, Insert, Execute ON *.* TO 'user'@'localhost';
+GRANT Select, Insert, Alter, Execute ON *.* TO 'user'@'localhost';
 FLUSH PRIVILEGES;
