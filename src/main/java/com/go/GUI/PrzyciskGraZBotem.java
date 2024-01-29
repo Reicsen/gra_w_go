@@ -1,7 +1,7 @@
 package com.go.GUI;
 
-import com.go.Bot;
-import com.go.Klient;
+import com.go.Gra.Klienci.Bot;
+import com.go.Gra.Klienci.Klient;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

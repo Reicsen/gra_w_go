@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import com.go.BazyDanych.IBazyDanychAdapter;
+import com.go.BazyDanych.PobieranieDanychZBazy;
 
 public class PrzyciskOdtworzGre extends Button
 {

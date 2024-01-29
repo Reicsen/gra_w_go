@@ -2,9 +2,6 @@ package com.go.GUI;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.go.Gracz;
-
 import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -21,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import com.go.Gra.Klienci.Gracz;
 
 public class GuiPlansza extends GridPane 
 {

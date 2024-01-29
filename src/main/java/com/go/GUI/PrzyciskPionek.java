@@ -1,12 +1,11 @@
 package com.go.GUI;
 
-import com.go.Klient;
-
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import com.go.Gra.Klienci.Klient;
 
 public class PrzyciskPionek extends Button
 {
