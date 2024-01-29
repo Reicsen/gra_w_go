@@ -79,7 +79,7 @@ public class TestyBazyDanych
             }
             assertTrue(kontrolka);
 
-            kwerenda.executeQuery("EXECUTE delete_1 USING "+maksIdGry+";");
+            kwerenda.executeQuery("EXECUTE delete1 USING "+maksIdGry+";");
             kwerenda.executeQuery("ALTER TABLE Gry AUTO_INCREMENT="+maksIdGry+";");
         }
         catch(SQLException e)
