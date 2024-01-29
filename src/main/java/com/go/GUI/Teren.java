@@ -8,11 +8,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import com.go.Gracz;
+import com.go.Gra.Klienci.Gracz;
 
 public class Teren extends GridPane{
 

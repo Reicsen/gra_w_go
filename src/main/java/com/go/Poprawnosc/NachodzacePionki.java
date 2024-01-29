@@ -1,6 +1,6 @@
 package com.go.Poprawnosc;
 
-import com.go.IPlansza;
+import com.go.Gra.IPlansza;
 
 public class NachodzacePionki implements IPoprawnosc{
     IPoprawnosc ko = new Ko();

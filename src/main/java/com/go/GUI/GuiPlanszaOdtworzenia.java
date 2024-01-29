@@ -2,10 +2,6 @@ package com.go.GUI;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.go.Bot;
-import com.go.Odtworzenie;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import com.go.Gra.Klienci.Odtworzenie;
 
 public class GuiPlanszaOdtworzenia extends GridPane 
 {

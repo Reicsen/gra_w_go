@@ -1,9 +1,8 @@
 package com.go.Poprawnosc;
 
 import java.util.ArrayList;
-
-import com.go.IPlansza;
-import com.go.IPole;
+import com.go.Gra.IPlansza;
+import com.go.Gra.IPole;
 
 public class Ko implements IPoprawnosc{
     

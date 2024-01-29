@@ -1,9 +1,6 @@
 package com.go.GUI;
 
 import java.util.List;
-
-import com.go.Gracz;
-
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import com.go.Gra.Klienci.Gracz;
 
 public class Zgoda extends GridPane{
     
