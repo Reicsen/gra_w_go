@@ -37,4 +37,14 @@ public class ListenerBazy implements IListenerBazy
         }
         zapis.obsluz();
     }
+
+    public List<Integer> wezListeGraczy()
+    {
+        return this.gracze;
+    }
+
+    public List<Integer> wezListeRuchow()
+    {
+        return this.pola;
+    }
 }
