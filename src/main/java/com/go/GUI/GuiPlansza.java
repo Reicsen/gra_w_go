@@ -50,7 +50,7 @@ public class GuiPlansza extends GridPane
         add(lbl, 0, 0);
 
         //Tworzymy przyciski, które po wciśnięciu dodają pionek w danym miejscu
-        //Przycisków jest tyle ile przecięć linji w planszy
+        //Przycisków jest tyle ile przecięć linii w planszy
         for (int row = 1; row < 20; row++) {
             for (int col = 0; col < 19; col++) {
                 PrzyciskPionek button = new PrzyciskPionek(gracz, row-1, col);

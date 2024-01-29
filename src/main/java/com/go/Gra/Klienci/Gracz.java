@@ -23,7 +23,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieT
     private GuiPlansza plansza;
     private List<Integer> negocjacyjneWlasneTerytorium;
     private List<Integer> negocjacyjneWrogieTerytorium;
-    public List<Integer> lista;
+    private List<Integer> lista;
 
     public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {

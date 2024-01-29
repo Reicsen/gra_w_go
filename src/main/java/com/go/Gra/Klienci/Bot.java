@@ -14,7 +14,7 @@ public class Bot implements Klient, IBot, Runnable
     private DataInputStream odbieranieOdSerwera;
     private DataOutputStream wysylanieDoSerwera;
     private Socket polaczenieZSerwerem;
-    MersenneTwister generator = new MersenneTwister();
+    private MersenneTwister generator;
 
     public Bot() //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
@@ -24,6 +24,7 @@ public class Bot implements Klient, IBot, Runnable
             this.odbieranieOdSerwera = new DataInputStream(polaczenieZSerwerem.getInputStream());
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
             this.nrGracza = odbieranieOdSerwera.readInt();
+            this.generator = new MersenneTwister();
         }
         catch (IOException e)
         {

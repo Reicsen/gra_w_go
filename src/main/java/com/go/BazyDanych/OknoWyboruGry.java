@@ -73,7 +73,7 @@ public class OknoWyboruGry implements IBazyDanychAdapter
             int id = idGier.get(i);
             String wygrany = zwyciezcyGier.get(i);
             
-            IDButton temp1 = new IDButton(id,Integer.toString(id));
+            IDButton temp1 = new IDButton(id);
             temp1.setFont(Font.font("Callibri",FontWeight.BOLD,15));
             temp1.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE,null,null)));
             temp1.setWrapText(true);
