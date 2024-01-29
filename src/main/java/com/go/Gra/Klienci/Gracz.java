@@ -11,7 +11,7 @@ import com.go.GUI.GuiPlansza;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
-public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieTerytoriow, Runnable
+public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieTerytoriow, IListaNegocjacyjna, Runnable
 {
     private boolean aktywny=false;
     private int iloscJencow=0;
@@ -410,7 +410,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieT
         }
     }
 
-    private void ustawListe(){
+    public void ustawListe(){
         this.lista = new ArrayList<Integer>();
         for(int i = 0; i < 361; i++){
             lista.add(0);
@@ -419,7 +419,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieT
     public List<Integer> podajListe(){
         return lista;
     }
-    private void zmien(int nrpola, Color kolor){
+    public void zmien(int nrpola, Color kolor){
         if(kolor == Color.WHITE){
             lista.set(nrpola, 2);
         }
@@ -427,7 +427,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieT
             lista.set(nrpola, 1);
         }
     }
-    private void usun(int nrpola){
+    public void usun(int nrpola){
         lista.set(nrpola, 0);
     }
 }
