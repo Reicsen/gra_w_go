@@ -63,7 +63,7 @@ public class TestPoprawnosc {
     }
 
     @Test
-    public void testOddechy(){
+    public void testOddechyPojedynczePionki(){
         IPoprawnosc warunek = new PoprawnaLiczbaOddechow(new Ko());
         IPlansza plansza = new Plansza();
         
@@ -88,20 +88,10 @@ public class TestPoprawnosc {
 
         //teraz można bo czarne pionki są wtedy uduszone
         assertTrue(warunek.sprawdzPoprawnosc(plansza, 0, 0, "Biały"));
-
-        //sprawdzamy czy nie da się udusić własnego pionka
-        IPlansza p = new Plansza();
-
-        //stawiamy biały pionek
-        p.dodajPionek("Biały", 0, 0);
-
-        //otaczamy go ale zostawiamy jedno wolne miejsce
-        p.dodajPionek("Czarny", 2, 0);
-        p.dodajPionek("Czarny", 1, 1);
-        p.dodajPionek("Czarny", 0, 1);
-
-        //sprawdzamy czy da się włożyć pionek w wolne miejsce
-        assertTrue(!warunek.sprawdzPoprawnosc(p, 1, 0, "Biały"));
+    }
+    @Test
+    public void testUduszeniePrzeciwnika(){
+        IPoprawnosc warunek = new PoprawnaLiczbaOddechow(new Ko());
 
         //sprawdzamy czy da się położyć w miejscu gdzie nie ma oddechu aby udusić przeciwnika
         IPlansza plansza2 = new Plansza();
@@ -120,9 +110,32 @@ public class TestPoprawnosc {
         plansza2.dodajPionek("Czarny", 0, 3);
 
         assertTrue(warunek.sprawdzPoprawnosc(plansza2, 2, 3, "Czarny"));
+    }
+    @Test
+    public void testUduszenieWlasnychPionkow(){
+        IPoprawnosc warunek = new PoprawnaLiczbaOddechow(new Ko());
+
+        //sprawdzamy czy nie da się udusić własnego pionka
+        IPlansza p = new Plansza();
+
+        //stawiamy biały pionek
+        p.dodajPionek("Biały", 0, 0);
+
+        //otaczamy go ale zostawiamy jedno wolne miejsce
+        p.dodajPionek("Czarny", 2, 0);
+        p.dodajPionek("Czarny", 1, 1);
+        p.dodajPionek("Czarny", 0, 1);
+
+        //sprawdzamy czy da się włożyć pionek w wolne miejsce
+        assertTrue(!warunek.sprawdzPoprawnosc(p, 1, 0, "Biały"));
+    }
+    @Test
+    public void testOddechyGrupyPionkow(){
+        IPoprawnosc warunek = new PoprawnaLiczbaOddechow(new Ko());
 
         //sprawdzamy dla grup
         IPlansza plansza3 = new Plansza();
+
         plansza3.dodajPionek("Biały", 3, 1);
         plansza3.dodajPionek("Biały", 2, 2);
         plansza3.dodajPionek("Biały", 4, 2);
@@ -152,7 +165,6 @@ public class TestPoprawnosc {
         plansza3.dodajPionek("Czarny", 3, 2);
 
         assertSame(0,plansza3.podajPola().get(19*2+2).podajKamien().podajOddechy() );
-
     }
 }
 
