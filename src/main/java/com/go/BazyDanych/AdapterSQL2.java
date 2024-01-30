@@ -30,8 +30,8 @@ public class AdapterSQL2 implements IBazyDanychAdapter
                 gracze.add(gracz);
             }
                 
-            IBazyDanychAdapter stworzPlansze = new TworzeniePlanszyOdtworzenia(ruchy, gracze);
-            stworzPlansze.obsluz();
+            IStworzGui stworzPlansze = new TworzeniePlanszyOdtworzenia(ruchy, gracze);
+            stworzPlansze.stworzOkno();
         }
         catch(SQLException e)
         {

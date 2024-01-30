@@ -14,7 +14,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-public class OknoWyboruGry implements IBazyDanychAdapter
+public class OknoWyboruGry implements IStworzGui
 {
     private List<Integer> idGier;
     private List<String> zwyciezcyGier;
@@ -27,7 +27,7 @@ public class OknoWyboruGry implements IBazyDanychAdapter
         this.iloscGier=idGier.size();
     }
 
-    public void obsluz()
+    public void stworzOkno()
     {
         GridPane siatka = new GridPane();
         Stage baza = new Stage();

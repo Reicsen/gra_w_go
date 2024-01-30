@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import com.go.GUI.GuiPlanszaOdtworzenia;
 
-public class TworzeniePlanszyOdtworzenia implements IBazyDanychAdapter
+public class TworzeniePlanszyOdtworzenia implements IStworzGui
 {
     protected List<Integer> ruchy;
     protected List<Integer> gracze;
@@ -17,7 +17,7 @@ public class TworzeniePlanszyOdtworzenia implements IBazyDanychAdapter
         this.gracze=listaGraczy;
     }
 
-    public void obsluz()
+    public void stworzOkno()
     {
         GridPane gridPane1 = new GuiPlanszaOdtworzenia(ruchy,gracze);
         GridPane gridPane2 = new GuiPlanszaOdtworzenia(ruchy,gracze);
