@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class TestPlansza {
     IPlansza p;
     @Test
-    public void testPlansza(){
+    public void testPlanszaPoprawnosc(){
         //Tworzymy nową plansze
         p = new Plansza();
 
@@ -28,6 +28,11 @@ public class TestPlansza {
         if(!p.sprawdzPoprawnosc("Czarny", 12, 7)){
             assert false;
         }
+    }
+    @Test
+    public void testPlanszaUsunDodajGrupaKamieni(){
+        //Tworzymy nową plansze
+        p = new Plansza();
         
         //sprawdzamy czy grupy się dobrze dodają i usuwają
         p.dodajPionek("Biały", 0, 0);
@@ -48,6 +53,5 @@ public class TestPlansza {
         p.usunPionek(1, 0);
         assertTrue(p.sprawdzPoprawnosc("Czarny", 3, 0));
         assertSame(8, p.podajPola().get(20).podajKamien().podajOddechy());
-    }
-    
+    }  
 }
