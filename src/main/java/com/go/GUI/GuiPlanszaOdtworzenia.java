@@ -27,7 +27,7 @@ public class GuiPlanszaOdtworzenia extends GridPane
     public List<PrzyciskPionek> pionki= new ArrayList<>();
     public Color kolor;
 
-    public GuiPlanszaOdtworzenia(List<Integer> ruchy, List<Integer> gracze)
+    public GuiPlanszaOdtworzenia(List<Integer> ruchy, List<Integer> gracze) throws BrakSerwera
     {
         //Tworzymy nowy GridPane
         super();
@@ -61,6 +61,7 @@ public class GuiPlanszaOdtworzenia extends GridPane
         catch(BrakSerwera e)
         {
             System.out.println("Nie ma serwera!");
+            throw new BrakSerwera();
         }
     }
 

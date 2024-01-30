@@ -1,5 +1,7 @@
 package com.go.GUI;
 
+import com.go.Gra.Klienci.BrakSerwera;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -22,13 +24,20 @@ public class PrzyciskGraZGraczem extends Button{
             public void handle(ActionEvent e) 
             {
                 //Tworzymy nowy Pane (który wyświetla plansze do gry) i zastępujemy stary nowym
-                GridPane gridPane = new GuiPlansza();
+                try
+                {
+                    GridPane gridPane = new GuiPlansza();
 
-                stage.setTitle("Gra w go");
+                    stage.setTitle("Gra w go");
 
-                Scene scene = new Scene(gridPane, 900, 1000);
-                stage.setScene(scene);
-                stage.show();
+                    Scene scene = new Scene(gridPane, 900, 1000);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+                catch(BrakSerwera b)
+                {
+                    System.out.println("Brak serwera!");
+                }
             }
         });
     }

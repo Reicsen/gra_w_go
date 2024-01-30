@@ -29,7 +29,7 @@ public class GuiPlansza extends GridPane
     public List<PrzyciskPionek> pionki= new ArrayList<>();
     public Color kolor;
 
-    public GuiPlansza()
+    public GuiPlansza() throws BrakSerwera
     {
         //Tworzymy nowy GridPane
         super();
@@ -96,6 +96,7 @@ public class GuiPlansza extends GridPane
         catch(BrakSerwera e)
         {
             System.out.println("Nie ma serwera!");
+            throw new BrakSerwera();
         }
     }
     //Funkcja, która wywoływana jest na początku rozgrywki
