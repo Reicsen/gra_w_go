@@ -16,9 +16,7 @@
 --
 </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>2471</x><y>546</y><w>28</w><h>133</h></coordinates><panel_attributes>lt=-
 m1=2
-m2=1</panel_attributes><additional_attributes>10;10;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>2296</x><y>735</y><w>77</w><h>210</h></coordinates><panel_attributes>lt=-
-m1=1
-m2=1</panel_attributes><additional_attributes>10;280;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>2142</x><y>1001</y><w>35</w><h>84</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=1</panel_attributes><additional_attributes>10;10;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>2142</x><y>1001</y><w>35</w><h>84</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 m1=1
 m2=361</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>2107</x><y>931</y><w>245</w><h>77</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 IPlansza
@@ -310,4 +308,6 @@ Application
 </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1757</x><y>357</y><w>70</w><h>21</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;80;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1344</x><y>210</y><w>147</w><h>56</h></coordinates><panel_attributes>&lt;&lt;Interface&gt;&gt;
 IStworzGui
 --
-void stworzOkno()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1470</x><y>259</y><w>182</w><h>231</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;240;310</additional_attributes></element><element><id>Relation</id><coordinates><x>1134</x><y>259</y><w>245</w><h>224</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>330;10;10;300</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1806</x><y>42</y><w>70</w><h>21</h></coordinates><panel_attributes>GridPane</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1862</x><y>56</y><w>42</w><h>91</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;110</additional_attributes></element></diagram>
+void stworzOkno()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1470</x><y>259</y><w>182</w><h>231</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;240;310</additional_attributes></element><element><id>Relation</id><coordinates><x>1134</x><y>259</y><w>245</w><h>224</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>330;10;10;300</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1806</x><y>42</y><w>70</w><h>21</h></coordinates><panel_attributes>GridPane</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1862</x><y>56</y><w>42</w><h>91</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;110</additional_attributes></element><element><id>Relation</id><coordinates><x>2317</x><y>735</y><w>70</w><h>210</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1</panel_attributes><additional_attributes>80;10;10;280</additional_attributes></element></diagram>
