@@ -6,6 +6,7 @@ import com.go.GUI.OkienkoBledu;
 public class OdczytRuchow implements IBazyDanychAdapter
 {
     protected int nrGry;
+    protected ResultSet wyniki;
 
     public OdczytRuchow(int nr)
     {
@@ -18,7 +19,7 @@ public class OdczytRuchow implements IBazyDanychAdapter
             Statement kwerenda = polaczenie.createStatement();)
         {
             kwerenda.executeQuery("CALL start();");
-            ResultSet wyniki = kwerenda.executeQuery("EXECUTE lista_ruchow USING "+this.nrGry+";");
+            wyniki = kwerenda.executeQuery("EXECUTE lista_ruchow USING "+this.nrGry+";");
 
             IBazyDanychAdapter adapterRuchow = new AdapterSQL2(wyniki);
             adapterRuchow.obsluz();
