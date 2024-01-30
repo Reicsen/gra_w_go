@@ -56,5 +56,5 @@ END#
 DELIMITER ;
 
 CREATE USER 'user'@'localhost';
-GRANT Select, Insert, Alter, Execute ON *.* TO 'user'@'localhost';
+GRANT Select, Insert, Delete, Alter, Execute ON *.* TO 'user'@'localhost';
 FLUSH PRIVILEGES;

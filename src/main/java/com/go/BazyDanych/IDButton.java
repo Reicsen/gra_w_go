@@ -12,6 +12,12 @@ public class IDButton extends Button
         this.setText(nazwa);
     }
 
+    public IDButton(int nr)
+    {
+        this.id=nr;
+        this.setText(Integer.toString(nr));
+    }
+
     public int zwrocId()
     {
         return this.id;

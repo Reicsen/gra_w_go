@@ -17,6 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+
+import com.go.Gra.Klienci.BrakSerwera;
 import com.go.Gra.Klienci.Odtworzenie;
 
 public class GuiPlanszaOdtworzenia extends GridPane 
@@ -35,26 +37,33 @@ public class GuiPlanszaOdtworzenia extends GridPane
         setStyle("-fx-background-color: black;");
 
         //Tworzymy nowego gracza
-        gracz = new Odtworzenie(this,ruchy,gracze);
+        try
+        {
+            gracz = new Odtworzenie(this,ruchy,gracze);
 
-        //Tworzymy przyciski, które będą reprezentować pionki lub przecięcia linii
-        //Przycisków jest tyle ile przecięć linii w planszy
-        for (int row = 1; row < 20; row++) {
-            for (int col = 0; col < 19; col++) {
-                PrzyciskPionek button = new PrzyciskPionek(gracz, row-1, col);
-                button.setStyle("-fx-background-color: white;");
+            //Tworzymy przyciski, które będą reprezentować pionki lub przecięcia linii
+            //Przycisków jest tyle ile przecięć linii w planszy
+            for (int row = 1; row < 20; row++) {
+                for (int col = 0; col < 19; col++) {
+                    PrzyciskPionek button = new PrzyciskPionek(gracz, row-1, col);
+                    button.setStyle("-fx-background-color: white;");
 
-                add(button, col, row);
+                    add(button, col, row);
 
-                setHalignment(button, HPos.CENTER);
+                    setHalignment(button, HPos.CENTER);
 
-                button.setOnAction(new EventHandler<ActionEvent>() { 
-                    @Override
-                    public void handle(ActionEvent e) {}
-                });
-                pionki.add(button);
-                //button.setDisable(true);
+                    button.setOnAction(new EventHandler<ActionEvent>() { 
+                        @Override
+                        public void handle(ActionEvent e) {}
+                    });
+                    pionki.add(button);
+                    //button.setDisable(true);
+                }
             }
+        }
+        catch(BrakSerwera e)
+        {
+            System.out.println("Nie ma serwera!");
         }
     }
 

@@ -6,9 +6,9 @@ import com.go.GUI.OkienkoBledu;
 
 public class ZapisDoBazy implements IBazyDanychAdapter
 {
-    private String zwyciezca;
-    private List<Integer> gracze;
-    private List<Integer> pola;
+    protected String zwyciezca;
+    protected List<Integer> gracze;
+    protected List<Integer> pola;
     
     public ZapisDoBazy(List<Integer> gr, List<Integer> p, String wygrany)
     {
