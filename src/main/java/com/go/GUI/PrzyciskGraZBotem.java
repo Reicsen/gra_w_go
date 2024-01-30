@@ -6,7 +6,9 @@ import com.go.Gra.Klienci.Klient;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class PrzyciskGraZBotem extends Button{
@@ -21,11 +23,16 @@ public class PrzyciskGraZBotem extends Button{
             @Override
             public void handle(ActionEvent e) 
             {
-                //tworzymy bota 
+                //tworzymy bota i GuiPlansza dla gracza
                 try
                 {
                     bot = new Bot();
-                    stage.close();
+                    GridPane gridPane = new GuiPlansza();
+                    stage.setTitle("Gra w go");
+
+                    Scene scene = new Scene(gridPane, 1300, 1000);
+                    stage.setScene(scene);
+                    stage.show();
                 }
                 catch(BrakSerwera b)
                 {

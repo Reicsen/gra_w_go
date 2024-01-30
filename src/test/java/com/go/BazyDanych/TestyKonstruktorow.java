@@ -99,7 +99,7 @@ public class TestyKonstruktorow
             lGraczy.add(generator.nextInt(1000000));
             lRuchow.add(generator.nextInt(1000000));            
         }
-        IBazyDanychAdapter test = new TworzeniePlanszyOdtworzenia(lRuchow, lGraczy);
+        IStworzGui test = new TworzeniePlanszyOdtworzenia(lRuchow, lGraczy);
         List<Integer> testR = ((TworzeniePlanszyOdtworzenia) test).ruchy;
         List<Integer> testG = ((TworzeniePlanszyOdtworzenia) test).gracze;
         

@@ -52,10 +52,7 @@ public class GuiPlanszaOdtworzenia extends GridPane
 
                     setHalignment(button, HPos.CENTER);
 
-                    button.setOnAction(new EventHandler<ActionEvent>() { 
-                        @Override
-                        public void handle(ActionEvent e) {}
-                    });
+                    button.setOnAction(event -> {});
                     pionki.add(button);
                     //button.setDisable(true);
                 }

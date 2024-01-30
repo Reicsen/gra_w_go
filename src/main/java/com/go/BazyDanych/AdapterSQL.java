@@ -31,8 +31,8 @@ public class AdapterSQL implements IBazyDanychAdapter
                 zwyciezcy.add(wygrany);
             }
                 
-            IBazyDanychAdapter wyborGry = new OknoWyboruGry(id, zwyciezcy);
-            wyborGry.obsluz();
+            IStworzGui wyborGry = new OknoWyboruGry(id, zwyciezcy);
+            wyborGry.stworzOkno();
         }
         catch(SQLException e)
         {
