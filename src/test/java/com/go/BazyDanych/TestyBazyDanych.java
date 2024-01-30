@@ -52,7 +52,7 @@ public class TestyBazyDanych
     {
         List<Integer> testRuchow = new ArrayList<Integer>();
         List<Integer> testGraczy = new ArrayList<Integer>();
-        String testZwyciezcy;
+        //String testZwyciezcy;
         for(int i=0; i<100; i++)
         {
             testRuchow.add(i);
@@ -90,7 +90,7 @@ public class TestyBazyDanych
     {
         List<Integer> testRuchow = new ArrayList<Integer>();
         List<Integer> testGraczy = new ArrayList<Integer>();
-        String testZwyciezcy;
+        //String testZwyciezcy;
         for(int i=0; i<5; i++)
         {
             testRuchow.add(i);
