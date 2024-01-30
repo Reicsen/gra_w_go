@@ -1,22 +1,28 @@
 package com.go.Gra.Klienci;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+import com.go.GUI.GuiPlansza;
+import com.go.GUI.GuiPlanszaOdtworzenia;
 
 public class TestyBleduPolaczenia
 {
-    @Test
+    @Test(expected = BrakSerwera.class)
     public void testBleduPolaczeniaGracza()
-    { 
+    {
+        new Gracz(new GuiPlansza());
     }
 
-    @Test
+    @Test(expected = BrakSerwera.class)
     public void testBleduPolaczeniaBota()
-    { 
+    {
+        new Bot();
     }
-
-    @Test
-    public void testBleduPolaczeniaOdtworzenia()
-    { 
+    
+    @Test(expected = BrakSerwera.class)
+    public void testBleduPolaczeniaOdtwarzania()
+    {
+        new Odtworzenie(new GuiPlanszaOdtworzenia(new ArrayList<Integer>(), new ArrayList<Integer>()), new ArrayList<Integer>(), new ArrayList<Integer>());
     }
 }
