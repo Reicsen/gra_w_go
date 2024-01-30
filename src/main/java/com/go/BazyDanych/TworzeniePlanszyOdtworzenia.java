@@ -20,7 +20,7 @@ public class TworzeniePlanszyOdtworzenia implements IStworzGui
     public void stworzOkno()
     {
         GridPane gridPane1 = new GuiPlanszaOdtworzenia(ruchy,gracze);
-        GridPane gridPane2 = new GuiPlanszaOdtworzenia(ruchy,gracze);
+        new GuiPlanszaOdtworzenia(ruchy,gracze);
         Scene scenaGry = new Scene(gridPane1,900,1000);
         Stage bazaGry = new Stage();
         bazaGry.setTitle("Gra w go: replay");

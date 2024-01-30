@@ -171,7 +171,7 @@ public class Bot implements Klient, IBot, Runnable
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
         int sygnal;
-        int ruch;
+        //int ruch;
 
         while (true)
         {
@@ -180,7 +180,8 @@ public class Bot implements Klient, IBot, Runnable
                 sygnal=odbieranieOdSerwera.readInt();
                 if (sygnal==0)
                 {
-                    ruch=odbieranieOdSerwera.readInt();
+                    //ruch=odbieranieOdSerwera.readInt();
+                    odbieranieOdSerwera.readInt();
                     jencyISygnal4();
                     zmienAktywnosc();
                 }
@@ -191,7 +192,8 @@ public class Bot implements Klient, IBot, Runnable
 
                 if (sygnal==1)
                 {
-                    ruch=odbieranieOdSerwera.readInt();
+                    //ruch=odbieranieOdSerwera.readInt();
+                    odbieranieOdSerwera.readInt();
                     zmienAktywnosc();
                     jencyISygnal4();
                     losujRuch();

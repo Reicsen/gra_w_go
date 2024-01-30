@@ -2,7 +2,6 @@ package com.go.GUI;
 
 import com.go.Gra.Klienci.Bot;
 import com.go.Gra.Klienci.BrakSerwera;
-import com.go.Gra.Klienci.Klient;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +12,7 @@ import javafx.stage.Stage;
 
 public class PrzyciskGraZBotem extends Button{
 
-    private Klient bot;
+    //private Klient bot;
 
     PrzyciskGraZBotem(Stage stage){
         super("Gra z botem");
@@ -26,7 +25,8 @@ public class PrzyciskGraZBotem extends Button{
                 //tworzymy bota i GuiPlansza dla gracza
                 try
                 {
-                    bot = new Bot();
+                    //bot = new Bot();
+                    new Bot();
                     GridPane gridPane = new GuiPlansza();
                     stage.setTitle("Gra w go");
 
