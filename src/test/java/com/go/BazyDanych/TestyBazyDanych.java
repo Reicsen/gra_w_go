@@ -177,4 +177,43 @@ public class TestyBazyDanych
             e.printStackTrace();
         }
     }
+    
+    @Test
+    public void testBazyDanych6()
+    {
+        try (Connection polaczenie = DriverManager.getConnection("jdbc:mariadb://localhost:3306/gra_w_go", "user", "");
+            Statement kwerenda = polaczenie.createStatement();)
+        {
+            kwerenda.executeQuery("CALL start();");
+            ResultSet wynik = kwerenda.executeQuery("EXECUTE wez_id_gry;");
+            wynik.first();
+            int maksIdGry=wynik.getInt(1);
+            ResultSet wyniki=kwerenda.executeQuery("EXECUTE lista_ruchow USING "+maksIdGry+";");
+            IBazyDanychAdapter test = new AdapterSQL2(wyniki);
+            test.obsluz();
+            List<Integer> testGraczy = ((AdapterSQL2) test).gracze;
+            List<Integer> testRuchow = ((AdapterSQL2) test).ruchy;
+
+            wyniki=kwerenda.executeQuery("EXECUTE lista_ruchow USING "+maksIdGry+";");
+            List<Integer> lGraczy = new ArrayList<Integer>();
+            List<Integer> lRuchow = new ArrayList<Integer>();
+            while (wyniki.next())
+            {
+                lGraczy.add(wyniki.getInt("gracz"));
+                lRuchow.add(wyniki.getInt("pole"));
+            }
+
+            assertEquals(lGraczy.size(),testGraczy.size());
+            assertEquals(lRuchow.size(),testRuchow.size());
+            for (int i=0; i<lRuchow.size(); i++)
+            {
+                assertEquals(lGraczy.get(i),testGraczy.get(i));
+                assertEquals(lRuchow.get(i),testRuchow.get(i));
+            }
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

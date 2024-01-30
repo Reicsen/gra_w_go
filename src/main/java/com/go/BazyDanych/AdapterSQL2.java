@@ -8,6 +8,8 @@ import com.go.GUI.OkienkoBledu;
 public class AdapterSQL2 implements IBazyDanychAdapter
 {
     protected ResultSet wyniki;
+    protected List<Integer> ruchy;
+    protected List<Integer> gracze;
 
     public AdapterSQL2(ResultSet wynik)
     {
@@ -18,8 +20,8 @@ public class AdapterSQL2 implements IBazyDanychAdapter
     {
         try
         {
-            List<Integer> ruchy = new ArrayList<Integer>();
-            List<Integer> gracze = new ArrayList<Integer>();
+            ruchy = new ArrayList<Integer>();
+            gracze = new ArrayList<Integer>();
 
             while(wyniki.next())
             {
