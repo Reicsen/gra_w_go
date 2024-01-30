@@ -18,8 +18,11 @@ Kamieni raz postawionych na planszy nie można zabrać ani przesunąć, mogą na
 Gracz nie może pozbawić swojej grupy kamieni ostatniego oddechu, ani położyć kamienia w punkt bez oddechu. Wyjątkiem od reguły jest sytuacja, w której taki ruch dusi kamienie przeciwnika.
 Kształt, w którym gracze mogą naprzemiennie dusić kamień przeciwnika, zwany jest ko. W celu uniknięcia nieskończonych cykli gracz, którego kamień został uduszony w ko, nie może udusić kamienia przeciwnika w następnym ruchu.
 
-Gracz zawsze może zrezygnować z ruchu. Gdy obaj gracze bezpośrednio po sobie zrezygnują z ruchu, gra się zatrzymuje i wyświetlane są informacje dotyczące zajmowanego terenu i jeńców. Póżniej można zakończyć grę lub grać dalej.
+Gracz zawsze może zrezygnować z ruchu. Gdy obaj gracze bezpośrednio po sobie zrezygnują z ruchu, gra się zatrzymuje i rozpoczynają się negocjacje. Najpierw gracz, który jako pierwszy pominął ruch zaznacza swoje terytorium a później przeciwnika. Drugi gracz może zaakceptować tak ustalone terytoria - wtedy gra się kończy, wrócić do gry - zaczyna przeciwnik albo zaproponować własny układ terytoriów - te terytoria są pokazywane drugiemu graczowi i ma on ten sam wybór (zgodzić się, zaproponować własną wersje lub wrócić do gry). 
+
 Jeśli gracze zdecydują, że gra się skończyła, usuwane są kamienie znajdujące się na terytorium przeciwnika i dodawane są do jeńców. Następnie jeńcy ustawiani są na terytorium przeciwnika, po czym podliczane i porównywane są punkty terytorium. Gracz z większym terytorium wygrywa.
+
+Gracz może również podczas swojej tury się poddać. Wtedy on przegrywa a przeciwnik wygrywa.
 
 ## Instrukcje
 
@@ -47,7 +50,7 @@ Po kliknieciu przycisku "Gra z innym graczem", wyświetla się plansza. Jeśli n
 
 Po kliknieciu przycisku "Gra z botem", wyświetla się plansza.
 
-Po kliknieciu przycisku "Odtworzenie gry", wybiera się którą grę chce się odtworzyć po czym wyświetlane są dwie plansze na któych wyświetlana jest stara gra.
+Po kliknieciu przycisku "Odtworzenie gry", wybiera się którą grę chce się odtworzyć po czym wyświetlana jest plansza, na której wyświetlana jest stara gra.
 
 ## Autorzy
 
