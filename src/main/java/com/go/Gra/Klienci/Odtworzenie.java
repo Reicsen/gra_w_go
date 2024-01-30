@@ -23,7 +23,7 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
     private int indeks;
     private int nrGracza;
 
-    public Odtworzenie(GuiPlanszaOdtworzenia plansza, List<Integer> listaRuchow, List<Integer> listaGraczy) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
+    public Odtworzenie(GuiPlanszaOdtworzenia plansza, List<Integer> listaRuchow, List<Integer> listaGraczy) throws BrakSerwera //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
         try
         {
@@ -39,7 +39,7 @@ public class Odtworzenie implements Klient, ObslugaPlanszy, IOdtwarzanie, Runnab
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            throw new BrakSerwera();
         }
         Thread watek = new Thread(this); //stworzenie wątku
         watek.start();

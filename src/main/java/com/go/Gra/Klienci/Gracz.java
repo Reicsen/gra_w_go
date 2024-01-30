@@ -25,7 +25,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieT
     private List<Integer> negocjacyjneWrogieTerytorium;
     private List<Integer> lista;
 
-    public Gracz(GuiPlansza plansza) //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
+    public Gracz(GuiPlansza plansza) throws BrakSerwera //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
         try
         {
@@ -42,7 +42,7 @@ public class Gracz implements Klient, ObslugaPlanszy, INegocjacje, IPrzesylanieT
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            throw new BrakSerwera();
         }
         Thread watek = new Thread(this); //stworzenie wątku
         watek.start();

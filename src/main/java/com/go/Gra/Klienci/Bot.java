@@ -16,7 +16,7 @@ public class Bot implements Klient, IBot, Runnable
     private Socket polaczenieZSerwerem;
     private MersenneTwister generator;
 
-    public Bot() //konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
+    public Bot() throws BrakSerwera//konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
         try
         {
@@ -28,7 +28,7 @@ public class Bot implements Klient, IBot, Runnable
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            throw new BrakSerwera();
         }
         Thread watek = new Thread(this); //stworzenie wątku
         watek.start();

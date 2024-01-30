@@ -1,6 +1,7 @@
 package com.go.GUI;
 
 import com.go.Gra.Klienci.Bot;
+import com.go.Gra.Klienci.BrakSerwera;
 import com.go.Gra.Klienci.Klient;
 
 import javafx.event.ActionEvent;
@@ -21,8 +22,15 @@ public class PrzyciskGraZBotem extends Button{
             public void handle(ActionEvent e) 
             {
                 //tworzymy bota 
-                bot = new Bot();
-                stage.close();
+                try
+                {
+                    bot = new Bot();
+                    stage.close();
+                }
+                catch(BrakSerwera b)
+                {
+                    System.out.println("Nie ma serwera!");
+                }
             }
         });
     }
