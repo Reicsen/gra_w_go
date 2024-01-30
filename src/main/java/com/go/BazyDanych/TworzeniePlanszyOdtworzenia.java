@@ -20,19 +20,10 @@ public class TworzeniePlanszyOdtworzenia implements IStworzGui
 
     public void stworzOkno()
     {
-<<<<<<< HEAD
-        GridPane gridPane1 = new GuiPlanszaOdtworzenia(ruchy,gracze);
-        new GuiPlanszaOdtworzenia(ruchy,gracze);
-        Scene scenaGry = new Scene(gridPane1,900,1000);
-        Stage bazaGry = new Stage();
-        bazaGry.setTitle("Gra w go: replay");
-        bazaGry.setScene(scenaGry);
-        bazaGry.show();
-=======
         try
         {
             GridPane gridPane1 = new GuiPlanszaOdtworzenia(ruchy,gracze);
-            GridPane gridPane2 = new GuiPlanszaOdtworzenia(ruchy,gracze);
+            new GuiPlanszaOdtworzenia(ruchy,gracze);
             Scene scenaGry = new Scene(gridPane1,900,1000);
             Stage bazaGry = new Stage();
             bazaGry.setTitle("Gra w go: replay");
@@ -43,6 +34,5 @@ public class TworzeniePlanszyOdtworzenia implements IStworzGui
         {
             System.out.println("Brak serwera!");
         }
->>>>>>> 7da53d03a21c0d0bdbbb7944885844bc47f06f89
     }
 }
