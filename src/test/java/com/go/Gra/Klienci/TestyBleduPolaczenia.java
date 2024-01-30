@@ -2,7 +2,7 @@ package com.go.Gra.Klienci;
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import com.go.GUI.GuiPlansza;
 import com.go.GUI.GuiPlanszaOdtworzenia;
 
