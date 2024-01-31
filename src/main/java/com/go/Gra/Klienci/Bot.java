@@ -4,6 +4,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.math3.random.MersenneTwister;
 
 public class Bot implements Klient, IBot, Runnable
@@ -15,6 +18,7 @@ public class Bot implements Klient, IBot, Runnable
     private DataOutputStream wysylanieDoSerwera;
     private Socket polaczenieZSerwerem;
     private MersenneTwister generator;
+    private List<Integer> wolnePola;
 
     public Bot() throws BrakSerwera//konstruktor; reszta metod opisana w interfejsach; sygnały informacyjne zawarte zostały w pliku Sygnały.txt
     {
@@ -25,6 +29,11 @@ public class Bot implements Klient, IBot, Runnable
             this.wysylanieDoSerwera = new DataOutputStream(polaczenieZSerwerem.getOutputStream());
             this.nrGracza = odbieranieOdSerwera.readInt();
             this.generator = new MersenneTwister();
+            wolnePola=new ArrayList<Integer>();
+            for (int i=0; i<361; i++)
+            {
+                wolnePola.add(i);
+            }
         }
         catch (IOException e)
         {
@@ -105,8 +114,9 @@ public class Bot implements Klient, IBot, Runnable
             }
             else
             {
-                int x=this.generator.nextInt(19);
-                int y=this.generator.nextInt(19);
+                int ruch=generator.nextInt(wolnePola.size());
+                int x=wolnePola.get(ruch)%19;
+                int y=wolnePola.get(ruch)/19;
                 wykonajRuch(x, y);
             }
         }
@@ -157,6 +167,7 @@ public class Bot implements Klient, IBot, Runnable
                 sygnal=odbieranieOdSerwera.readInt();
                 while (sygnal!=-1)
                 {
+                    wolnePola.add(sygnal);
                     sygnal=odbieranieOdSerwera.readInt();
                 }
             } 
@@ -167,11 +178,17 @@ public class Bot implements Klient, IBot, Runnable
         }
     }
 
+    public void zajmijPole(int pole)
+    {
+        int temp=wolnePola.indexOf(pole);
+        wolnePola.remove(temp);
+    }
+
     @Override
     public void run() //metoda obsługująca działanie wątkowe - odbieranie sygnałów z serwera i uruchamianie odpowiednich metod z interfejsów
     {
         int sygnal;
-        //int ruch;
+        int ruch;
 
         while (true)
         {
@@ -180,8 +197,8 @@ public class Bot implements Klient, IBot, Runnable
                 sygnal=odbieranieOdSerwera.readInt();
                 if (sygnal==0)
                 {
-                    //ruch=odbieranieOdSerwera.readInt();
-                    odbieranieOdSerwera.readInt();
+                    ruch=odbieranieOdSerwera.readInt();
+                    zajmijPole(ruch);
                     jencyISygnal4();
                     zmienAktywnosc();
                 }
@@ -192,8 +209,8 @@ public class Bot implements Klient, IBot, Runnable
 
                 if (sygnal==1)
                 {
-                    //ruch=odbieranieOdSerwera.readInt();
-                    odbieranieOdSerwera.readInt();
+                    ruch=odbieranieOdSerwera.readInt();
+                    zajmijPole(ruch);
                     zmienAktywnosc();
                     jencyISygnal4();
                     losujRuch();
